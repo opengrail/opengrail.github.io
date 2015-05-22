@@ -1,1 +1,1 @@
-# opengrail.github.io
+# Blog for opengrail
