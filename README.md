@@ -1,2 +1,10 @@
 # Blog for opengrail
-see https://opengrail.github.io
+
+see 
+
+https://blog.opengrail.com
+
+or
+
+https://opengrail.github.io
+
