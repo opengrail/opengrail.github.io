@@ -1,0 +1,129 @@
+<p><strong>Datomic On Heroku</strong></p>
+
+<p><strong>Datomic</strong> is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on their website[1]</p>
+
+<p><strong>Heroku</strong> is a well known Platform As A Service (PAAS) which is rightly famed for its simplicity and its ease of use.  It has some strong opinions about how to make applications scalable using a stateless application model and has long supported the now hotness that is Linux containers. It has also made using Postgres incredibly easy with tools to fork and clone databases in seconds. Whilst Heroku started with Ruby, it can now run Java, node.js and even Clojure apps. To get started with Heroku go and download their toolbelt so you can have a CLI.[2]</p>
+
+<p><strong>BFFs FTW?</strong></p>
+
+<p>I like Datomic and Heroku on their own merits. A year or so ago when I first started getting into Datomic I thought they could be friends. Two interesting, powerful and yet simple technologies with a lot in common: a focus on simplicity, friendly to Clojure and more than a passing interest in Postgres. Surely they would hit it off. But no, there was trouble in paradise: Datomic assumes that it is configured behind a secure network while Heroku assumes that you want everything out in the open. It was like taking a nun to a nude beach.</p>
+
+<p><strong>Leveraging strategic synergies in skinny jeans</strong></p>
+
+<p>Well that was awkward. But it seems like the naturalists are putting on some clothes. Whilst Heroku rose to fame with the high profile start-ups that used its service (Uber and Automatic as a few examples), it is turning its attention to capturing the hearts and minds of larger, more established enterprises. It hasn’t quite put on a three-piece suit and tie but a pair of skinny jeans and a conference tee shirt is already making it seem more attractive to the nuns.</p>
+
+<p><strong>Spaced out</strong></p>
+
+<p>Ok listen, forget the nuns, let’s get back to what Heroku are doing to appeal to more traditional businesses: a service called Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.</p>
+
+<p>I have been fortunate to have access to the private Beta version of Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let’s get into the details…</p>
+
+<p><strong>Pack, Hack and Stack</strong></p>
+
+<p>Heroku apps are deployed using a buildpack, which is the script needed to install and run up any service on the platform. There are some official build packs for Ruby, Java, node.js, etc… but you can can extend them or make your own and people do. So I did. Datomic has a dependency on Java so it made sense to use the Heroku official Java buildpack as a starting point for the hacking.</p>
+
+<p><strong>Starting, a fight</strong></p>
+
+<p>Datomic itself comes in a few flavours: Free, Pro and Pro+. The Free version is obviously the most accessible so I wanted to support that one and indeed it is the default. Free is great for playtime but only stores the data in memory or a disk that is local to the app. It is not a great fit for Heroku: Did I say Heroku is built on stateless principles? The disks are also ephemeral. So with the free version everything is wiped when you restart your app. All to say that it’s OK to kick the tyres but it doesn’t really take advantage of the Heroku platform very well and one could even say that the Heroku platform is slightly hostile. If deleting all of the database’s data could be described as hostile.</p>
+
+<p><strong>ZOMG BFFs FTW fr raal</strong></p>
+
+<p>So for the Datomic Free version story is not so great. But Datomic has another free to access version called the Pro Starter Pack. This allows up two web apps (also called Peers) to connect to the database and any one of the backend database storage engines can be brought into play.  With Datomic Starter Pack plus Heroku Postgres, we really do have game on.</p>
+
+<p><strong>Datomic Starter Pack</strong> [Ceremony alert]</p>
+
+<p>There is a little bit of ceremony (registration and email) to obtain a license for the Datomic Starter Pack so I’ll let you do that … we’ll still be here when you come back.</p>
+
+<p>OK, so you’re back and armed with your license you are now only a few seconds from deploying your first app.</p>
+
+<p><strong>Heroku Spaces</strong> [Ceremony alert]</p>
+
+<p>OK, I was fibbing.  There is also a little ceremony on Heroku as you will need to have an Enterprise account - contact the Heroku account manager to organise that.</p>
+
+<p>OK, so you’re back again. Phew! Let’s get started…</p>
+
+<p><strong>Create your transactor app</strong></p>
+
+<p><code class="highlighter-rouge">
+heroku apps:create my-xtor -s my-space
+</code></p>
+
+<p><strong>Provision your database</strong></p>
+
+<p><code class="highlighter-rouge">
+heroku addons:create heroku-postgresql
+</code></p>
+
+<p>The Postgres addon will be configured at the lowest cost - free - option, which is limited to 10k rows.</p>
+
+<p><strong>Clone the demo transactor app</strong></p>
+
+<p><code class="highlighter-rouge">
+git clone https://github.com/raymcdermott/space-xtor
+</code></p>
+
+<p><strong>Configure your Datomic license for Heroku</strong></p>
+
+<p><code class="highlighter-rouge">
+heroku config:set DATOMIC_LICENSE_PASSWORD=license-password
+heroku config:set DATOMIC_LICENSE_USER=license-user
+heroku config:set DATOMIC_TRANSACTOR_KEY=license-key
+</code></p>
+
+<p><strong>Push the app</strong></p>
+
+<p><code class="highlighter-rouge">
+git push heroku master
+</code></p>
+
+<p><strong>Create your web app</strong></p>
+
+<p><code class="highlighter-rouge">
+heroku apps:create my-xtor-web-front -s my-space
+</code></p>
+
+<p><strong>Attach your database</strong></p>
+
+<p>```
+$ heroku addons -a my-xtor</p>
+
+<p>Add-on                                           Plan       Price
+───────────────────────────────────────────────  ─────────  ─────
+heroku-postgresql (postgresql-xyzabc-1234)       hobby-dev  free 
+ └─ as DATABASE</p>
+
+<p>The table above shows add-ons and the attachments to the current app (space-xtor) or other apps.</p>
+
+<p>heroku addons:attach postgresql-xyzabc-1234 -a my-xtor-web-front
+```</p>
+
+<p><strong>Clone the demo web app</strong></p>
+
+<p><code class="highlighter-rouge">
+git clone https://github.com/raymcdermott/xtor-web-front
+</code></p>
+
+<p><strong>Push the demo web app</strong></p>
+
+<p><code class="highlighter-rouge">
+git push heroku master
+</code></p>
+
+<p><strong>Test it all out</strong></p>
+
+<p><code class="highlighter-rouge">
+heroku open -a my-xtor-web-front
+</code></p>
+
+<p><strong>Operating costs</strong></p>
+
+<p>All of the Datomic software and Heroku Postgres services are free. Be careful to watch your dyno use on Heroku as it’s possible to go beyond the free tier if you play for too long.</p>
+
+<p>Obviously you can spend as much as you want with Datomic or Heroku once you get going.</p>
+
+<p>The code is on github so you can try it out for yourself and let me know how it works out.</p>
+
+<p>I would appreciate a link or a tweet if you found this useful.</p>
+
+<p><a href="https://www.datomic.com">1</a>
+<a href="https://toolbelt.heroku.com">2</a></p>
