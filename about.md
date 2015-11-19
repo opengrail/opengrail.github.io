@@ -4,4 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I really wish I had something funny to say here.
+There's this joke, yeah, God ... so funny, cracked me up. Wait, I've just got to take this...
+
+
+Where you going?
