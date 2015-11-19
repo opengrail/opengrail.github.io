@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Your awesome title</title>
+    <description>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+</description>
+    <link>http://blog.opengrail.com/</link>
+    <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 19 Nov 2015 23:19:28 +0100</pubDate>
+    <lastBuildDate>Thu, 19 Nov 2015 23:19:28 +0100</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 19 Nov 2015 23:14:49 +0100</pubDate>
+        <link>http://blog.opengrail.com/jekyll/update/2015/11/19/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/jekyll/update/2015/11/19/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>Datomic On Heroku!</title>
+        <description>&lt;p&gt;&lt;strong&gt;Datomic On Heroku&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Datomic&lt;/strong&gt; is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on &lt;a href=&quot;https://www.datomic.com&quot;&gt;the Datomic website&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Heroku&lt;/strong&gt; is a well known Platform As A Service (PAAS) which is rightly famed for its simplicity and its ease of use.  It has some strong opinions about how to make applications scalable using a stateless application model and has long supported the now hotness that is Linux containers. It has also made using Postgres incredibly easy with tools to fork and clone databases in seconds. Whilst Heroku started with Ruby, it can now run Java, node.js and even Clojure apps. To get started with Heroku go and download the &lt;a href=&quot;https://toolbelt.heroku.com&quot;&gt;Heroku Toolbelt&lt;/a&gt; so you can have a CLI.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;BFFs FTW?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I like Datomic and Heroku on their own merits. A year or so ago when I first started getting into Datomic I thought they could be friends. Two interesting, powerful and yet simple technologies with a lot in common: a focus on simplicity, friendly to Clojure and more than a passing interest in Postgres. Surely they would hit it off. But no, there was trouble in paradise: Datomic assumes that it is configured behind a secure network while Heroku assumes that you want everything out in the open. It was like taking a nun to a nude beach.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Leveraging strategic synergies in skinny jeans&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Well that was awkward. But it seems like the naturalists are putting on some clothes. Whilst Heroku rose to fame with the high profile start-ups that used its service (Uber and Automatic as a few examples), it is turning its attention to capturing the hearts and minds of larger, more established enterprises. It hasn’t quite put on a three-piece suit and tie but a pair of skinny jeans and a conference tee shirt is already making it seem more attractive to the nuns.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Spaced out&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok listen, forget the nuns, let’s get back to what Heroku are doing to appeal to more traditional businesses: a service called Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.&lt;/p&gt;
+
+&lt;p&gt;I have been fortunate to have access to the private Beta version of Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let’s get into the details…&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Pack, Hack and Stack&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Heroku apps are deployed using a buildpack, which is the script needed to install and run up any service on the platform. There are some official build packs for Ruby, Java, node.js, etc… but you can can extend them or make your own and people do. So I did. Datomic has a dependency on Java so it made sense to use the Heroku official Java buildpack as a starting point for the hacking.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Starting, a fight&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Datomic itself comes in a few flavours: Free, Pro and Pro+. The Free version is obviously the most accessible so I wanted to support that one and indeed it is the default. Free is great for playtime but only stores the data in memory or a disk that is local to the app. It is not a great fit for Heroku: Did I say Heroku is built on stateless principles? The disks are also ephemeral. So with the free version everything is wiped when you restart your app. All to say that it’s OK to kick the tyres but it doesn’t really take advantage of the Heroku platform very well and one could even say that the Heroku platform is slightly hostile. If deleting all of the database’s data could be described as hostile.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;ZOMG BFFs FTW fr raal&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;So for the Datomic Free version story is not so great. But Datomic has another free to access version called the Pro Starter Pack. This allows up two web apps (also called Peers) to connect to the database and any one of the backend database storage engines can be brought into play.  With Datomic Starter Pack plus Heroku Postgres, we really do have game on.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Datomic Starter Pack&lt;/strong&gt; [Ceremony alert]&lt;/p&gt;
+
+&lt;p&gt;There is a little bit of ceremony (registration and email) to obtain a license for the Datomic Starter Pack so I’ll let you do that … we’ll still be here when you come back.&lt;/p&gt;
+
+&lt;p&gt;OK, so you’re back and armed with your license you are now only a few seconds from deploying your first app.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Heroku Spaces&lt;/strong&gt; [Ceremony alert]&lt;/p&gt;
+
+&lt;p&gt;OK, I was fibbing.  There is also a little ceremony on Heroku as you will need to have an Enterprise account - contact the Heroku account manager to organise that.&lt;/p&gt;
+
+&lt;p&gt;OK, so you’re back again. Phew! Let’s get started…&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Create your transactor app&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku apps:create my-xtor -s my-space&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure the Datomic buildpack&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku buildpacks:set https://github.com/opengrail/heroku-buildpack-datomic -a my-xtor&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Provision your database&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku addons:create heroku-postgresql&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The Postgres addon will be configured at the lowest cost - free - option, which is limited to 10k rows.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Clone the demo transactor app&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/raymcdermott/space-xtor&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Configure your Datomic license for Heroku&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_LICENSE_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;license-password
+heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_LICENSE_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;license-user
+heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_TRANSACTOR_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;license-key&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Push the app&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Create your web app&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku apps:create my-xtor-web-front -s my-space&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Attach your database&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;heroku addons -a my-xtor
+
+Add-on                                           Plan       Price
+───────────────────────────────────────────────  ─────────  ─────
+heroku-postgresql &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;postgresql-xyzabc-1234&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;       hobby-dev  free 
+ └─ as DATABASE                                                  
+
+The table above shows add-ons and the attachments to the current app &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;space-xtor&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; or other apps.
+
+heroku addons:attach postgresql-xyzabc-1234 -a my-xtor-web-front&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Clone the demo web app&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/raymcdermott/xtor-web-front&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Push the demo web app&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Test it all out&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku open -a my-xtor-web-front&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;Operating costs&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the Datomic software and Heroku Postgres services are free. Be careful to watch your dyno use on Heroku as it’s possible to go beyond the free tier if you play for too long.&lt;/p&gt;
+
+&lt;p&gt;Obviously you can spend as much as you want with Datomic or Heroku once you get going.&lt;/p&gt;
+
+&lt;p&gt;The code is on github so you can try it out for yourself and let me know how it works out.&lt;/p&gt;
+
+&lt;p&gt;I would appreciate a link or a tweet if you found this useful.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 19 Nov 2015 19:59:38 +0100</pubDate>
+        <link>http://blog.opengrail.com/jekyll/update/2015/11/19/datomic-heroku-spaces.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/jekyll/update/2015/11/19/datomic-heroku-spaces.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+  </channel>
+</rss>
