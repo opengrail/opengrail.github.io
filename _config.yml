@@ -17,3 +17,7 @@ github_username:  raymcdermott
 
 # Build settings
 markdown: kramdown
+
+# SASS
+sass:
+    style: compressed
