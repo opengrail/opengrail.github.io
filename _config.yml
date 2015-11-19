@@ -10,8 +10,8 @@ title: Opengrail blog
 email: blog@opengrail.com
 description: > # this means to ignore newlines until "baseurl:"
   Thoughts on Clojure, Datomic and related technology
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://blog.opengrail.com" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://blog.opengrail.com/" # the base hostname & protocol for your site
 twitter_username: raymcdermott
 github_username:  raymcdermott
 
