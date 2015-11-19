@@ -4,7 +4,14 @@ title: About
 permalink: /about/
 ---
 
-There's this joke, yeah, God ... so funny, cracked me up. Wait, I've just got to take this...
+Yes, this is a very basic Jekyll theme. I would say don't judge but it's probably way too late for that.
 
+Or not, great - you're not aware of what a lame site this is so now I don't know whether I care about what you think.
 
-Where you going?
+God, now I'm judging you.
+
+Let's just forget this page existed and all just move along...
+
+Be amused and entertained over on [Clojure-TV][cloj-tv]
+
+[cloj-tv]: https://www.youtube.com/user/ClojureTV
