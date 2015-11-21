@@ -9,7 +9,7 @@ categories: jekyll update
 
 **Datomic** is an immutable, append-only databases that stores all of your new and historic data. It's easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There's a ton more innovation from Datomic so check out the videos and other introductory material on [the Datomic website][datomic-site]
 
-![Datomic components]({{ url }}/assets/DatomicHerokuVisuals.jpg)
+![Datomic components]({{ url }}/assets/DatomicHerokuVisuals-1.jpg)
 
 **Heroku** is a well known Platform As A Service (PAAS) which is rightly famed for its simplicity and its ease of use.  It has some strong opinions about how to make applications scalable using a stateless application model and has long supported the now hotness that is Linux containers. It has also made using Postgres incredibly easy with tools to fork and clone databases in seconds. Whilst Heroku started with Ruby, it can now run Java, node.js and even Clojure apps. To get started with Heroku go and download the [Heroku Toolbelt][heroku-cli] so you can have a CLI.
 

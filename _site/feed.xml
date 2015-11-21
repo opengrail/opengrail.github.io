@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 21 Nov 2015 13:21:11 +0100</pubDate>
-    <lastBuildDate>Sat, 21 Nov 2015 13:21:11 +0100</lastBuildDate>
+    <pubDate>Sat, 21 Nov 2015 13:26:09 +0100</pubDate>
+    <lastBuildDate>Sat, 21 Nov 2015 13:26:09 +0100</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -16,7 +16,7 @@
 
 &lt;p&gt;&lt;strong&gt;Datomic&lt;/strong&gt; is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on &lt;a href=&quot;https://www.datomic.com&quot;&gt;the Datomic website&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/DatomicHerokuVisuals.jpg&quot; alt=&quot;Datomic components&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/DatomicHerokuVisuals-1.jpg&quot; alt=&quot;Datomic components&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Heroku&lt;/strong&gt; is a well known Platform As A Service (PAAS) which is rightly famed for its simplicity and its ease of use.  It has some strong opinions about how to make applications scalable using a stateless application model and has long supported the now hotness that is Linux containers. It has also made using Postgres incredibly easy with tools to fork and clone databases in seconds. Whilst Heroku started with Ruby, it can now run Java, node.js and even Clojure apps. To get started with Heroku go and download the &lt;a href=&quot;https://toolbelt.heroku.com&quot;&gt;Heroku Toolbelt&lt;/a&gt; so you can have a CLI.&lt;/p&gt;
 
