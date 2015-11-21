@@ -9,11 +9,19 @@ categories: jekyll update
 
 **Datomic** is an immutable, append-only databases that stores all of your new and historic data. It's easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There's a ton more innovation from Datomic so check out the videos and other introductory material on [the Datomic website][datomic-site]
 
+![Datomic components]({{ url }}/assets/DatomicHerokuVisuals.jpg)
+
 **Heroku** is a well known Platform As A Service (PAAS) which is rightly famed for its simplicity and its ease of use.  It has some strong opinions about how to make applications scalable using a stateless application model and has long supported the now hotness that is Linux containers. It has also made using Postgres incredibly easy with tools to fork and clone databases in seconds. Whilst Heroku started with Ruby, it can now run Java, node.js and even Clojure apps. To get started with Heroku go and download the [Heroku Toolbelt][heroku-cli] so you can have a CLI.
 
 **BFFs FTW?**
 
-I like Datomic and Heroku on their own merits. A year or so ago when I first started getting into Datomic I thought they could be friends. Two interesting, powerful and yet simple technologies with a lot in common: a focus on simplicity, friendly to Clojure and more than a passing interest in Postgres. Surely they would hit it off. But no, there was trouble in paradise: Datomic assumes that it is configured behind a secure network while Heroku assumes that you want everything out in the open. It was like taking a nun to a nude beach.
+I like Datomic and Heroku on their own merits. A year or so ago when I first started getting into Datomic I thought they could be friends. Two interesting, powerful and yet simple technologies with a lot in common: a focus on simplicity, friendly to Clojure and more than a passing interest in Postgres. 
+
+A small diversion on the technology components involved with Datomic. Apps contain the Datomic Peer library which reads directly from the storage. The transactor is used occasionally to record novelty into the database.
+
+Surely they would hit it off. But no, there was trouble in paradise: Datomic, and most specifically the transactor, assumes that it is configured behind a secure network while Heroku assumes that you want everything out in the open. It was like taking a nun to a nude beach.
+
+![Datomic components]({{ url }}/assets/DatomicHerokuVisuals-2.jpg)
 
 **Leveraging strategic synergies in skinny jeans**
 
@@ -33,6 +41,8 @@ Heroku apps are deployed using a buildpack, which is the script needed to instal
 
 Datomic itself comes in a few flavours: Free, Pro and Pro+. The Free version is obviously the most accessible so I wanted to support that one and indeed it is the default. Free is great for playtime but only stores the data in memory or a disk that is local to the app. It is not a great fit for Heroku: Did I say Heroku is built on stateless principles? The disks are also ephemeral. So with the free version everything is wiped when you restart your app. All to say that it's OK to kick the tyres but it doesn't really take advantage of the Heroku platform very well and one could even say that the Heroku platform is slightly hostile. If deleting all of the database's data could be described as hostile.
 
+![Datomic components]({{ url }}/assets/DatomicHerokuVisuals-3.jpg)
+
 **ZOMG BFFs FTW fr raal**
 
 So for the Datomic Free version story is not so great. But Datomic has another free to access version called the Pro Starter Pack. This allows up two web apps (also called Peers) to connect to the database and any one of the backend database storage engines can be brought into play.  With Datomic Starter Pack plus Heroku Postgres, we really do have game on.
@@ -48,6 +58,8 @@ OK, so you're back and armed with your license you are now only a few seconds fr
 OK, I was fibbing.  There is also a little ceremony on Heroku as you will need to have an Enterprise account - contact the Heroku account manager to organise that.
 
 OK, so you're back again. Phew! Let's get started...
+
+![Datomic components]({{ url }}/assets/DatomicHerokuVisuals-4.jpg)
 
 **Create your transactor app**
 
