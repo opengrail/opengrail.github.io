@@ -29,9 +29,9 @@ Well that was awkward. But it seems like the naturalists are putting on some clo
 
 **Spaced out**
 
-Ok listen, forget the nuns, let's get back to what Heroku are doing to appeal to more traditional businesses: a service called Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.
+Ok listen, forget the nuns, let's get back to what Heroku are doing to appeal to more traditional businesses: a service called Private Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.
 
-I have been fortunate to have access to the private Beta version of Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let's get into the details...
+I have been fortunate to have access to the private Beta version of Private Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let's get into the details...
 
 **Pack, Hack and Stack**
 
@@ -53,7 +53,7 @@ There is a little bit of ceremony (registration and email) to obtain a license f
 
 OK, so you're back and armed with your license you are now only a few seconds from deploying your first app.
 
-**Heroku Spaces** [Ceremony alert]
+**Heroku Private Spaces** [Ceremony alert]
 
 OK, I was fibbing.  There is also a little ceremony on Heroku as you will need to have an Enterprise account - contact the Heroku account manager to organise that.
 
@@ -146,9 +146,14 @@ All of the Datomic software and Heroku Postgres services are free. Be careful to
 
 Obviously you can spend as much as you want with Datomic or Heroku once you get going. 
 
-The code is on github so you can try it out for yourself and let me know how it works out.
+The code is on github so you can fork it and please let me know if there are any problems.
 
- I would appreciate a link or a tweet if you found this useful.
+**Thanks**
+
+Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS.
+
+Zing me or ping me if this was useful via Twitter.
+
 
 [datomic-site]: https://www.datomic.com
 [heroku-cli]: https://toolbelt.heroku.com
