@@ -144,6 +144,8 @@ heroku open -a my-xtor-web-front
 
 All of the Datomic software and Heroku Postgres services are free. Be careful to watch your dyno use on Heroku as it's possible to go beyond the free tier if you play for too long.
 
+[ A friend from Heroku (thanks @michrome) made me aware of a small caveat with respect to Heroku Postgres: plans below Standard-4 do not exist "in" the Private Space. In practise this is not a big issue as the connection must always be made with SSL ]
+
 Obviously you can spend as much as you want with Datomic or Heroku once you get going. 
 
 The code is on github so you can fork it and please let me know if there are any problems.
