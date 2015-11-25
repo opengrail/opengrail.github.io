@@ -7,7 +7,7 @@ categories: jekyll update
 
 **Datomic On Heroku**
 
-**Datomic** is an immutable, append-only databases that stores all of your new and historic data. It's easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There's a ton more innovation from Datomic so check out the videos and other introductory material on [the Datomic website][datomic-site]
+**Datomic** is an immutable, append-only databases that stores all of your new and historic data. It's easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other folks at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There's a ton more innovation from Datomic so check out the videos and other introductory material on [the Datomic website][datomic-site]
 
 ![Datomic components]({{ url }}/assets/DatomicHerokuVisuals-1.jpg)
 
