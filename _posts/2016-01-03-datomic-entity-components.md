@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Datomic On Heroku!"
+date:   2015-11-19 19:59:38 +0100
+categories: jekyll update
+---
+
 #Datomic - Component Entities
 
 Datomic has the concept of components entities where some 'inner' entities can be embedded in an 'outer' entity.
