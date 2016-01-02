@@ -31,7 +31,7 @@ Well that was awkward. But it seems like the naturalists are putting on some clo
 
 Ok listen, forget the nuns, let's get back to what Heroku are doing to appeal to more traditional businesses: a service called Private Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.
 
-I have been fortunate to have access to the private Beta version of Private Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let's get into the details...
+You UI have been fortunate to have access to the private Beta version of Private Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let's get into the details...
 
 **Pack, Hack and Stack**
 
@@ -143,6 +143,8 @@ heroku open -a my-xtor-web-front
 **Operating costs**
 
 All of the Datomic software and Heroku Postgres services are free. Be careful to watch your dyno use on Heroku as it's possible to go beyond the free tier if you play for too long.
+
+You should be aware that Heroku Private Spaces is a beta product that is currently only available to Heroku Enterprise customers. That usually means you have a paid up front account.
 
 [ A friend from Heroku (thanks @michrome) made me aware of a small caveat with respect to Heroku Postgres: plans below Standard-4 do not exist "in" the Private Space. In practise this is not a big issue as the connection must always be made with SSL ]
 
