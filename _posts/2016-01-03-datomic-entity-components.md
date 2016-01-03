@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Datomic On Heroku!"
-date:   2015-11-19 19:59:38 +0100
+title:  "Datomic Component Entities"
+date:   2016-01-02 19:59:38 +0100
 categories: jekyll update
 ---
 
@@ -47,7 +47,7 @@ Here is the most basic empty cart:
 
 {% highlight clojure %}
 (def cart {:cart/name "myCart"})
-```
+{% endhighlight %}
 
 We can add this to Datomic with one additional property - a temporary DB/ID. Transactions are always in a list
  so we need to conjure up one of those.
@@ -262,8 +262,12 @@ To invoke the `component-crud` database function
 
 So its definitely a win to have atomicity for certain functions. However database functions are more awkward to
  implement and invoke than standard clojure functions. They also have fewer affordances than standard functions:
+ 
  - they must be a single expression rather than a few smaller functions
  - diagnosing and debugging issues is not so easy if there are problems with the data at execution time
+
+On the upside, it is still all standard Clojure so it's a huge win from an expressivity and eco-system perspective
+ compared to DB functions in other embedded language systems in major databases such as Oracle, Postgres or MySQL.
 
 ##Should there be more out of the box from Datomic?
 
