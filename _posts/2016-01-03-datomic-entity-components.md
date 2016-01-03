@@ -274,3 +274,10 @@ On the upside, it is still all standard Clojure so it's a huge win from an expre
 Yes and no... its hard to argue that these needs are universal. In fact, the semantics of retraction are not obvious
  or easily agreed. For example, should elements not in the list be automatically deleted? In this case yes, but we
  can imagine many conditions where that would not be the most obvious / desired behaviour.
+ 
+**Thanks**
+ 
+Thanks for making it through, I have a better understanding of database functions on Datomic after writing this, so I
+ hope that's true for you too!
+ 
+Zing me or ping me if this was useful via Twitter.
