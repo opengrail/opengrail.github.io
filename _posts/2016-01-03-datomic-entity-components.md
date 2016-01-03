@@ -203,8 +203,7 @@ Here we create a list of calls to `db.fn/retractEntity`. Finally we bring the tw
     (let [db-comps (comp-key db-entity)
           user-comps (comp-key entity)
           updated-entity (assoc entity comp-key (calculate-updates user-comps))
-          retractions (calculate-retractions db-comps user-comps)
-          ]
+          retractions (calculate-retractions db-comps user-comps)]
       (if (empty? retractions)
         (vector updated-entity)
         (conj retractions updated-entity)))))
@@ -277,7 +276,7 @@ Yes and no... its hard to argue that these needs are universal. In fact, the sem
  
 **Thanks**
  
-Thanks for making it through, I have a better understanding of database functions on Datomic after writing this, so I
+Thanks for making it through. I have a better understanding of database functions on Datomic after writing this, so I
  hope that's true for you too!
  
 Zing me or ping me if this was useful via Twitter.
