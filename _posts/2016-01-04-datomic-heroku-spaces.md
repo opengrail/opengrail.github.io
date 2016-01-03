@@ -5,7 +5,7 @@ date:   2016-01-03 19:59:38 +0100
 categories: jekyll update
 ---
 
-#Datomic On Heroku
+#Datomic On Heroku with DynamoDB
 
 In my earlier post I describe how to use get [Datomic][datomic] up and running on [Heroku Private Spaces][heroku]. The great advantage of this system is the avoidance of any infrastructure management. You deploy your transactor like any other app.
  
