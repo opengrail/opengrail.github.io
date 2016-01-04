@@ -26,7 +26,7 @@ I will be going to the conference anyway so let me know if you're going too beca
 
 #Cycling
 
-If you really want to stalk me you can follow my cycle training for my next attempt at the [legendary Marmotte][marmotte] event in July 2016 on a hand-made, full carbon Twitter account.
+If you really want to stalk me you can follow my cycle training for my next attempt at the [legendary Marmotte][marmotte] event in July 2016 on a hand-made, full carbon [Twitter account][rays-bike]
 
 
 [cloj-tv]: https://www.youtube.com/user/ClojureTV
@@ -34,4 +34,4 @@ If you really want to stalk me you can follow my cycle training for my next atte
 [react-js]: http://www.meetup.com/ReactJS-Belgium/events/227410650/
 [clojure-days]: http://www.ticketbase.com/events/dutch-clojure-days-2016
 [marmotte]: http://www.sport.be/marmottegranfondoseries/en/
-[raymondos-bike]: https://twitter.com/raymondos_bike
+[rays-bike]: https://twitter.com/raymondos_bike
