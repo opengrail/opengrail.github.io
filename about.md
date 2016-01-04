@@ -8,7 +8,7 @@ I am Ray McDermott, a consultant developing software and helping out on software
 
 Originally from the UK but living in Belgium for tax reasons. If you're not Belgian you won't realise just how funny that is.
 
-# Feedback
+#Feedback
 
 I am thinking about putting comments on here but in the meantime please see me on the Clojurian Slack or tweet me up.
 
