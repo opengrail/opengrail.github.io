@@ -2,7 +2,7 @@
 layout: post
 title:  "Datomic Component Entities"
 date:   2016-01-02 19:59:38 +0100
-categories: jekyll update
+categories: datomic DB-functions
 ---
 
 **Datomic - Component Entities**

@@ -2,7 +2,7 @@
 layout: post
 title:  "Datomic On Heroku!"
 date:   2015-11-19 19:59:38 +0100
-categories: jekyll update
+categories: datomic heroku postgres
 ---
 
 **Datomic On Heroku**

@@ -2,7 +2,7 @@
 layout: post
 title:  "Datomic On Heroku with DynamoDB"
 date:   2016-01-03 19:59:38 +0100
-categories: jekyll update
+categories: datomic heroku dynamoDB AWS
 ---
 
 #Datomic On Heroku with DynamoDB
