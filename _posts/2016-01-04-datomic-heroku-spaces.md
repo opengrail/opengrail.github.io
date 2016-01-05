@@ -125,31 +125,11 @@ Thanks for making it through, I hope you enjoy the wonders of Datomic on a great
 
 Zing me or ping me if this was useful via Twitter.
 
-{% if post.comments %}
-
-<div id="disqus_thread"></div>
-<script>
-    var disqus_config = function () {
-        this.page.url = {{page.url}};
-        this.page.identifier = {{page.id}};
-    };
-
-    (function() {  // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        
-        s.src = '//opengrail.disqus.com/embed.js';
-        
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-
-{% endif %}
-
 
 [datomic]: https://www.datomic.com
 [heroku]: https://www.heroku.com/private-spaces
 [datomic-ddb]: http://docs.datomic.com/storage.html#provisioning-dynamo
     
-    
+
+{% include disqus.html %}
+
