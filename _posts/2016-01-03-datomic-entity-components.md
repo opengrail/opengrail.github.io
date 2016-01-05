@@ -280,3 +280,5 @@ Thanks for making it through. I have a better understanding of database function
  hope that's true for you too!
  
 Zing me or ping me if this was useful via Twitter.
+
+{% include disqus.html %}
