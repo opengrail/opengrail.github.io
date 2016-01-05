@@ -161,3 +161,6 @@ Zing me or ping me if this was useful via Twitter.
 
 [datomic-site]: https://www.datomic.com
 [heroku-cli]: https://toolbelt.heroku.com
+
+
+{% include disqus.html %}
