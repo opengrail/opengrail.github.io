@@ -6,7 +6,7 @@ comments: true
 categories: clojure events streams core.async
 ---
 
-#Introduction
+# Introduction
 
 In my [initial post][overview-post] I outlined a small bare-bones order management system that could act as a motivation for Event Stream Processing. 
 
@@ -14,7 +14,7 @@ In this post I want to show some code to implement how we may implement the proc
 
 ![Simple stock management]({{ url }}/assets/Stock-Tracking-Streams-2.jpg)
 
-#Data first
+# Data first
 
 Let us just quickly outline the data in our model:
 {% highlight clojure %}
@@ -23,7 +23,7 @@ Let us just quickly outline the data in our model:
 
 This is certainly a simple model but not necessarily useless and reduces the clutter around the examples.
 
-#Start with a printer
+# Start with a printer
 
 At the REPL we define a generic printer for data...
 
@@ -72,7 +72,7 @@ Let's play with it a little at the REPL and then shut it down:
 
 OK, so far so good. We have a basic example so let's look at the next program that will do something useful in the system...
 
-#Next - the end
+# Next - the end
 The most trivial consumer in the diagram is the Supplier Notifier which is at the end of the stream process flow in this case.
  
 That process listens on the Supplier Order channel and calls the supplier API.
@@ -130,7 +130,7 @@ Calling REST API with order
 {:id G__12827, :supplier "Acme Supplies", :quantity 100}
 {% endhighlight %}
 
-#Warm up complete
+# Warm up complete
 
 So that's the first edge of the system complete. 
 
@@ -191,7 +191,7 @@ Let's run a couple of test cases through:
 
 In the second case our low water mark has not been breached so the data is dropped.
 
-#Streaming hot
+# Streaming hot
 
 Finally let's hook up all of the components and run through the same test cases:
 
@@ -232,17 +232,17 @@ Calling REST API with order
 => true
 {% endhighlight %}
 
-#Summary
+# Summary
 
 We have seen the stock data flow through a tracker which had a simple filter to ensure that the notifications occurred when a specific business rule was fired.
 
 And this all happened in real time with minimal resource usage. Scaling down is often as equally important as scaling up.
 
-#Next next next
+# Next next next
 
 In the next post I will show the Stock Tracker to combine data from more than one channel and maintain local state within the go block.
 
-**And finally - Thanks**
+# And finally - Thanks!
  
 Thanks for making it through. I have a better understanding of core.async after writing this and I hope that's true for you too!
  

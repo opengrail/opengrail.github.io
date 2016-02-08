@@ -30,13 +30,13 @@ Modern concurrency models are based on Communicating Sequential Processes that i
 
 CSP is a powerful enabler for Event Stream Processing. Furthermore, with the advent of microservices, ESP has become an interesting model to glue together events that occur between the independent microservices. Likewise mcroservices provide a natural model to expose stream data in casual yet powerful ways. Casual because stream consumers can be created aside from the stream producer and powerful because they can join multiple streams or process time series windows of events to create new categories applications built on high-order time based events.
 
-#Streams everywhere?
+# Streams everywhere?
 
 In this opening post I am asserting that this vision displaces the database as the centre piece of online data processing. 
 
 There does however, remain a place for these technologies. Databases and search engines offer facilities that cannot be matched or replicated by event streams (ACID transactions and complex data mining). Database themselves can be the source of events as new transactions are applied. This is evidenced by the Transaction Queue in Datomic, the replication log of CouchDB and the oplog of MongoDB. Likewise SQL Server and DB2 can be queried through Change Data Capture interfaces to obtain deltas from a given point in time.
 
-#Tooling choices
+# Tooling choices
 
 There is a huge range of tools and technologies to ingest, store and process events: from cloud services such as [Amazon's Kinesis Streams][aws-kinesis], powerful frameworks such as [Apache Kakfa][apache-kafka], [Apache Flink][apache-flink] and all the way down to individual language features.
 
@@ -44,7 +44,7 @@ I always want to start off with something concrete that doesn't require a lot of
 
 I could have picked Go or JS but I'm a big advocate for Clojure so [core.async][core-async] is a natural choice for me to start my investigations. 
 
-#Full DisClojure
+# Full DisClojure
 
 To be honest, I know (and my colleagues insist) that there are other languages and frameworks that are richer by default than core.async. But my other goal here is to research understand the basic building blocks on which this model operates.
 
@@ -54,7 +54,7 @@ If I can also provide some examples that are useful in the Clojure community: bo
 
 Oh and it's my own time and I wanted to have some fun, so shut up.
 
-#Event Stream Processing - example scenarios
+# Event Stream Processing - example scenarios
 
 When dreaming up some scenarios I wanted to make something easy for my fellow <del>corporate drones</del> developers to grok so I figured that a small subset of an order management system would fit the bill. 
 

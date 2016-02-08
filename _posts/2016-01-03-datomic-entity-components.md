@@ -5,7 +5,7 @@ date:   2016-01-02 19:59:38 +0100
 categories: datomic DB-functions
 ---
 
-**Datomic - Component Entities**
+# Datomic - Component Entities
 
 Datomic has the concept of components entities where some 'inner' entities can be embedded in an 'outer' entity.
  
@@ -60,7 +60,7 @@ We can add this to Datomic with one additional property - a temporary DB/ID. Tra
 The `d/tempid` function provides a placeholder structure for Datomic to replace during the transaction and
  looks like this `#db/id[:db.part/user -1000010]`
 
-##Returning data rather than meta-data
+# Returning data rather than meta-data
 In this case our function would return the transaction to the user. This is definitely OK in some cases but more often clients want the data back with the newly created ID.
 
 When using Datomic this requires an extra step that is not needed with traditional databases. The creation of a new record (or any transaction for that matter) creates a new version of the database with the newly created data. But your connection refers to an earlier version of the database. 
@@ -113,7 +113,7 @@ As an aside, we can see how we might generalise this to be used for other map da
 
 Now we can move on from the background to the entity components themselves
 
-**Entity components**
+# Entity components
 
 You can see that the cart/skus are defined as a component. The schema for the skus:
 
@@ -197,7 +197,7 @@ Here we create a list of calls to `db.fn/retractEntity`. Finally we bring the tw
         (conj retractions updated-entity)))))
 {% endhighlight %}
 
-**Database or user space function?**
+# Database or user space function?
 The above code is shown as a set of functions but in the end I opted to install the code as a database function. The main reason for this choice was to ensure atomic operation. If one is comparing database structures and userland structures there are race conditions that are avoided completely when using database functions.
 
 This is the method defined as a database function called `component-crud`
@@ -253,11 +253,11 @@ So its definitely a win to have atomicity for certain functions. However databas
 On the upside, it is still all standard Clojure so it's a huge win from an expressivity and eco-system perspective
  compared to DB functions in other embedded language systems in major databases such as Oracle, Postgres or MySQL.
 
-**Should there be more out of the box from Datomic?**
+# Should there be more out of the box from Datomic?
 
 Yes and no... its hard to argue that these needs are universal. In fact, the semantics of retraction are not obvious or easily agreed. For example, should elements not in the list be automatically deleted? In this case yes, but we can imagine many conditions where that would not be the most obvious / desired behaviour. Nicer debug tooling would be nice though!
  
-**Thanks**
+# Thanks
  
 Thanks for making it through. I have a better understanding of database functions on Datomic after writing this, so I hope that's true for you too!
  
