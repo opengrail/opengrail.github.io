@@ -78,4 +78,4 @@ The code is all on my GitHub and I will point you to the relevant code in each p
 [apache-kafka]: http://kafka.apache.org/
 [apache-flink]: https://flink.apache.org/
 [core-async]: https://github.com/clojure/core.async/
-[overview-post]: {% post_url 2016-02-06-event-streams-core-async %}
+[reading-events]: {% post_url 2016-02-06-event-streams-core-async %}
