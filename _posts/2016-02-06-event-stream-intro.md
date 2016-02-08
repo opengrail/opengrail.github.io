@@ -6,7 +6,7 @@ comments: false
 categories: clojure events streams
 ---
 
-#Event Stream Processing - Motivation
+# Event Stream Processing - Motivation
 
 Event Stream Processing (ESP) is an interesting way in which we can model our systems. 
 
@@ -24,7 +24,7 @@ These reasons have been relentlessly crushed:
 - concurrent programming models are now built into languages (Go, C#, Erlang, ES6) and provided as macros in Clojure and other languages in the form of Reactive Extensions (RX).
 - mobile devices and IoT motivate the need to provide up to date versions of data for users at all times, everywhere. Companies in every sector are now providing this level of quality so it is quickly becoming a cost of doing business.
 
-#CSP for ESP. No thanks JSP.
+# CSP for ESP. No thanks JSP.
 
 Modern concurrency models are based on Communicating Sequential Processes that is a formal model for allowing independent sequential processes to communicate using channels. I'm not going to repeat the theory here but if you are hungry for more, see [Rob Pike's presentation on concurrency and parallelism][go-video].
 

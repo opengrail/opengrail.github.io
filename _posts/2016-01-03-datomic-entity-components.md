@@ -49,8 +49,7 @@ Here is the most basic empty cart:
 (def cart {:cart/name "myCart"})
 {% endhighlight %}
 
-We can add this to Datomic with one additional property - a temporary DB/ID. Transactions are always in a list
- so we need to conjure up one of those.
+We can add this to Datomic with one additional property - a temporary DB/ID. Transactions are always in a list so we need to conjure up one of those.
 
 {% highlight clojure %}
 (defn ins1 [cart]
@@ -62,18 +61,13 @@ The `d/tempid` function provides a placeholder structure for Datomic to replace 
  looks like this `#db/id[:db.part/user -1000010]`
 
 ##Returning data rather than meta-data
-In this case our function would return the transaction to the user. This is definitely OK in some cases but more often
- clients want the data back with the newly created ID.
+In this case our function would return the transaction to the user. This is definitely OK in some cases but more often clients want the data back with the newly created ID.
 
-When using Datomic this requires an extra step that is not needed with traditional databases. The creation of a new record
- (or any transaction for that matter) creates a new version of the database with the newly created data. But your connection
- refers to an earlier version of the database. 
+When using Datomic this requires an extra step that is not needed with traditional databases. The creation of a new record (or any transaction for that matter) creates a new version of the database with the newly created data. But your connection refers to an earlier version of the database. 
 
-To solve this we need two parts ... one is a new version of the database and another is a function to obtain the newly
- created IDs.
+To solve this we need two parts ... one is a new version of the database and another is a function to obtain the newly created IDs.
 
-The transaction that is returned by the `d/transact` method provides several keys to help us out. Here is an example of
- a transaction that is returned from calling `ins1` as shown above:
+The transaction that is returned by the `d/transact` method provides several keys to help us out. Here is an example of a transaction that is returned from calling `ins1` as shown above:
 
 {% highlight clojure %}
 (ins1 cart)
@@ -103,8 +97,7 @@ As an example:
 => {:db/id 17592186045420, :cart/name "My-Cart"}
 {% endhighlight %}
 
-This function returns the whole record which is what I needed but could just return the ID. There is no network cost
- to run the pull query and a direct lookup is highly efficient.
+This function returns the whole record which is what I needed but could just return the ID. There is no network cost to run the pull query and a direct lookup is highly efficient.
  
 As an aside, we can see how we might generalise this to be used for other map data rather than just shopping carts:
 
@@ -120,7 +113,7 @@ As an aside, we can see how we might generalise this to be used for other map da
 
 Now we can move on from the background to the entity components themselves
 
-##Entity components
+**Entity components**
 
 You can see that the cart/skus are defined as a component. The schema for the skus:
 
@@ -147,9 +140,7 @@ Here is an example cart with 2 skus:
                         :sku/quantity 2}]})
 {% endhighlight %}
 
-The nice thing is that we can just call `save-new` as defined above and it will still work. We don't need to add any 
- code to save carts which include items for purchase. Both of the skus will automatically be provided a distinct entity
- id and that will bubble back in the pull query. Like this:
+The nice thing is that we can just call `save-new` as defined above and it will still work. We don't need to add any code to save carts which include items for purchase. Both of the skus will automatically be provided a distinct entity id and that will bubble back in the pull query. Like this:
 
 {% highlight clojure %}
 (save-new cart)
@@ -163,8 +154,7 @@ The nice thing is that we can just call `save-new` as defined above and it will 
  
 Things become more complex when we want to perform updates / deletions (retractions in Datomic terms). 
 
-First and most obvious we need to see if the cart has a `db/id` so we introduce higher level function to split out
- the two cases. If this feels imperative, I'm guilty as charged. Alternatives suggestions are welcomed. 
+First and most obvious we need to see if the cart has a `db/id` so we introduce higher level function to split out the two cases. If this feels imperative, I'm guilty as charged. Alternatives suggestions are welcomed. 
 
 {% highlight clojure %}
 (defn save-cart! [cart]
@@ -183,8 +173,7 @@ So now let's see what we have to do with the update case...
     (concat existing-comps datomicized-additions)))
 {% endhighlight %}
 
-Firstly we add in the tempid, as we did for the cart, for any new components and return the combined list. Next we
- need to handle any retractions - items that are missing from the input data but that are present on the database.
+Firstly we add in the tempid, as we did for the cart, for any new components and return the combined list. Next we need to handle any retractions - items that are missing from the input data but that are present on the database.
 
 {% highlight clojure %}
 (defn calculate-retractions [list1 list2]
@@ -194,8 +183,7 @@ Firstly we add in the tempid, as we did for the cart, for any new components and
     (map (fn [e] [:db.fn/retractEntity e]) diffs)))
 {% endhighlight %}
 
-Here we create a list of calls to `db.fn/retractEntity`. Finally we bring the two together into single list of
- transactions:
+Here we create a list of calls to `db.fn/retractEntity`. Finally we bring the two together into single list of transactions:
 
 {% highlight clojure %}
 (defn update [entity comp-key]
@@ -209,10 +197,8 @@ Here we create a list of calls to `db.fn/retractEntity`. Finally we bring the tw
         (conj retractions updated-entity)))))
 {% endhighlight %}
 
-##Database or user space function?
-The above code is shown as a set of functions but in the end I opted to install the code as a database function. The
- main reason for this choice was to ensure atomic operation. If one is comparing database structures and userland
- structures there are race conditions that are avoided completely when using database functions.
+**Database or user space function?**
+The above code is shown as a set of functions but in the end I opted to install the code as a database function. The main reason for this choice was to ensure atomic operation. If one is comparing database structures and userland structures there are race conditions that are avoided completely when using database functions.
 
 This is the method defined as a database function called `component-crud`
 
@@ -259,8 +245,7 @@ To invoke the `component-crud` database function
     (d/pull db-after '[*] (:db/id cart))))
 {% endhighlight %}
 
-So its definitely a win to have atomicity for certain functions. However database functions are more awkward to
- implement and invoke than standard clojure functions. They also have fewer affordances than standard functions:
+So its definitely a win to have atomicity for certain functions. However database functions are more awkward to implement and invoke than standard clojure functions. They also have fewer affordances than standard functions:
  
  - they must be a single expression rather than a few smaller functions
  - diagnosing and debugging issues is not so easy if there are problems with the data at execution time
@@ -268,16 +253,13 @@ So its definitely a win to have atomicity for certain functions. However databas
 On the upside, it is still all standard Clojure so it's a huge win from an expressivity and eco-system perspective
  compared to DB functions in other embedded language systems in major databases such as Oracle, Postgres or MySQL.
 
-##Should there be more out of the box from Datomic?
+**Should there be more out of the box from Datomic?**
 
-Yes and no... its hard to argue that these needs are universal. In fact, the semantics of retraction are not obvious
- or easily agreed. For example, should elements not in the list be automatically deleted? In this case yes, but we
- can imagine many conditions where that would not be the most obvious / desired behaviour.
+Yes and no... its hard to argue that these needs are universal. In fact, the semantics of retraction are not obvious or easily agreed. For example, should elements not in the list be automatically deleted? In this case yes, but we can imagine many conditions where that would not be the most obvious / desired behaviour. Nicer debug tooling would be nice though!
  
 **Thanks**
  
-Thanks for making it through. I have a better understanding of database functions on Datomic after writing this, so I
- hope that's true for you too!
+Thanks for making it through. I have a better understanding of database functions on Datomic after writing this, so I hope that's true for you too!
  
 Zing me or ping me if this was useful via Twitter.
 

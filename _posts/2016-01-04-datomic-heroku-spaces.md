@@ -6,7 +6,7 @@ comments: true
 categories: datomic heroku dynamoDB AWS
 ---
 
-#Datomic On Heroku with DynamoDB
+# Datomic On Heroku with DynamoDB
 
 In my earlier post I describe how to use get [Datomic][datomic] up and running on [Heroku Private Spaces][heroku]. The great advantage of this system is the avoidance of any infrastructure management. You deploy your transactor like any other app.
  
@@ -16,17 +16,17 @@ As a refresher, this is what it looks like on Heroku:
 
 ![Datomic components]({{ url }}/assets/DatomicHerokuVisuals-4.jpg)
 
-#Datomic and DynamoDB
+# Datomic and DynamoDB
 But of course Datomic has other storage options, including the AWS DynamoDB. In this article I will show how we can use the same facilities for deploying apps and the transactor in a Heroku Private Space but use DynamoDB rather than Heroku Postgres as a storage option.
 
 This is what it looks like when we use DynamoDB:
 
 ![Datomic components]({{ url }}/assets/DatomicHerokuAWSVisuals-1.jpg)
 
-#Chocolate and ice-cream
+# Chocolate and ice-cream
 As a final background note, you should also bear in mind that it is perfectly possible to have multiple transactors with different storage back-ends and to have them all still be reachable and usable by the same Peer.
 
-#Transactor app
+# Transactor app #
 Getting into the details, the process is very similar to the set up for Postgres with a few small tweaks. For the sake of completeness I am going to charge through the whole process again here so that you don't have to pick apart the differences.
 
 **Create your transactor app**
@@ -107,7 +107,7 @@ git push heroku master
 heroku open -a my-xtor-web-front
 {% endhighlight %}
 
-**Operating costs**
+# Operating costs
 
 Be careful to watch your dyno use on Heroku as it's possible to go beyond the free tier if you play for too long.
 
@@ -119,7 +119,7 @@ Obviously you can spend as much as you want with Datomic or DynamoDB once you ge
 
 The code for the build packs and the sample apps are all on github so you can fork away and please let me know if there are any problems or suggestions for improvements.
 
-**Thanks**
+# Thanks
 
 Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS / DBAAS combination.
 
