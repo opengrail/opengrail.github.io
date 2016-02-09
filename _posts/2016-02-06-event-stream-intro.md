@@ -40,13 +40,13 @@ There does however, remain a place for these technologies. Databases and search 
 
 There is a huge range of tools and technologies to ingest, store and process events: from cloud services such as [Amazon's Kinesis Streams][aws-kinesis], powerful frameworks such as [Apache Kakfa][apache-kafka], [Apache Flink][apache-flink] and all the way down to individual language features.
 
-I always want to start off with something concrete that doesn't require a lot of infrastructure but can get demonstrate the benefits so I don't want to rely on the cloud or big frameworks - not just yet.
+I always want to start off with something concrete that doesn't require a lot of infrastructure but can demonstrate the benefits. So I don't want to rely on the cloud or big frameworks - at least not just yet.
 
 I could have picked Go or JS but I'm a big advocate for Clojure so [core.async][core-async] is a natural choice for me to start my investigations. 
 
 # Full DisClojure
 
-To be honest, I know (and my colleagues insist) that there are other languages and frameworks that are richer by default than core.async. But my other goal here is to research understand the basic building blocks on which this model operates.
+To be honest, I know (and my colleagues insist) that there are other languages and frameworks that are richer by default than core.async. But my other goal here is to research and understand the basic building blocks on which this model operates.
 
 In my experience the abstractions in Clojure are tastefully chosen. So I decided to start there on the basis that I would not get lost either learning a new language (like Go) or in the intricacies of distributed persistence addressed by more complex frameworks (like Flink). 
 
