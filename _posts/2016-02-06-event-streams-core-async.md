@@ -240,7 +240,7 @@ And this all happened in real time with minimal resource usage. Scaling down is 
 
 # Next next next
 
-In the next post I will show the Stock Tracker to combine data from more than one channel and maintain local state within the go block.
+In the [next post][core-async-state] I show the Stock Management Tracker to combine data from more than one channel and maintain local state within the go block.
 
 # And finally - Thanks!
  
@@ -249,5 +249,6 @@ Thanks for making it through. I have a better understanding of core.async after 
 Zing me or ping me if this was useful via Twitter or in the comments below.
 
 [overview-post]: {% post_url 2016-02-06-event-stream-intro %}
+[core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
 
 {% include disqus.html %}
