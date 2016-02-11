@@ -12,45 +12,34 @@ In my [last post][core-async-state] I went through the code for a data flow usin
 
 In this post I want to show how to segregate data from a stream into time series.
 
-![Simple stock management]({{ url }}/assets/Stock-Tracking-Streams-3.jpg)
+![Simple stock management]({{ url }}/assets/Stock-Tracking-Streams-4.jpg)
 
-In the tracker we will join the two streams to emit a running total of stock on hand vs orders at any point in time.
+In this use case we want to notify the supplier if we have a spike in demand. This spike example is fairly trivial but we will see that core.async can handle many millions of events
+per minute and provide fine grained time series with very little code.
 
 # Data first
 
-Let us just quickly outline the data in our model:
+As usual in this series we will outline the simple data we use in our model:
 {% highlight clojure %}
 ; Order
 {:item-id A123 :description "Windscreen wiper" :quantity 2 :customer-id C234}
-; Delivery
-{:item-id A123 :description "Windscreen wiper" :quantity 40 :supplier-id S234}
 {% endhighlight %}
 
-Once again this is certainly a simple model but is sufficient to demonstrate the power of the solution.
+# Timing out of the box
 
-To help with the simulation we will throw together some sample data and create a few small functions to generate the orders and deliveries.
+`core.async` does not provide any models for managing time in the library. 
 
-# Parts data generation
+The addition of this support however is relatively simple and suprisngly concise. Well, maybe not that surprising by now.
 
-{% highlight clojure %}
-; Wikipedia sourced list of body and main parts
-(def manifest ["Bonnet/hood" "Bonnet/hood latch" "Bumper" "Unexposed bumper" "Exposed bumper"
-               "Cowl screen" "Decklid" "Fascia rear and support" "Fender (wing or mudguard)"
-               "Front clip" "Front fascia and header panel" "Grille (also called grill)"
-               "Pillar and hard trim" "Quarter panel" "Radiator core support"
-               "Rocker" "Roof rack" "Spoiler" "Front spoiler (air dam)" "Rear spoiler (wing)" "Rims" "Hubcap"
-               "Tire/Tyre" "Trim package" "Trunk/boot/hatch" "Trunk/boot latch" "Valance" "Welded assembly"
-               "Outer door handle" "Inner door handle" "Door control module" "Door seal"
-               "Door watershield" "Hinge" "Door latch" "Door lock and power door locks" "Center-locking"
-               "Fuel tank (or fuel filler) door" "Window glass" "Sunroof" "Sunroof motor" "Window motor"
-               "Window regulator" "Windshield (also called windscreen)" "Windshield washer motor"
-               "Window seal"])
+The development of this model was prompted by a short conversation with @jgdavey in the core.async channel on Slack
 
-; magic up 460 items with variants for each part (adjust the range to create more / less)
-(def parts (mapcat (fn [part]
-                     (map #(assoc {} :id (gensym) :description (str part %)) (range 10)))
-                   manifest))
-{% endhighlight %}
+> If you were to implement yourself, you could make a `go` that simply pulls from a channel, and adds to another as a `[timestamp item]` pair, then finally pushes into an unbounded `chan` that has a transducer that filters based on age of that timestamp.
+>
+> -- <cite>Joshua Davey</cite>
+
+I couldn't get my head around the suggestion at first but I decided to give it a try - what could possibly go wrong?
+
+Joshua has his 
 
 # Order and delivery generation
 

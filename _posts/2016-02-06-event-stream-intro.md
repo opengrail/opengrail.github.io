@@ -65,8 +65,8 @@ This type of system is ripe with opportunities to demonstrate events throughout 
 In this series of posts I will show the following examples in code:
 
 - [Reading events][reading-events] from streams (Stock Tracker in the above drawing)
-- Joining streams to combine data (Stock Management Tracker)
-- Process time series events in the form of sliding intervals (Sliding Window Tracker)
+- [Joining streams][core-async-state] to combine data and manage state (Stock Management Tracker)
+- [Process time series][core-async-time] events in the form of sliding intervals (Sliding Window Tracker)
 
 The code is all on my GitHub and I will point you to the relevant code in each post.
 
@@ -79,3 +79,6 @@ The code is all on my GitHub and I will point you to the relevant code in each p
 [apache-flink]: https://flink.apache.org/
 [core-async]: https://github.com/clojure/core.async/
 [reading-events]: {% post_url 2016-02-06-event-streams-core-async %}
+[core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
+[core-async-time]: {% post_url 2016-02-11-event-streams-core-async-time-series %}
+
