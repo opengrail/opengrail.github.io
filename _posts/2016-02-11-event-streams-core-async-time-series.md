@@ -1,16 +1,16 @@
 ---
 layout: post
-title:  "Event Stream Processing - Managing state with core.async"
-date:   2016-02-09 19:59:38 +0100
+title:  "Event Stream Processing - Managing time series with core.async"
+date:   2016-02-11 19:59:38 +0100
 comments: true
 categories: clojure events streams core.async
 ---
 
 # Introduction
 
-In my [last post][core-async-intro-post] I went through the code for a data flow using a product stock level tracker. It had a simple filter to ensure that the notifications occurred when a specific business rule was fired.
+In my [last post][core-async-state] I went through the code for a data flow using a product stock level tracker by combining channels and maintaining state around the `go-loop`
 
-In that post I showed the basic mechanisms for creating and connecting channels. In this post I want to show how to combine data from multiple streams. To demonstrate this we will implement the processes around the Stock Management Tracker. 
+In this post I want to show how to segregate data from a stream into time series.
 
 ![Simple stock management]({{ url }}/assets/Stock-Tracking-Streams-3.jpg)
 
@@ -82,7 +82,7 @@ They differ only in the way that orders are consistent and deliveries are random
 
 One aspect to note in the above code is the `timeout` function. It reads from a virtual channel and effects a pause on the generation like Thread/sleep but does not block.
 
-Not blocking means that it is OK to start 100s or 1000s of go blocks with very little CPU or RAM overhead. This is similar in effect to the way that **NGINX** is architected.
+Not blocking means that it is OK to start 100s or 1000s of go blocks with very little CPU or RAM overhead. This is similar in effect to the way that NGINX is architected.
 
 # Don't change that channel
 
@@ -113,9 +113,7 @@ In this example we use `condp` to run differing code based on the channel that w
 
 #Re-Stating our intentions
 
-The gap we have with the above code is that it will only ever report 0 or 1. 
-
-That might might be useful if have an external aggregator but we can also aggregate in the go-loop directly:
+The problem we have here is that we need to retain the latest value of the stock otherwise we will only ever report 0 or 1. That might might be useful if have an external aggregator but we can also aggregate in the go-loop directly
 
 {% highlight clojure %}
 (defn stock-levels [orders deliveries]
@@ -137,15 +135,15 @@ That might might be useful if have an external aggregator but we can also aggreg
     out))
 {% endhighlight %}
 
-Using the parameters to the `go-loop` we can initiate state and then maintain it via `recur`. 
+Using the parameters to the go-loop we can initiate state and then maintain it via recur. 
 
-In this case we create a set of parts and set each stock item count to 0 when our function starts. One can imagine more complex initialisations!
+In this case we do the simplest possible setting for stock to 0 when our function starts. One can imagine more complex initialisations!
 
-In the loop we then pass the stock collection to the `modify-stock` function which returns a new version of the stock collection.
+In the loop we then pass the stock collection to the `modify-stock` function which can return a new version of the stock collection.
 
-Here we exploit the fact that Clojure collections are **very efficient** with respect to minimising the costs of each new version. 
+Here we exploit the fact that Clojure collections are very efficient with respect to minimising the costs of each new version. 
 
-This stock list could easily be scaled to tens of thousands of parts without adding any latency costs (barring side effects of swapping although luckily we are no longer limited to 32k, 32Mb or even 32Gb of memory like in the good old days). For more information [see this rich visual explanation][data-structures] from  Jean Niklas L'orange.
+This stock list could easily be scaled to tens of thousands of parts without adding any latency costs (barring side effects of swapping although luckily we are no longer limited to 32k, 32Mb or even 32Gb of memory like in the good old days).
 
 # Modify without side effects
 
@@ -163,11 +161,11 @@ One nice aspect of using Clojure's `set` data structure is that we can use `conj
 
 # Summary
 
-In this example we saw how to implement a stock level tracker. To achieve this functionality we read multiple channels in one `go-loop` and distinguished data from those channels. Further we maintained aggregations and state around the `go-loop` to increase power and simplicity.
+In this example we saw how to read multiple channels in one `go-loop` and distinguish data from those channels. Further we saw that we can maintain aggregations and state around the `go-loop` to increase both power and simplicity.
 
 # Next next next
 
-In the [final example][core-async-time] of this short series I will show how to track stream data within series of time.
+In the final example of this short series I will show how to track data within series of time.
 
 # And finally - Thanks!
  
@@ -175,8 +173,7 @@ Thanks for making it through. I have a better understanding of core.async after 
  
 Zing me or ping me if this was useful via Twitter or in the comments below.
 
-[core-async-intro-post]: {% post_url 2016-02-06-event-streams-core-async %}
-[data-structures]: http://hypirion.com/musings/understanding-persistent-vector-pt-1
-[core-async-time]: {% post_url 2016-02-11-event-streams-core-async-time-series %}
+[core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
+
 
 {% include disqus.html %}

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Event Stream Processing"
+title:  "Event Stream Processing - A short series of adventures with core.async"
 date:   2016-02-06 19:59:38 +0100
 comments: false
 categories: clojure events streams
