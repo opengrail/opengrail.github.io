@@ -39,7 +39,7 @@ The development of this model was prompted by a short conversation with @jgdavey
 
 I couldn't get my head around the suggestion at first but I decided to give it a try - what could possibly go wrong?
 
-Joshua has his 
+Oh, and Joshua has [his own implementation][jgd-gist] which is interesting in its own right.
 
 # Order and delivery generation
 
@@ -163,6 +163,6 @@ Thanks for making it through. I have a better understanding of core.async after 
 Zing me or ping me if this was useful via Twitter or in the comments below.
 
 [core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
-
+[jgd-gist]: https://gist.github.com/jgdavey/d928136d035645bd15ec
 
 {% include disqus.html %}
