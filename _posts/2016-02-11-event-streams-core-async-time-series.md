@@ -194,40 +194,31 @@ The thing I like about this code is that we have avoided creating global state.
 # Demo time
 
 {% highlight clojure %}
-(finite-printer (stop-after-n-seconds 10) (data-in-timed-series (gen-timed-data parts) (create-time-series-windows 4)))
+(finite-printer (stop-after-n-seconds 10) (data-in-timed-series (gen-timed-orders 1000 parts) (create-time-series-windows 4)))
 =>
 #object[clojure.core.async.impl.channels.ManyToManyChannel
-        0x3e18c16e
-        "clojure.core.async.impl.channels.ManyToManyChannel@3e18c16e"]
+        0x2b730646
+        "clojure.core.async.impl.channels.ManyToManyChannel@2b730646"]
 ({:from
-  #object[org.joda.time.DateTime 0x6ab0406 "2016-02-14T15:45:45.661Z"],
+  #object[org.joda.time.DateTime 0x6a21c46e "2016-02-14T20:31:28.404Z"],
   :to
-  #object[org.joda.time.DateTime 0x31c06b0c "2016-02-14T15:45:49.661Z"],
+  #object[org.joda.time.DateTime 0x51d383fa "2016-02-14T20:31:32.404Z"],
   :closed true,
   :items
-  [{:id G__19806, :description "Bonnet/hood latch3"}
-   {:id G__20195, :description "Sunroof motor2"}
-   {:id G__20148, :description "Door lock and power door locks5"}
-   {:id G__20042, :description "Trunk/boot/hatch9"}
-   {:id G__20053, :description "Valance0"}
-   {:id G__19938, :description "Radiator core support5"}
-   {:id G__19942, :description "Radiator core support9"}]})
+  [{:id G__12317, :description "Door control module9"}
+   {:id G__12077, :description "Decklid9"}
+   {:id G__12382, :description "Fuel tank (or fuel filler) door4"}
+   {:id G__12092, :description "Fender (wing or mudguard)4"}]})
 ({:from
-  #object[org.joda.time.DateTime 0x31c06b0c "2016-02-14T15:45:49.661Z"],
+  #object[org.joda.time.DateTime 0x51d383fa "2016-02-14T20:31:32.404Z"],
   :to
-  #object[org.joda.time.DateTime 0x623a386c "2016-02-14T15:45:53.661Z"],
+  #object[org.joda.time.DateTime 0x66a36cd7 "2016-02-14T20:31:36.404Z"],
   :closed true,
   :items
-  [{:id G__19798, :description "Bonnet/hood5"}
-   {:id G__19837, :description "Exposed bumper4"}
-   {:id G__19942, :description "Radiator core support9"}
-   {:id G__20228, :description "Windshield (also called windscreen)5"}
-   {:id G__19837, :description "Exposed bumper4"}
-   {:id G__20239, :description "Windshield washer motor6"}
-   {:id G__20234, :description "Windshield washer motor1"}
-   {:id G__20107, :description "Door seal4"}
-   {:id G__20016, :description "Tire/Tyre3"}
-   {:id G__20170, :description "Fuel tank (or fuel filler) door7"}]})
+  [{:id G__12171, :description "Roof rack3"}
+   {:id G__12055, :description "Exposed bumper7"}
+   {:id G__12428, :description "Window regulator0"}
+   {:id G__12167, :description "Rocker9"}]})
 :stop
 {% endhighlight %}
 
@@ -249,13 +240,13 @@ Here is a small general purpose aggegrator that take a function to operate on ea
     out))
 
 
-(finite-printer (stop-after-n-seconds 10) (interval-aggregator count (data-in-timed-series (gen-timed-data parts) (create-time-series-windows 4))))
+(finite-printer (stop-after-n-seconds 10) (interval-aggregator count (data-in-timed-series (gen-timed-orders 1000 parts) (create-time-series-windows 4))))
 =>
 #object[clojure.core.async.impl.channels.ManyToManyChannel
-        0x379dfa3d
-        "clojure.core.async.impl.channels.ManyToManyChannel@379dfa3d"]
-6
-11
+        0x77069406
+        "clojure.core.async.impl.channels.ManyToManyChannel@77069406"]
+3
+4
 :stop
 {% endhighlight %}
 
