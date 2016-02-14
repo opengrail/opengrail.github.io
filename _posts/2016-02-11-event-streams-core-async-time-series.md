@@ -25,11 +25,11 @@ As usual in this series we will outline the simple data we use in our model:
 {:item-id A123 :description "Windscreen wiper" :quantity 2 :customer-id C234}
 {% endhighlight %}
 
-# Timing out of the box
+# Timing - thinking out of the box
 
 `core.async` does not provide any models for managing time in the library. 
 
-The addition of this support however is relatively simple and suprisngly concise. Well, maybe not that surprising by now.
+The addition of this support however is relatively simple and surprisingly concise. Well, maybe not that surprising by now.
 
 The development of this model was prompted by a short conversation with @jgdavey in the core.async channel on Slack
 
@@ -37,11 +37,11 @@ The development of this model was prompted by a short conversation with @jgdavey
 >
 > -- <cite>Joshua Davey</cite>
 
-I couldn't get my head around the suggestion at first but I decided to give it a try - what could possibly go wrong?
+I couldn't get my head around the suggestion at first but I decided to give it a try - what could possibly go wrong? In the end mine was a different take on Joshua's idea but it served as inspiration.
 
 Oh, and Joshua has [his own implementation][jgd-gist] which is interesting in its own right.
 
-# Order and delivery generation
+# Timing orders
 
 {% highlight clojure %}
 (defn gen-timed-orders [frequency-millis coll]
@@ -52,113 +52,228 @@ Oh, and Joshua has [his own implementation][jgd-gist] which is interesting in it
         (<! (timeout frequency-millis))
         (recur)))
     out))
+{% endhighlight %}
 
-(defn gen-random-deliveries [max-wait-millis coll]
+We saw this function in a previous example to generate infinite streams of data with time stamps so this satisfies the first part of generating pairs of data with a time / data tuple. 
+
+# Timing windows
+
+{% highlight clojure %}
+(defn create-time-series-windows
+  "Create a window for X seconds that refresh every Y seconds. 1 <= Y <= X"
+  ([open-duration slide-interval]
+   {:pre [(> open-duration 0) (> slide-interval 0) (>= open-duration slide-interval)]}
+   (let [out (chan)]
+     (go-loop [start-time (t/now)]
+       (let [window (gen-window start-time open-duration)]
+         (do
+           (>! out window)
+           (<! (timeout (* 1000 slide-interval)))
+           (if (= open-duration slide-interval)
+             (recur (:to window))
+             (recur (t/now))))))
+     out))
+
+  ([open-duration]
+   {:pre [(> open-duration 0)]}
+   (create-time-series-windows open-duration open-duration)))
+
+(finite-printer (stop-after-n-seconds 4) (create-time-series-windows 2))
+=>
+#object[clojure.core.async.impl.channels.ManyToManyChannel
+        0x36b824c4
+        "clojure.core.async.impl.channels.ManyToManyChannel@36b824c4"]
+{:from
+ #object[org.joda.time.DateTime 0x6b838f36 "2016-02-14T14:55:19.807Z"],
+ :to
+ #object[org.joda.time.DateTime 0x595b82e4 "2016-02-14T14:55:21.807Z"],
+ :closed false,
+ :items []}
+{:from
+ #object[org.joda.time.DateTime 0x595b82e4 "2016-02-14T14:55:21.807Z"],
+ :to
+ #object[org.joda.time.DateTime 0x18e43e29 "2016-02-14T14:55:23.807Z"],
+ :closed false,
+ :items []}
+:stop
+{% endhighlight %}
+
+We have a multi-arity function for creating time windows. With one argument it will produce contiguous windows of X seconds. With two arguments the windows will overlap.
+
+We use state on the `go-loop` to maintain the interval contiguousness (I checked, yes that is the right word)
+
+We also have a few contractual checks using `{pre:` to ensure that the arguments are somewhat sane.
+
+# Time in Windows
+
+There are many ways to skin this particular cat. But before I go on I just want to say that no cats were actually skinned.
+
+I went away from Joshua's concept and decided to place the data into the window by means of a vector of items.
+
+We will see that this enables further aggregations based on the data accumulated in each window, which is a reasonably common requirement.
+
+To complete the code, here is the function to generate the windows
+
+{% highlight clojure %}
+(defn- gen-window [start-time open-duration]
+  {:pre [(> open-duration 0)]}
+  (let [to-time (t/plus start-time (t/seconds open-duration))]
+    (assoc {} :from start-time :to to-time :closed false :items [])))
+{% endhighlight %}
+
+# Merging time and data
+
+{% highlight clojure %}
+(defn data-in-timed-series
+  "Add timed data from item-ch to the time series windows produced in the window-ch;
+   emit the window once only, after it is closed"
+  [item-ch window-ch]
+  (let [out-ch (chan 1 (comp (map (fn [windows]
+                                    (filter #(:closed %) windows)))
+                             (filter (fn [windows] (> (count windows) 0)))))]
+    (go-loop [active-windows ()]
+      (if-let [[data chan] (alts! [item-ch window-ch])]
+        (condp = chan
+          window-ch (if-let [windows (maintain-active-windows (conj active-windows data))]
+                      (do
+                        (>! out-ch windows)
+                        (recur windows)))
+          item-ch (recur (add-timed-item-to-windows data active-windows)))
+        (close! out-ch)))
+    out-ch))
+{% endhighlight %}
+
+This function creates a `go-loop` that combines data from channels on which the windows and time-stamped data are emitted.
+
+When the data is incoming from the `item-ch` the items are added to appropriate window(s) using `add-timed-item-to-windows` and we `recur` on the result.
+
+When the data comes in from the `window-ch` the new window is added to the list. We will show the `maintain-active-windows` function shortly. 
+
+Finally, the transducer limits the output to closed, non-empty windows.
+
+# Time management
+
+Again, no cats skinned but there are choices. In this case I chose to maintain the windows by tracking a boolean and then reaping the windows after a certain time threshold. Here is the code abstracted out into a small function:
+
+{% highlight clojure %}
+(defn- maintain-active-windows [windows]
+  (let [now (t/now)
+        retention-period (t/millis 500)
+        retention-boundary (t/minus now retention-period)
+        retained (filter #(t/after? (:to %) retention-boundary) windows)
+        to-be-closed (filter #(and (t/before? (:to %) now) (false? (:closed %))) windows)
+        closing (map #(assoc % :closed true) to-be-closed)]
+    (concat retained closing)))
+{% endhighlight %}
+
+I chose a retention period of 500ms on the basis that 1000ms is the minimum window size in this design. This way I am always guaranteed to clean up on each new time window. 
+
+It also means that there is some small additional time for catching stragglers although that is the limit of any effort to deal with that particular problem. In general stragglers are silently dropped.
+
+# Data management
+
+The code for adding items to the windows is fairly boiler plate but presented here so that you can have a more complete view:
+
+{% highlight clojure %}
+(defn- within-interval? [from to time]
+  {:pre [(t/before? from to)]}
+  "Check whether a time is within an interval"
+  (let [interval (t/interval from to)]
+    (t/within? interval time)))
+
+(defn- add-timed-item-to-windows [timed-item windows]
+  "Add an item to the windows where the time intervals match"
+  (if-let [[time item] timed-item]
+    (let [matching-windows (filter #(within-interval? (:from %) (:to %) time) windows)
+          updated-windows (map #(assoc % :items (conj (:items %) item)) matching-windows)]
+      updated-windows)))
+{% endhighlight %}
+
+The thing I like about this code is that we have avoided creating global state.
+
+# Demo time
+
+{% highlight clojure %}
+(finite-printer (stop-after-n-seconds 10) (data-in-timed-series (gen-timed-data parts) (create-time-series-windows 4)))
+=>
+#object[clojure.core.async.impl.channels.ManyToManyChannel
+        0x3e18c16e
+        "clojure.core.async.impl.channels.ManyToManyChannel@3e18c16e"]
+({:from
+  #object[org.joda.time.DateTime 0x6ab0406 "2016-02-14T15:45:45.661Z"],
+  :to
+  #object[org.joda.time.DateTime 0x31c06b0c "2016-02-14T15:45:49.661Z"],
+  :closed true,
+  :items
+  [{:id G__19806, :description "Bonnet/hood latch3"}
+   {:id G__20195, :description "Sunroof motor2"}
+   {:id G__20148, :description "Door lock and power door locks5"}
+   {:id G__20042, :description "Trunk/boot/hatch9"}
+   {:id G__20053, :description "Valance0"}
+   {:id G__19938, :description "Radiator core support5"}
+   {:id G__19942, :description "Radiator core support9"}]})
+({:from
+  #object[org.joda.time.DateTime 0x31c06b0c "2016-02-14T15:45:49.661Z"],
+  :to
+  #object[org.joda.time.DateTime 0x623a386c "2016-02-14T15:45:53.661Z"],
+  :closed true,
+  :items
+  [{:id G__19798, :description "Bonnet/hood5"}
+   {:id G__19837, :description "Exposed bumper4"}
+   {:id G__19942, :description "Radiator core support9"}
+   {:id G__20228, :description "Windshield (also called windscreen)5"}
+   {:id G__19837, :description "Exposed bumper4"}
+   {:id G__20239, :description "Windshield washer motor6"}
+   {:id G__20234, :description "Windshield washer motor1"}
+   {:id G__20107, :description "Door seal4"}
+   {:id G__20016, :description "Tire/Tyre3"}
+   {:id G__20170, :description "Fuel tank (or fuel filler) door7"}]})
+:stop
+{% endhighlight %}
+
+# Aggregations
+
+Here is a small general purpose aggegrator that take a function to operate on each window:
+
+{% highlight clojure %}
+(defn interval-aggregator [aggregator in]
+  "Execute the provided aggregator against the :items property from the map on the channel"
   (let [out (chan)]
     (go-loop []
-      (do
-        (>! out [(t/now) (rand-nth coll)])
-        (<! (timeout (rand-int max-wait-millis)))
-        (recur)))
-    out))
-{% endhighlight %}
-
-Here we generate infinite streams of data with time stamps. That will be used in later examples to aggregate data into time series.
-
-They differ only in the way that orders are consistent and deliveries are random. This is not a perfect model of the real world (yeah, I know) but is good enough for this purpose.
-
-# Blocking without Thread/sleep == SCAAAAALE!
-
-One aspect to note in the above code is the `timeout` function. It reads from a virtual channel and effects a pause on the generation like Thread/sleep but does not block.
-
-Not blocking means that it is OK to start 100s or 1000s of go blocks with very little CPU or RAM overhead. This is similar in effect to the way that NGINX is architected.
-
-# Don't change that channel
-
-I'm going to show this next function in to forms. The first form shows how to use conditionals based on channel
-
-{% highlight clojure %}
-(defn stock-levels [orders deliveries]
-  "Stock levels - also includes demand (negative stock numbers)"
-  (let [out (chan)
-        dec-stock (partial modify-stock dec)
-        inc-stock (partial modify-stock inc)]
-    (go-loop [stock {}]
-      (if-let [[data chan] (alts! [orders deliveries])]
-        (let [[_ item] data
-              update-operation (condp = chan
-                                 orders dec-stock
-                                 deliveries inc-stock)]
-          (do
-            (>! out (update-operation stock item))          ; does not work - need to manage 'stock'
-            (recur stock)))
+      (if-let [window (first (<! in))]
+        (do
+          (let [results (aggregator (:items window))]
+            (>! out results))
+          (recur))
         (close! out)))
     out))
+
+
+(finite-printer (stop-after-n-seconds 10) (interval-aggregator count (data-in-timed-series (gen-timed-data parts) (create-time-series-windows 4))))
+=>
+#object[clojure.core.async.impl.channels.ManyToManyChannel
+        0x379dfa3d
+        "clojure.core.async.impl.channels.ManyToManyChannel@379dfa3d"]
+6
+11
+:stop
 {% endhighlight %}
-    
-In this first showing of the code we see the ability to read many channels at once using `alts!` which receives the data and the channel that was read.
-
-In this example we use `condp` to run differing code based on the channel that was read. In this case we set the method to adjust stock.
-
-#Re-Stating our intentions
-
-The problem we have here is that we need to retain the latest value of the stock otherwise we will only ever report 0 or 1. That might might be useful if have an external aggregator but we can also aggregate in the go-loop directly
-
-{% highlight clojure %}
-(defn stock-levels [orders deliveries]
-  "Stock levels - also includes demand (negative stock numbers)"
-  (let [out (chan)
-        dec-stock (partial modify-stock dec)
-        inc-stock (partial modify-stock inc)]
-    (go-loop [stock (into #{} (map #(assoc {} :id (:id %) :count 0) parts))]
-      (if-let [[data chan] (alts! [orders deliveries])]
-        (let [[_ item] data
-              update-operation (condp = chan
-                                 orders dec-stock
-                                 deliveries inc-stock)]
-          (if-let [[modified-stock updated-item] (update-operation stock item)]
-            (do
-              (>! out updated-item)
-              (recur modified-stock))))
-        (close! out)))
-    out))
-{% endhighlight %}
-
-Using the parameters to the go-loop we can initiate state and then maintain it via recur. 
-
-In this case we do the simplest possible setting for stock to 0 when our function starts. One can imagine more complex initialisations!
-
-In the loop we then pass the stock collection to the `modify-stock` function which can return a new version of the stock collection.
-
-Here we exploit the fact that Clojure collections are very efficient with respect to minimising the costs of each new version. 
-
-This stock list could easily be scaled to tens of thousands of parts without adding any latency costs (barring side effects of swapping although luckily we are no longer limited to 32k, 32Mb or even 32Gb of memory like in the good old days).
-
-# Modify without side effects
-
-To finalise the example here is the code for `modify-stock` which runs the provided function to obtain the new value using the existing count on the item.
-
-{% highlight clojure %}
-(defn modify-stock [count-adjust-fn stock item]
-  (let [current-value (first (clojure.set/select #(= (:id %) (:id item)) stock))
-        new-value (assoc current-value :count (count-adjust-fn (:count current-value)))
-        updated-stock (conj stock new-value)]
-    [updated-stock new-value]))
-{% endhighlight %}
-
-One nice aspect of using Clojure's `set` data structure is that we can use `conj` as a succinct upsert.
 
 # Summary
 
-In this example we saw how to read multiple channels in one `go-loop` and distinguish data from those channels. Further we saw that we can maintain aggregations and state around the `go-loop` to increase both power and simplicity.
+So that's our final experiment with aggregating over time series.
 
-# Next next next
+The amount of code is pleasantly small and we can see many possibilities for playing with time series data.
 
-In the final example of this short series I will show how to track data within series of time.
+# Conclusions
+
+This really has been me scraping the surface of core.async by trying to scratch a few itches. I found the model quite straightforward to use and extremely powerful. I will continue to experiment with the library and write up some samples as further revelations unfold!
 
 # And finally - Thanks!
  
-Thanks for making it through. I have a better understanding of core.async after writing this and I hope that's true for you too!
+Thanks for making it through, especially of you ploughed through the series!
+ 
+I have a better understanding of core.async after writing this and I hope that's true for you too!
  
 Zing me or ping me if this was useful via Twitter or in the comments below.
 
