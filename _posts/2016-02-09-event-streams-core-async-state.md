@@ -221,6 +221,8 @@ One nice aspect of using Clojure's `set` data structure is that we can use `conj
 
 In this example we saw how to implement a stock level tracker. To achieve this functionality we read multiple channels in one `go-loop` and distinguished data from those channels. Further we maintained aggregations and state around the `go-loop` to increase power and simplicity.
 
+The code is all on [my GitHub][ray-repo].
+
 # Next next next
 
 In the [final example][core-async-time] of this short series I will show how to track stream data within series of time.
@@ -234,5 +236,6 @@ Zing me or ping me if this was useful via Twitter or in the comments below.
 [core-async-intro-post]: {% post_url 2016-02-06-event-streams-core-async %}
 [data-structures]: http://hypirion.com/musings/understanding-persistent-vector-pt-1
 [core-async-time]: {% post_url 2016-02-11-event-streams-core-async-time-series %}
+[ray-repo]: https://github.com/raymcdermott/core-async-examples
 
 {% include disqus.html %}

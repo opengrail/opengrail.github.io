@@ -256,6 +256,8 @@ So that's our final experiment with aggregating over time series.
 
 The amount of code is pleasantly small and we can see many possibilities for playing with time series data.
 
+The code is all on [my GitHub][ray-repo].
+
 # Conclusions
 
 This really has been me scraping the surface of core.async by trying to scratch a few itches. I found the model quite straightforward to use and extremely powerful. I will continue to experiment with the library and write up some samples as further revelations unfold!
@@ -270,5 +272,6 @@ Zing me or ping me if this was useful via Twitter or in the comments below.
 
 [core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
 [jgd-gist]: https://gist.github.com/jgdavey/d928136d035645bd15ec
+[ray-repo]: https://github.com/raymcdermott/core-async-examples
 
 {% include disqus.html %}

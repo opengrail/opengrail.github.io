@@ -68,7 +68,7 @@ In this series of posts I will show the following examples in code:
 - [Joining streams][core-async-state] to combine data and manage state (Stock Management Tracker)
 - [Process time series][core-async-time] events in the form of sliding intervals (Sliding Window Tracker)
 
-The code is all on my GitHub and I will point you to the relevant code in each post.
+The code is all on [my GitHub][ray-repo].
 
 # Thanks
 
@@ -81,4 +81,4 @@ The code is all on my GitHub and I will point you to the relevant code in each p
 [reading-events]: {% post_url 2016-02-06-event-streams-core-async %}
 [core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
 [core-async-time]: {% post_url 2016-02-11-event-streams-core-async-time-series %}
-
+[ray-repo]: https://github.com/raymcdermott/core-async-examples
