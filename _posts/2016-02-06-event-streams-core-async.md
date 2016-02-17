@@ -29,12 +29,11 @@ At the REPL we define a generic printer for data...
 
 {% highlight clojure %}
 (defn printer [data-ch]
-  (let []
     (go-loop []
       (if-let [data (<! data-ch)]
         (do
           (clojure.pprint/pprint data)
-          (recur))))))
+          (recur)))))
 => #'stock.core/printer
 {% endhighlight %}
 
@@ -90,12 +89,11 @@ Next let's get our Supplier Order channel consumer defined so that it can invoke
 
 {% highlight clojure %}
 (defn supplier-notify [order-ch]
-  (let []
     (go-loop []
       (if-let [order (<! order-ch)]
         (do
           (supplier-api-call order)
-          (recur))))))
+          (recur)))))
 {% endhighlight %}
 
 Nothing suprising there. We substitute the printing function with the call to the API. 
