@@ -236,6 +236,8 @@ We have seen the stock data flow through a tracker which had a simple filter to 
 
 And this all happened in real time with minimal resource usage. Scaling down is often as equally important as scaling up.
 
+The code is all on [my GitHub][ray-repo].
+
 # Next next next
 
 In the [next post][core-async-state] I show the Stock Management Tracker to combine data from more than one channel and maintain local state within the go block.
@@ -248,5 +250,6 @@ Zing me or ping me if this was useful via Twitter or in the comments below.
 
 [overview-post]: {% post_url 2016-02-06-event-stream-intro %}
 [core-async-state]: {% post_url 2016-02-09-event-streams-core-async-state %}
+[ray-repo]: https://github.com/raymcdermott/core-async-examples
 
 {% include disqus.html %}

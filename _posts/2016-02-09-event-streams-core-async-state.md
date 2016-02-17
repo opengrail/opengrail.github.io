@@ -78,6 +78,35 @@ Here we generate infinite streams of data with time stamps. That will be used in
 
 They differ only in the way that orders are consistent and deliveries are random. This is not a perfect model of the real world (yeah, I know) but is good enough for this purpose.
 
+# Short demo
+
+{% highlight clojure %}
+(def stock-levels-ch (stock-levels orders deliveries))
+
+(finite-printer (stop-after-n-seconds 2) stock-levels-ch)
+
+=> #'core-async-examples.stock-management-tracker/stock-levels-ch
+=>
+#object[clojure.core.async.impl.channels.ManyToManyChannel
+        0x6e923694
+        "clojure.core.async.impl.channels.ManyToManyChannel@6e923694"]
+{:id G__11226, :count -1}
+{:id G__11584, :count 1}
+{:id G__11422, :count -1}
+{:id G__11408, :count -1}
+{:id G__11579, :count 1}
+{:id G__11223, :count -1}
+{:id G__11288, :count -1}
+{:id G__11656, :count -1}
+{:id G__11333, :count 1}
+{:id G__11425, :count -1}
+{:id G__11666, :count -1}
+{:id G__11561, :count -1}
+{:id G__11642, :count -1}
+{:id G__11584, :count 1}
+:stop
+{% endhighlight %}
+
 # Blocking without Thread/sleep == SCAAAAALE!
 
 One aspect to note in the above code is the `timeout` function. It reads from a virtual channel and effects a pause on the generation like Thread/sleep but does not block.
@@ -86,7 +115,7 @@ Not blocking means that it is OK to start 100s or 1000s of go blocks with very l
 
 # Don't change that channel
 
-I'm going to show this next function in to forms. The first form shows how to use conditionals based on channel
+I'm going to show this next function in two forms. The first form shows how to use conditionals based on channel
 
 {% highlight clojure %}
 (defn stock-levels [orders deliveries]
@@ -111,7 +140,7 @@ In this first showing of the code we see the ability to read many channels at on
 
 In this example we use `condp` to run differing code based on the channel that was read. In this case we set the method to adjust stock.
 
-#Re-Stating our intentions
+# Re-Stating our intentions
 
 The gap we have with the above code is that it will only ever report 0 or 1. 
 
@@ -147,6 +176,33 @@ Here we exploit the fact that Clojure collections are **very efficient** with re
 
 This stock list could easily be scaled to tens of thousands of parts without adding any latency costs (barring side effects of swapping although luckily we are no longer limited to 32k, 32Mb or even 32Gb of memory like in the good old days). For more information [see this rich visual explanation][data-structures] from  Jean Niklas L'orange.
 
+# Short Demo Two
+
+{% highlight clojure %}
+(def order-chan (async/mult (gen-timed-orders 10 parts)))  ; use mult to allow many readers
+
+(def deliveries-chan (gen-random-deliveries 1000 parts))
+
+; show what's happening with stock
+(def stock-chan (stock-levels (async/tap order-chan (chan)) deliveries-chan))
+(def backlogs-chan (detect-backlogs -4 stock-chan))
+(finite-printer (stop-after-n-seconds 20) backlogs-chan) ; 20k orders will be processed
+
+=> #'core-async-examples.stock-management-tracker/order-chan
+=> #'core-async-examples.stock-management-tracker/deliveries-chan
+=> #'core-async-examples.stock-management-tracker/stock-chan
+=> #'core-async-examples.stock-management-tracker/backlogs-chan
+=>
+#object[clojure.core.async.impl.channels.ManyToManyChannel
+        0x694db469
+        "clojure.core.async.impl.channels.ManyToManyChannel@694db469"]
+{:id G__11288, :count -5}
+{:id G__11338, :count -5}
+{:id G__11603, :count -5}
+{:id G__11338, :count -5}
+:stop
+{% endhighlight %}
+
 # Modify without side effects
 
 To finalise the example here is the code for `modify-stock` which runs the provided function to obtain the new value using the existing count on the item.
@@ -165,6 +221,8 @@ One nice aspect of using Clojure's `set` data structure is that we can use `conj
 
 In this example we saw how to implement a stock level tracker. To achieve this functionality we read multiple channels in one `go-loop` and distinguished data from those channels. Further we maintained aggregations and state around the `go-loop` to increase power and simplicity.
 
+The code is all on [my GitHub][ray-repo].
+
 # Next next next
 
 In the [final example][core-async-time] of this short series I will show how to track stream data within series of time.
@@ -178,5 +236,6 @@ Zing me or ping me if this was useful via Twitter or in the comments below.
 [core-async-intro-post]: {% post_url 2016-02-06-event-streams-core-async %}
 [data-structures]: http://hypirion.com/musings/understanding-persistent-vector-pt-1
 [core-async-time]: {% post_url 2016-02-11-event-streams-core-async-time-series %}
+[ray-repo]: https://github.com/raymcdermott/core-async-examples
 
 {% include disqus.html %}
