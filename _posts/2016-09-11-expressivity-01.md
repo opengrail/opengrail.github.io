@@ -38,7 +38,7 @@ The algebraic form and the arithmetic forms are equally concise so we don't gain
 
 In fact, we lose something of the directness of the arithmetic form when we compare it to the algebraic form. The algebraic form requires yet another set of semantics - a further abstraction - that sits over the semantics of arithmetic. 
 
-#Plug and play
+# Plug and play
 We can use substitution rules to plug in any numbers and the arithmetic works.
 
 But that's not the where the value lies - instead it's the fact that we have not just made some arithmetic we have asserted a truth. That in this expression, for that is what we call it, hahaha, a + a will always equal b.
@@ -47,7 +47,7 @@ And that's in the end what algebra buys us the ability to assert expressions tha
 
 I want to finish with a woolly model to test expressivity - does it enable us to say more in our programs and yet remain precise by being open to a transparent and predictable form of substitution?
 
-#The Challenge
+# The Challenge
 That challenge is the basis of functional programming.
 
 There is a body of working software in the world, so why do I say that we have been failed by other categories of programming languages? Luckily, I'm not alone in this opinion. The next posts will form a short, biased survey of facts and opinions that have been carefully curated chosen to support my arguments.
