@@ -15,17 +15,19 @@ Going back to first principles, consider expressivity in general. in English we 
 One plus one equals two.
 ```
 
-That works but it's more expressive in a mathematical form:
+That works but it's more expressive (to programmers at least!) in a mathematical form:
 
 ```
 1 + 1 = 2
 ```
 
-The mathematical form is more concise than the long hand so there is a win in productivity but that's not what makes it more expressive. [ And by the way I'm not saying that English is not expressive. I'm not totally crazy. ]
+The mathematical form is more concise than the long hand so there is a win in productivity but that's not what makes it more expressive for this context.
 
 The increase in expressivity comes from the **meaning** behind the mathematical syntax. English grammar is open whereas the grammar of mathematical expressions is closed or at least constrained to some well defined semantics.
 
-Parsing the mathematical expression is easier than the English version if you are familiar with those semantics but otherwise it's just a pile of symbolic gibberish. And so, talking of gibberish let's take the maths up a level (to about as far as I can safely go to be honest) and compare arithmetic against algebra
+Parsing the mathematical expression is easier than the English version if you are familiar with the syntax and semantics but otherwise it's just a pile of symbolic gibberish. The need to understand this extra level of symbology has a price - so it has to be worth paying. And not everybody, as we recall from school, wanted to pay it. Whenever we increase expressivity - be it in maths or poetry or music we lose some people along the way.
+
+And so, talking of losing people, let's take the maths up a level (to about as far as I can safely go to be honest) and compare arithmetic against algebra
 
 ```
 1 + 1 = 2  ; arithmetic
@@ -33,17 +35,22 @@ Parsing the mathematical expression is easier than the English version if you ar
 a + a = b  ; algebra
 ```
 
+The algebraic form and the arithmetic forms are equally concise so we don't gain anything in the effort required to write the expression. That feels like a productivity bummer.
 
-The algebraic form and the arithmetic forms are equally concise so we don't gain anything in the effort required to write the expression. So that feels like a productivity bummer.
-
-In fact, we lose something of the directness of the arithmetic form when we compare it to the algebraic form. The algebraic form requires yet another set of semantics - a further abstraction - that sits over the semantics of arithmetic. 
+In fact, we lose something of the directness of the arithmetic form when we compare it to the algebraic form. The algebraic form requires yet another set of semantics - a further abstraction - that sits over the semantics of arithmetic. So we lose some more people at this stage.
 
 # Plug and play
 We can use substitution rules to plug in any numbers and the arithmetic works.
 
-But that's not the where the value lies - instead it's the fact that we have not just made some arithmetic we have asserted a truth. That in this expression, for that is what we call it, hahaha, a + a will always equal b.
+But that's not the where the value lies - instead it's the fact that we have not just made some arithmetic. 
 
-And that's in the end what algebra buys us the ability to assert expressions that can in some way be proven by plugging in some numbers and playing out the arithmetic. So the arithmetic becomes a lowly servant of the algebra.
+We have asserted a truth: in this expression a + a will always equal b.
+
+And that's in the end what algebra buys us the ability to assert expressions and then play with them. By playing, I mean we can introduce logic. For example we can deduce that a and b cannot be equal unless they are 0. We also know that b is always greater than a. 
+
+Many more things are implied and can be deduced from this increase in abstraction. And abstraction that gives us new ways to think is a genuine improvement in expressivity.
+ 
+Finally, and more prosaically, we can plug in some numbers and play out the arithmetic. Arithmetic becomes the dull, lowly servant of the algebra.
 
 I want to finish with a woolly model to test expressivity - does it enable us to say more in our programs and yet remain precise by being open to a transparent and predictable form of substitution?
 
