@@ -13,27 +13,24 @@ I introduced a woolly model to test expressivity - does it enable us to say more
 I am going to look back at some of the imperative style code that I used to write back in the 90s and run it through the test. It's a style that's very much alive today so this is not a pure nostalgia trip.
 
 # Imperative
-Imperative style, taking C as a canonical example. The standard C function for copying strings is
+Taking C as a canonical example, the standard C function for copying strings is `strcpy`
 
 ```C
 char *strcpy(char *dest, const char *src)
 ```
 
-*Parameters:*
-dest -- This is the pointer to the destination array where the content is to be copied.
-src -- This is the string to be copied.
+*Parameters:* `dest` - This is the pointer to the destination array where the content is to be copied. `src` - This is the string to be copied.
 
-*Return Value:*
-This returns a pointer to the destination string dest.
+*Return Value:* This returns a pointer to the destination string dest.
 
 # Expressive, not
-This is a trivially small example of how confused the C library authors were about what was the correct thing to do when copying strings.
+This small example shows how confused the C library authors were about what was the correct thing to do even for the trivial task of copying strings.
 
-But there are some good things here. Firstly that the source string is immutable in the function: `strcpy` cannot change it.
+There are some good things here though. Firstly that the `src` string is immutable in the function so `strcpy` cannot change it.
 
 Secondly it returns a pointer with the copied value.
 
-The problem is that it has overwritten `dest`, so there is never any need to use that nice return value. It would be more correct to write:
+Well that would be nice, but it has overwritten `dest`, so there is never any need to use that nice return value. It would be more correct to write:
 
 ```C
 void strcpy(char *dest, const char *src) /* Wrong but honest */
