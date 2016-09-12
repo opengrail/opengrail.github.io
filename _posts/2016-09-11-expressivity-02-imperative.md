@@ -19,9 +19,13 @@ Taking C as a canonical example, the standard C function for copying strings is 
 char *strcpy(char *dest, const char *src)
 ```
 
-*Parameters:* `dest` - This is the pointer to the destination array where the content is to be copied. `src` - This is the string to be copied.
+*Parameters:* 
 
-*Return Value:* This returns a pointer to the destination string dest.
+`dest` - This is the pointer to the destination array where the content is to be copied. `src` - This is the string to be copied.
+
+*Return Value:* 
+
+This returns a pointer to the destination string dest.
 
 # Expressive, not
 This small example shows how confused the C library authors were about what was the correct thing to do even for the trivial task of copying strings.
