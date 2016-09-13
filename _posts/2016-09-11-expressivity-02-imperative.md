@@ -117,17 +117,21 @@ This is hard work: we need two variables and a loop to print out the values of a
 (println (string/join " " "1234"))
 ```
 
-If you look carefully at the C code you will also notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the for loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic for that completely correct solution. Not so in Clojure, the last space is not emitted.
+If you look carefully at the C code you will also notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic for that completely correct solution. Not so in Clojure, the last space is not emitted.
 
 I'm going to go into more depth about getting rid of loops in the Functional Programming post but I think even the most die in the wool C coder would agree that this one liner is more expressive.
 
 # Is it harmful?
 
-It makes us work harder and we can cut ourselves more easily. For many cases I would consider C harmful. On the other hand C has it's uses in device drivers and other low level system code where functional programming has traditionally struggled to add value. We see the rise of non-C system level programming (such as JavaScript) even in highly constrained environments such as [Kinoma][kinoma]
+It makes us work harder and we can cut ourselves - or more importantly our users - more easily. For most common programming problems, yes I would consider C harmful.
+
+On the other hand C has its place in device drivers and other low level system code where OO and functional programming have traditionally struggled to add value. 
+
+That crown may be at risk however as we continue to see the rise of non-C system level programming (such as Rust, Go and JavaScript) even in highly constrained environments such as [Kinoma][kinoma]
 
 # Next OO
 
-Having looked at some limitations in the imperative code with C, I will [next show how OO][oo] - in Java at least - is also quite imperative as well as why OO imposes limits on expression.
+The [next post will show how OO][oo] - in Java at least - imposes limits on expression, **by design**.
 
 [imperative]: {% post_url 2016-09-11-expressivity-02-imperative %}
 [oo]: {% post_url 2016-09-11-expressivity-03-oo %}
