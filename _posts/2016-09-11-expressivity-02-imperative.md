@@ -23,35 +23,24 @@ char *strcpy(char *dest, const char *src)
 
 `dest` - This is the pointer to the destination array where the content is to be copied. `src` - This is the string to be copied.
 
-*Return Value:* 
-
-This returns a pointer to the destination string dest.
+*Return Value:* This returns a pointer to the destination string dest.
 
 # Expressive, not
 This small example shows how confused the C library authors were about what was the correct thing to do even for the trivial task of copying strings.
 
-There are some good things here though. Firstly that the `src` string is immutable in the function so `strcpy` cannot change it.
-
-Secondly it returns a pointer with the copied value.
+There are some good things here though. Firstly that the `src` string is immutable in the function so `strcpy` cannot change it. Secondly it returns a pointer with the copied value.
 
 Well that would be nice, but it has overwritten `dest`, so there is never any need to use that nice return value. It would be more correct to write:
 
 ```C
-void strcpy(char *dest, const char *src) /* Wrong but honest */
+void strcpy(char *dest, const char *src) /* Honest */
 ```
 
 And for my taste, if we have to do it this way, I would prefer `src` come first and `dest` second but that's perhaps a modern affectation.
 
 ```C
-void strcpy(const char *src, char *dest) /* Wrong but more obvious order for parameters */
+void strcpy(const char *src, char *dest) /* More 'obvious'? */
 ```
-
-A more expressive signature would be:
-
-```C
-char *strcpy(const char *src) /* Not good C, but definitely more ergonomic */
-```
-
 
 # Playing it out in client code
 Here is a simple example:
@@ -71,11 +60,17 @@ int main()
 
 ```
 
-You see here that the client programmer has to abide by the unwritten rules of strcpy. Amongst these are:
+The programmer has to abide by the unwritten rules of `strcpy`, or maybe it's better said, the conventions of C. Amongst these are:
 - ensure that the memory for `dest` array has been allocated
-- ensure that the size of the `dest` array is >= the source array
+- ensure that the size of the `dest` array is >= the source array, otherwise you will get less than you gave!
 
 # Improved C
+
+A tweak here and there and we can have simpler and more expressive function:
+
+```C
+char *strcpy(const char *src) /* Not good C, but definitely more ergonomic */
+```
 
 ```C
 include <string.h>
@@ -87,7 +82,11 @@ int main()
 
 ```
 
-This does not work in C for one simple reason: C does not have a garbage collector. If the strcpy function were to allocate the memory for the `dest` array there would be nothing to clean it up so we would have a memory leak. Thus we are hobbled in our range of expressivity by the need to allocate and free memory by hand.
+It's simpler because there are fewer names to grok and there is no confusion between the input and the output. These small gains in expressivity add up.
+
+But this does not work in C for one simple reason: **C does not have a garbage collector**. If the strcpy function were to allocate the memory for the `dest` array there would be no way to clean it up so we would have a memory leak. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by the need to allocate and free memory by hand. 
+
+Modern GC implementations, like those on the Java Virtual Machine, are not only as fast if not faster than hand tuned solutions but also much less buggy.
 
 # Looping in C
 
@@ -98,25 +97,43 @@ Another area where imperative programming makes us work hard for our reward is i
  
 int main()
 {
-    const int max = 5;
+    const char nums[] = "01234"
+    const int max = strlen(nums); /* strlen is good :) too */
     int i;
     for(i = 0; i < max; i++)
-        printf("%d ", i);     // 0 1 2 3 4
+        printf("%d ", nums[i]);     // 0 1 2 3 4
 }
 ```
 
-Again, one nice thing here: the `max` value is constant or immutable so there's no way that it's going to change during the loop.
+One small simplifying thing here: the `max` and `nums` values are constant or immutable so there's no way they will change during the loop.
 
 That `i` however is going to be changing through the use of `i++`. This is equivalent to `i = i + 1`
 
+# Hard work
 
+This is hard work: we need two variables and a loop to print out the values of an array. In a more expressive language we would bbe able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping.
 
+```Clojure
+(println (string/join " " "1234"))
+```
 
+If you look carefully at the C code you will also notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the for loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic for that completely correct solution. Not so in Clojure, the last space is not emitted.
+
+I'm going to go into more depth about getting rid of loops in the Functional Programming post but I think even the most die in the wool C coder would agree that this one liner is more expressive.
+
+# Is it harmful?
+
+It makes us work harder and we can cut ourselves more easily. For many cases I would consider C harmful. On the other hand C has it's uses in device drivers and other low level system code where functional programming has traditionally struggled to add value. We see the rise of non-C system level programming (such as JavaScript) even in highly constrained environments such as [Kinoma][kinoma]
+
+# Next OO
+
+Having looked at some limitations in the imperative code with C, I will [next show how OO][oo] - in Java at least - is also quite imperative as well as why OO imposes limits on expression.
 
 [imperative]: {% post_url 2016-09-11-expressivity-02-imperative %}
 [oo]: {% post_url 2016-09-11-expressivity-03-oo %}
 [fp]: {% post_url 2016-09-11-expressivity-04-fp %}
 
 [expressivity]: {% post_url 2016-09-11-expressivity-01 %}
+[kinoma]: http://kinoma.com
 
 {% include disqus.html %}
