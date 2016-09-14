@@ -15,7 +15,7 @@ I am going to look back at some of the imperative style code that I used to writ
 # Imperative
 Taking C as a canonical example, the standard C function for copying strings is `strcpy`
 
-```C
+```c
 char *strcpy(char *dest, const char *src)
 ```
 
@@ -28,32 +28,31 @@ char *strcpy(char *dest, const char *src)
 # Expressive, not
 This small example shows how confused the C library authors were about what was the correct thing to do even for the trivial task of copying strings.
 
-There are some good things here though. Firstly that the `src` string is immutable in the function so `strcpy` cannot change it. Secondly it returns a pointer with the copied value.
+There are some good things here though: firstly that the `src` string is immutable so `strcpy` cannot change it. Secondly it returns a pointer with the copied value.
 
-Well that would be nice, but it has overwritten `dest`, so there is never any need to use that nice return value. It would be more correct to write:
+Well that *would have been nice*, but the copied value is `dest`, so there is never any need to use that nice return value. It would have been more honest to write:
 
-```C
+```c
 void strcpy(char *dest, const char *src) /* Honest */
 ```
 
-And for my taste, if we have to do it this way, I would prefer `src` come first and `dest` second but that's perhaps a modern affectation.
+And for my taste, if we have to do it this way, I would prefer `src` come first and `dest` second so that it reads more normally (at least for an English reader)
 
-```C
+```c
 void strcpy(const char *src, char *dest) /* More 'obvious'? */
 ```
 
 # Playing it out in client code
-Here is a simple example:
+Here is a simple example using the actual method:
 
-```C
+```c
 include <string.h>
 
-int main()
-{
+int main() {
    char src[40];
    char dest[100];
-  
    memset(dest, '\0', sizeof(dest));
+
    strcpy(src, "This is an example");
    strcpy(dest, src);
 }
@@ -68,11 +67,11 @@ The programmer has to abide by the unwritten rules of `strcpy`, or maybe it's be
 
 A tweak here and there and we can have simpler and more expressive function:
 
-```C
+```c
 char *strcpy(const char *src) /* Not good C, but definitely more ergonomic */
 ```
 
-```C
+```c
 include <string.h>
 
 int main()
@@ -84,7 +83,9 @@ int main()
 
 It's simpler because there are fewer names to grok and there is no confusion between the input and the output. These small gains in expressivity add up.
 
-But this does not work in C for one simple reason: **C does not have a garbage collector**. If the strcpy function were to allocate the memory for the `dest` array there would be no way to clean it up so we would have a memory leak. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by the need to allocate and free memory by hand. 
+But this does not work in C for one simple reason: **C does not have a garbage collector**.
+
+If the strcpy function were to allocate the memory for the `dest` array there would be no way to clean it up so we would have a memory leak. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by the need to allocate and free memory by hand. 
 
 Modern GC implementations, like those on the Java Virtual Machine, are not only as fast if not faster than hand tuned solutions but also much less buggy.
 
@@ -92,7 +93,7 @@ Modern GC implementations, like those on the Java Virtual Machine, are not only 
 
 Another area where imperative programming makes us work hard for our reward is iteration. Here is a simple for loop in C
 
-```C
+```c
 #include <stdio.h>
  
 int main()
