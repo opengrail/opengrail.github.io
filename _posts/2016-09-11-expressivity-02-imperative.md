@@ -114,7 +114,10 @@ That `i` however is going to be changing through the use of `i++`. This is equiv
 This is hard work: we need two variables and a loop to print out the values of an array. In a more expressive language we would be able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping. Like this perhaps:
 
 ```Clojure
-(print (string/join " " "1234"))
+(string/join " " "1234")
+=> "1 2 3 4"
+; To print... 
+(println (string/join " " "1234"))
 ```
 
 If you look carefully at the C code you will notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic to obtain a more *correct* solution.
@@ -129,7 +132,7 @@ int main()
     int i;
     for(i = 0; i < max; i++)
         if (i == (max - 1))
-            printf("%d", nums[i]);
+            printf("%d\n", nums[i]);
         else
             printf("%d ", nums[i]);
 }
