@@ -58,6 +58,7 @@ int main() {
 ```
 
 The programmer has to abide by the unwritten rules of `strcpy`, or maybe it's better said, the conventions of C. Amongst these are:
+
 * ensure that the memory for `dest` array has been allocated
 * ensure that the size of the `dest` array is >= the source array, otherwise you will get less than you gave!
 
