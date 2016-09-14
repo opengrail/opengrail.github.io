@@ -113,7 +113,7 @@ That `i` however is going to be changing through the use of `i++`. This is equiv
 
 This is hard work: we need two variables and a loop to print out the values of an array. In a more expressive language we would be able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping. Like this perhaps:
 
-```Clojure
+```clojure
 (string/join " " "1234")
 => "1 2 3 4"
 ; To print... 
