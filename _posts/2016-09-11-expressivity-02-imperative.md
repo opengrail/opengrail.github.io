@@ -122,7 +122,7 @@ This is hard work: we need two variables and a loop to print out the values of a
 
 If you look carefully at the C code you will notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic to obtain a more *correct* solution.
 
-```C
+```c
 #include <stdio.h>
 
 int main()
