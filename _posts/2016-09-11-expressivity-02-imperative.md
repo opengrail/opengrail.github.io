@@ -19,18 +19,16 @@ Taking C as a canonical example, the standard C function for copying strings is 
 char *strcpy(char *dest, const char *src)
 ```
 
-*Parameters:* 
-
-`dest` - This is the pointer to the destination array where the content is to be copied. `src` - This is the string to be copied.
-
-*Return Value:* This returns a pointer to the destination string dest.
+* `dest` - pointer to the destination array where the content is to be copied. 
+* `src` - The string to be copied.
+* `returns` - a pointer to the destination string dest.
 
 # Expressive, not
 This small example shows how confused the C library authors were about what was the correct thing to do even for the trivial task of copying strings.
 
 There are some good things here though: firstly that the `src` string is immutable so `strcpy` cannot change it. Secondly it returns a pointer with the copied value.
 
-Well that *would have been nice*, but the copied value is `dest`, so there is never any need to use that nice return value. It would have been more honest to write:
+Well that *would have been nice*, but the copied value is `dest`, so there is never any need to use that return value. It would have been more honest to write:
 
 ```c
 void strcpy(char *dest, const char *src) /* Honest */
@@ -43,7 +41,7 @@ void strcpy(const char *src, char *dest) /* More 'obvious'? */
 ```
 
 # Playing it out in client code
-Here is a simple example using the actual method:
+Here is a simple example using the *standard library method*:
 
 ```c
 include <string.h>
@@ -60,8 +58,8 @@ int main() {
 ```
 
 The programmer has to abide by the unwritten rules of `strcpy`, or maybe it's better said, the conventions of C. Amongst these are:
-- ensure that the memory for `dest` array has been allocated
-- ensure that the size of the `dest` array is >= the source array, otherwise you will get less than you gave!
+* ensure that the memory for `dest` array has been allocated
+* ensure that the size of the `dest` array is >= the source array, otherwise you will get less than you gave!
 
 # Improved C
 
@@ -83,15 +81,15 @@ int main()
 
 It's simpler because there are fewer names to grok and there is no confusion between the input and the output. These small gains in expressivity add up.
 
-But this does not work in C for one simple reason: **C does not have a garbage collector**.
+Or they wouldm but this does not work in C for one simple reason: **C does not have a garbage collector**.
 
-If the strcpy function were to allocate the memory for the `dest` array there would be no way to clean it up so we would have a memory leak. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by the need to allocate and free memory by hand. 
+If the `strcpy` function allocated memory for the `dest` array there would be no way to clean it up so we would have a memory leak. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by the need to allocate and free memory by hand.
 
-Modern GC implementations, like those on the Java Virtual Machine, are not only as fast if not faster than hand tuned solutions but also much less buggy.
+Modern GC implementations, like those on the Java Virtual Machine, are as fast if not faster than hand tuned solutions and much less prone to human error.
 
 # Looping in C
 
-Another area where imperative programming makes us work hard for our reward is iteration. Here is a simple for loop in C
+Another area where imperative programming makes us work hard for a small reward is iteration. Here is a simple for loop in C
 
 ```c
 #include <stdio.h>
@@ -106,9 +104,9 @@ int main()
 }
 ```
 
-One small simplifying thing here: the `max` and `nums` values are constant or immutable so there's no way they will change during the loop.
+One small simplifying thing here: the `max` and `nums` values are constant or immutable so there's no way they will change during the loop. Optimising C compilers, and of course those in higher level languages too, can simply substitute the values directly where they are used.
 
-That `i` however is going to be changing through the use of `i++`. This is equivalent to `i = i + 1`
+That `i` however is going to be changing through the use of `i++`. FYI this is the C equivalent to `i = i + 1`. 
 
 # Hard work
 
@@ -142,6 +140,8 @@ int main()
 I reckon more than one developer was like me and did not know immediately which iteration of `i` is the correct `i`. The moment where the `i++` operation take place is not obvious in the syntax. In fact, it is after the loop has executed but before the next test. So the `i++` is effectively moved to be the final expression of the loop no matter which branch is taken. Or if you prefer, it is moved to be the expression before the test, except for the first time around the loop. And would it make a difference, if you wrote `++i`?
  
 To be honest, I have not ran this version of the code so please send a comment to correct the it if you know better and help me to make my point!
+
+Incidentally, the Swift designers recently decided to drop the ++ operator from the language, arguing that its use is too confusing for new and old programmers. :thumbsup:
 
 I'm going to go into more depth about getting rid of loops in the Functional Programming post but I think even the most die in the wool C coder would agree that this one liner is more expressive.
 
