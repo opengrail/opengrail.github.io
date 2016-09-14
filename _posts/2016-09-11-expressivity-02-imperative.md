@@ -98,7 +98,7 @@ Another area where imperative programming makes us work hard for our reward is i
 int main()
 {
     const char nums[] = "01234"
-    const int max = strlen(nums); /* strlen is good :) too */
+    const int max = strlen(nums); /* strlen is a pure function */
     int i;
     for(i = 0; i < max; i++)
         printf("%d ", nums[i]);     // 0 1 2 3 4
@@ -111,13 +111,33 @@ That `i` however is going to be changing through the use of `i++`. This is equiv
 
 # Hard work
 
-This is hard work: we need two variables and a loop to print out the values of an array. In a more expressive language we would bbe able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping.
+This is hard work: we need two variables and a loop to print out the values of an array. In a more expressive language we would be able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping. Like this perhaps:
 
 ```Clojure
-(println (string/join " " "1234"))
+(print (string/join " " "1234"))
 ```
 
-If you look carefully at the C code you will also notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic for that completely correct solution. Not so in Clojure, the last space is not emitted.
+If you look carefully at the C code you will notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic to obtain a more *correct* solution.
+
+```C
+#include <stdio.h>
+
+int main()
+{
+    const char nums[] = "01234"
+    const int max = strlen(nums); /* strlen is good :) too */
+    int i;
+    for(i = 0; i < max; i++)
+        if (i == (max - 1))
+            printf("%d", nums[i]);
+        else
+            printf("%d ", nums[i]);
+}
+```
+
+I reckon more than one developer was like me and did not know immediately which iteration of `i` is the correct `i`. The moment where the `i++` operation take place is not obvious in the syntax. In fact, it is after the loop has executed but before the next test. So the `i++` is effectively moved to be the final expression of the loop no matter which branch is taken. Or if you prefer, it is moved to be the expression before the test, except for the first time around the loop. And would it make a difference, if you wrote `++i`?
+ 
+To be honest, I have not ran this version of the code so please send a comment to correct the it if you know better and help me to make my point!
 
 I'm going to go into more depth about getting rid of loops in the Functional Programming post but I think even the most die in the wool C coder would agree that this one liner is more expressive.
 
