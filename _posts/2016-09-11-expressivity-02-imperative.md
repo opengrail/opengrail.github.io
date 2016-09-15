@@ -82,11 +82,11 @@ int main()
 
 It's simpler because there are fewer names to grok and there is no confusion between the input and the output. These small gains in expressivity add up.
 
-Or they wouldm but this does not work in C for one simple reason: **C does not have a garbage collector**.
+*Or they would* but this does not work in C for one simple reason: **C does not have a garbage collector**.
 
-If the `strcpy` function allocated memory for the `dest` array there would be no way to clean it up so we would have a memory leak. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by the need to allocate and free memory by hand.
+If `strcpy` allocated memory for the return value, there would be no way for `strcpy` to clean it up and the client code couldn't either. So we would have a memory leak / hydrant. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by forcing the developer to allocate and free memory by hand. As they say these days, like an animal.
 
-Modern GC implementations, like those on the Java Virtual Machine, are as fast if not faster than hand tuned solutions and much less prone to human error.
+Modern GC implementations, like those on the Java Virtual Machine, are often as fast if not faster than hand tuned solutions and *much less prone to error*.
 
 # Looping in C
 
@@ -142,7 +142,7 @@ I reckon more than one developer was like me and did not know immediately which 
  
 To be honest, I have not ran this version of the code so please send a comment to correct the it if you know better and help me to make my point!
 
-Incidentally, the Swift designers recently decided to drop the ++ operator from the language, arguing that its use is too confusing for new and old programmers. :thumbsup:
+Incidentally, the Swift language designers recently decided to remove support for the `++` and `--` operators from version 3+ of the language. [They argue][swift-ref] that they are the source of too many errors. :thumbsup:
 
 I'm going to go into more depth about getting rid of loops in the Functional Programming post but I think even the most die in the wool C coder would agree that this one liner is more expressive.
 
@@ -164,5 +164,6 @@ The [next post will show how OO][oo] - in Java at least - imposes limits on expr
 
 [expressivity]: {% post_url 2016-09-11-expressivity-01 %}
 [kinoma]: http://kinoma.com
+[swift-ref]: https://github.com/apple/swift-evolution/blob/master/proposals/0004-remove-pre-post-inc-decrement.md
 
 {% include disqus.html %}
