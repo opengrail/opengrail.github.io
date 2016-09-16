@@ -60,6 +60,7 @@ The programmer has to abide by the unwritten rules of `strcpy`, or maybe it's be
 
 * ensure that the memory for `dest` array has been allocated
 * ensure that the size of the `dest` array is >= the source array, otherwise you will get less than you gave!
+* the memory must be freed and a proper program rather than this toy would have to do that too
 
 Imperative code like this is awkward because it combines in detail what needs to be done and how exactly to do it.
 
