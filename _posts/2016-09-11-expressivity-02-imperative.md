@@ -133,7 +133,7 @@ int main()
 }
 ```
 
-I reckon more than one developer, like me did not know immediately which iteration of `i` is the correct `i`. The moment where the `i++` operation take place is not obvious in the syntax. In fact, it is after the loop has executed but before the next test. So the `i++` is effectively moved to be the final expression of the loop no matter which branch is taken. Or if you prefer, it is moved to be the expression before the test, except for the first time around the loop. And would it make a difference, if you wrote `++i`?
+I reckon more than one developer, like me, did not immediately know which iteration of `i` is the correct `i`. The moment where the `i++` operation take place is not obvious in the syntax. In fact, it is after the loop has executed but before the next test. So the `i++` is effectively moved to be the final expression of the loop no matter which branch is taken. Or if you prefer, it is moved to be the expression before the test, except for the first time around the loop. And would it make a difference, if you wrote `++i`?
  
 To be honest, I have not ran this version of the code so please send a comment to correct the it if you know better and help me to make my point!
 
@@ -156,13 +156,11 @@ I'm going to go into more depth about getting rid of loops in the Functional Pro
 
 It makes us work harder and we can cut ourselves - or more importantly our users - more easily. For most common programming problems, yes I would consider C harmful.
 
-The Swift language designers recently decided to remove support for the `++` and `--` operators from of the language (v3 and onwards). [They argue][swift-ref] that they are the source of too many errors. :thumbsup:
+The Swift language designers recently decided to remove support for the `++` and `--` operators from of the language (v3 and onwards). [They argue][swift-ref] that it is a bad hangover from the C heritage because they are the source of too many errors :thumbsup:
 
 Manual memory allocation is also a common form of security exploit, for example when it is not [allocated or deallocated properly.][dealloc].
 
-On the other hand C has its place in device drivers and other low level system code where OO and functional programming have traditionally struggled to add value. 
-
-That crown may be at risk however as we continue to see the rise of non-C system level programming languages such as Rust, Go and even JavaScript (see the 64Kb [Kinoma][kinoma])
+C has its historic place in device drivers and other low level system code where OO and functional programming have traditionally struggled to add value. That crown may be at risk however as we continue to see the rise of non-C system level programming languages such as Rust, Go and even JavaScript (see the 64Kb [Kinoma][kinoma]) that are less imperative in style.
 
 # Next OO
 
