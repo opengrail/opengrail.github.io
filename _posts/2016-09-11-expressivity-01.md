@@ -66,7 +66,7 @@ The associated posts will form a short, biased survey of facts and opinions that
 - [Object-oriented][oo] composting
 - [Functional programming][fp] as a New Hope
 
-[imperative]: {% post_url 2016-09-11-expressivity-02-imperative %}
+[imperative]: {% post_url 2016-09-15-expressivity-02-imperative %}
 [oo]: {% post_url 2016-09-11-expressivity-03-oo %}
 [fp]: {% post_url 2016-09-11-expressivity-04-fp %}
 
