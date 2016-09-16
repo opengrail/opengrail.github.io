@@ -54,13 +54,14 @@ int main() {
    strcpy(src, "This is an example");
    strcpy(dest, src);
 }
-
 ```
 
 The programmer has to abide by the unwritten rules of `strcpy`, or maybe it's better said, the conventions of C. Amongst these are:
 
 * ensure that the memory for `dest` array has been allocated
 * ensure that the size of the `dest` array is >= the source array, otherwise you will get less than you gave!
+
+Imperative code like this is awkward because it combines in detail what needs to be done and how exactly to do it.
 
 # Improved C
 
@@ -77,7 +78,6 @@ int main()
 {
    char *dest = strcpy("This is an example"); /* Not valid C - why? */
 }
-
 ```
 
 It's simpler because there are fewer names to grok and there is no confusion between the input and the output. These small gains in expressivity add up.
@@ -87,6 +87,10 @@ It's simpler because there are fewer names to grok and there is no confusion bet
 If `strcpy` allocated memory for the return value, there would be no way for `strcpy` to clean it up and the client code couldn't either. So we would have a memory leak / hydrant. Not having a GC (or any form of automatic memory management) hobbles our range of expressivity by forcing the developer to allocate and free memory by hand. As they say these days, like an animal.
 
 Modern GC implementations, like those on the Java Virtual Machine, are often as fast if not faster than hand tuned solutions and *much less prone to error*.
+
+# Functions do not a functional language make
+
+Working with a function like `strcpy` is a good example why most of the C standard library is not functional in its design. In a functional language the goal is a pure function - an input takes parameters and returns a result without any side effects. The one side effect, that memory is allocated in both cases, is managed by the language in a functional environment.
 
 # Looping in C
 
@@ -109,18 +113,9 @@ One small simplifying thing here: the `max` and `nums` values are constant or im
 
 That `i` however is going to be changing through the use of `i++`. FYI this is the C equivalent to `i = i + 1`. 
 
-# Hard work
+# High cost of small defects
 
-This is hard work: we need two variables and a loop to print out the values of an array. In a more expressive language we would be able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping. Like this perhaps:
-
-```clojure
-(string/join " " "1234")
-=> "1 2 3 4"
-; To print... 
-(println (string/join " " "1234"))
-```
-
-If you look carefully at the C code you will notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it's an additional piece of logic to obtain a more *correct* solution.
+If you look carefully at the C code you will notice a small defect. I'm not gonna call it a bug but it's not 100% correct either. The last iteration of the `for` loop outputs an extraneous space. It's not a biggie here but it really does require an additional piece of logic to obtain a more *correct* solution.
 
 ```c
 #include <stdio.h>
@@ -138,11 +133,22 @@ int main()
 }
 ```
 
-I reckon more than one developer was like me and did not know immediately which iteration of `i` is the correct `i`. The moment where the `i++` operation take place is not obvious in the syntax. In fact, it is after the loop has executed but before the next test. So the `i++` is effectively moved to be the final expression of the loop no matter which branch is taken. Or if you prefer, it is moved to be the expression before the test, except for the first time around the loop. And would it make a difference, if you wrote `++i`?
+I reckon more than one developer, like me did not know immediately which iteration of `i` is the correct `i`. The moment where the `i++` operation take place is not obvious in the syntax. In fact, it is after the loop has executed but before the next test. So the `i++` is effectively moved to be the final expression of the loop no matter which branch is taken. Or if you prefer, it is moved to be the expression before the test, except for the first time around the loop. And would it make a difference, if you wrote `++i`?
  
 To be honest, I have not ran this version of the code so please send a comment to correct the it if you know better and help me to make my point!
 
-Incidentally, the Swift language designers recently decided to remove support for the `++` and `--` operators from version 3+ of the language. [They argue][swift-ref] that they are the source of too many errors. :thumbsup:
+# Hard work
+
+This is hard work: we need two variables and a loop to print out the values of an array, with the numbers joined by spaces. In a more expressive language we would be able to state our intention and allow the machinery of the language implementation to relieve us from this book-keeping. 
+
+Like this perhaps:
+
+```clojure
+(println (string/join " " "1234"))
+1 2 3 4
+```
+
+Trust me, there is no trailing space :)
 
 I'm going to go into more depth about getting rid of loops in the Functional Programming post but I think even the most die in the wool C coder would agree that this one liner is more expressive.
 
@@ -150,9 +156,13 @@ I'm going to go into more depth about getting rid of loops in the Functional Pro
 
 It makes us work harder and we can cut ourselves - or more importantly our users - more easily. For most common programming problems, yes I would consider C harmful.
 
+The Swift language designers recently decided to remove support for the `++` and `--` operators from of the language (v3 and onwards). [They argue][swift-ref] that they are the source of too many errors. :thumbsup:
+
+Manual memory allocation is also a common form of security exploit, for example when it is not [allocated or deallocated properly.][dealloc].
+
 On the other hand C has its place in device drivers and other low level system code where OO and functional programming have traditionally struggled to add value. 
 
-That crown may be at risk however as we continue to see the rise of non-C system level programming (such as Rust, Go and JavaScript) even in highly constrained environments such as [Kinoma][kinoma]
+That crown may be at risk however as we continue to see the rise of non-C system level programming languages such as Rust, Go and even JavaScript (see the 64Kb [Kinoma][kinoma])
 
 # Next OO
 
@@ -165,5 +175,6 @@ The [next post will show how OO][oo] - in Java at least - imposes limits on expr
 [expressivity]: {% post_url 2016-09-11-expressivity-01 %}
 [kinoma]: http://kinoma.com
 [swift-ref]: https://github.com/apple/swift-evolution/blob/master/proposals/0004-remove-pre-post-inc-decrement.md
+[dealloc]: https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=437
 
 {% include disqus.html %}
