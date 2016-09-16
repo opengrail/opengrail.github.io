@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Expressivity: Imperative considered, harmful?"
-date:   2016-09-11 19:59:38 +0100
+date:   2016-09-15 19:59:38 +0100
 categories: Clojure ClojureScript Functional
 ---
 
