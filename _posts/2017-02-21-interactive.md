@@ -127,7 +127,7 @@ Now, let's throw that function in a working chain and see what happens
 (map next-nil-fail (nthnext (filter even? (range 200)) 90))
 ~~~
 
-And then let's see what happens when we start throwing nils
+Boring but OK, now let's see what happens when we start throwing nils
 
 ~~~klipse
 (defn next-nil-fail [x] (if (= 0 x) 0 (/ x x)))

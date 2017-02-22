@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Feb 2017 00:27:19 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Feb 2017 00:27:19 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Feb 2017 00:29:49 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Feb 2017 00:29:49 +0100</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -126,7 +126,7 @@
 (map next-nil-fail (nthnext (filter even? (range 200)) 90))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;And then let’s see what happens when we start throwing nils&lt;/p&gt;
+&lt;p&gt;Boring but OK, now let’s see what happens when we start throwing nils&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn next-nil-fail [x] (if (= 0 x) 0 (/ x x)))
 ; filter returns 100 values so 101 &amp;gt; 100 and nthnext will return a nil
