@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Feb 2017 00:29:49 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Feb 2017 00:29:49 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Feb 2017 00:44:52 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Feb 2017 00:44:52 +0100</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -137,7 +137,8 @@
 
 &lt;p&gt;&lt;strong&gt;Say what?&lt;/strong&gt; How in the Lear didn’t it generate an error?&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(map next-nil-fail [nil])
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn next-nil-fail [x] (if (= 0 x) 0 (/ x x)))
+(map next-nil-fail [nil])
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;We can see that &lt;code class=&quot;highlighter-rouge&quot;&gt;nil-fail&lt;/code&gt; will fail if it is passed a nil or a collection of nils.&lt;/p&gt;
@@ -161,28 +162,23 @@
 
 &lt;p&gt;And now we see: the last line shows that the map implementation uses &lt;code class=&quot;highlighter-rouge&quot;&gt;rest&lt;/code&gt; to &lt;strong&gt;avoid producing nils on the stream when the seq is empty or nil&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;But it does not inspect the content of each element so cannot stop us from hitting all fail cases.&lt;/p&gt;
+&lt;h1 id=&quot;nils-desperandum&quot;&gt;Nils desperandum&lt;/h1&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(interpose nil [ 1 2 3])
+&lt;p&gt;But &lt;code class=&quot;highlighter-rouge&quot;&gt;map&lt;/code&gt; does not inspect the content of each element so cannot stop us from hitting all fail cases.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn next-nil-fail [x] (if (= 0 x) 0 (/ x x)))
+(map next-nil-fail (interpose nil [1 2 3]))
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;[&lt;strong&gt;NB:&lt;/strong&gt; This throws a null pointer exception for CLJ on the JVM but CLJS is more forgiving!)]&lt;/p&gt;
 
-&lt;p&gt;The core functions generally make it possible to ignore the nil values&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(every? int? (interpose nil [ 1 2 3]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In other cases, you can just clean them out&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(remove nil? (interpose nil [ 1 2 3]))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or take the idiomatic route and fix up your code&lt;/p&gt;
+&lt;p&gt;The idiomatic route is to fix up your code:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn div-nil-ok [x]
   (cond (nil? x) x
         (= 0 x) 0
-        :else (/ x x)))
+        :else (/ x x))) ; it&#39;s just a toy, don&#39;t make me write all the cases!
 (div-nil-ok nil)
+(map next-nil-fail (interpose nil [1 2 3]))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&quot;monadic-puns&quot;&gt;Monadic puns&lt;/h1&gt;
@@ -230,6 +226,12 @@
 &lt;p&gt;There are however still some edge cases that need to be addressed where nils can be inserted into sequences.&lt;/p&gt;
 
 &lt;p&gt;There are also many options (or enough rope) for adventurous programmers to use them where they have value.&lt;/p&gt;
+
+&lt;h1 id=&quot;follow-up&quot;&gt;Follow up&lt;/h1&gt;
+
+&lt;p&gt;I am reserving this space to explain in more detail why nil is treated differently between CLJ and CLJS.&lt;/p&gt;
+
+&lt;p&gt;Comments / links to help me are welcome!&lt;/p&gt;
 
 &lt;h1 id=&quot;credits&quot;&gt;Credits&lt;/h1&gt;
 

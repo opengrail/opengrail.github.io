@@ -140,6 +140,7 @@ Boring but OK, now let's see what happens when we start throwing nils
 **Say what?** How in the Lear didn't it generate an error?
 
 ~~~klipse
+(defn next-nil-fail [x] (if (= 0 x) 0 (/ x x)))
 (map next-nil-fail [nil])
 ~~~
 
@@ -164,32 +165,25 @@ So something funny going is on here! Let's look at how `map` works:
 
 And now we see: the last line shows that the map implementation uses `rest` to **avoid producing nils on the stream when the seq is empty or nil**.
 
-But it does not inspect the content of each element so cannot stop us from hitting all fail cases.
+# Nils desperandum
+
+But `map` does not inspect the content of each element so cannot stop us from hitting all fail cases.
 
 ~~~klipse
-(interpose nil [ 1 2 3])
+(defn next-nil-fail [x] (if (= 0 x) 0 (/ x x)))
+(map next-nil-fail (interpose nil [1 2 3]))
 ~~~
+[**NB:** This throws a null pointer exception for CLJ on the JVM but CLJS is more forgiving!)]
 
-The core functions generally make it possible to ignore the nil values
-
-~~~klipse
-(every? int? (interpose nil [ 1 2 3]))
-~~~
-
-In other cases, you can just clean them out
-
-~~~klipse
-(remove nil? (interpose nil [ 1 2 3]))
-~~~
-
-Or take the idiomatic route and fix up your code
+The idiomatic route is to fix up your code:
 
 ~~~klipse
 (defn div-nil-ok [x]
   (cond (nil? x) x
         (= 0 x) 0
-        :else (/ x x)))
+        :else (/ x x))) ; it's just a toy, don't make me write all the cases!
 (div-nil-ok nil)
+(map next-nil-fail (interpose nil [1 2 3]))
 ~~~
 
 # Monadic puns
@@ -237,6 +231,12 @@ Clojure has made working with nil pain free in general due to the design of the 
 There are however still some edge cases that need to be addressed where nils can be inserted into sequences.
 
 There are also many options (or enough rope) for adventurous programmers to use them where they have value.
+
+# Follow up
+
+I am reserving this space to explain in more detail why nil is treated differently between CLJ and CLJS.
+
+Comments / links to help me are welcome!
 
 # Credits
 
