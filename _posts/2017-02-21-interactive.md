@@ -35,7 +35,7 @@ This post is supported by live code snippets **and that you can live edit too**:
 (nthrest [0 1 2 3] 2)
 ~~~
 
-I was not familiar with them so I started digging a bit deeper. They are based, possibly obviously, on `next` and `rest`. The only difference is their return value when the sequence is nil or empty.
+I was not familiar with them so I started digging a bit deeper. They are based, possibly obviously, on `next` and `rest`. The only difference between `next` and `rest` (and their derivatives) is their return value when the sequence is nil or empty.
 
 ~~~klipse
 (let [nil-rest-gives (rest nil)
@@ -50,7 +50,7 @@ I was not familiar with them so I started digging a bit deeper. They are based, 
 
 # Seq and ye shall find
 
-In turn the docs say they are both are based on `seq`.
+In turn the docs say that both `rest` and `next` are based on `seq`.
 
 Looking at the code for `next` and `rest` we see how this is achieved: they are wrapped in method calls to native code.
 

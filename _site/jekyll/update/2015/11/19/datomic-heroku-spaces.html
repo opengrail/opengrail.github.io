@@ -64,7 +64,7 @@
   <div class="post-content" itemprop="articleBody">
     <p><strong>Datomic On Heroku</strong></p>
 
-<p><strong>Datomic</strong> is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other guys at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on <a href="https://www.datomic.com">the Datomic website</a></p>
+<p><strong>Datomic</strong> is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other folks at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on <a href="https://www.datomic.com">the Datomic website</a></p>
 
 <p><img src="/assets/DatomicHerokuVisuals-1.jpg" alt="Datomic components" /></p>
 
@@ -86,9 +86,9 @@
 
 <p><strong>Spaced out</strong></p>
 
-<p>Ok listen, forget the nuns, let’s get back to what Heroku are doing to appeal to more traditional businesses: a service called Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.</p>
+<p>Ok listen, forget the nuns, let’s get back to what Heroku are doing to appeal to more traditional businesses: a service called Private Spaces which is Virtual Private Cloud (VPC), done in a way that seems true to the spirit of the Heroku platform - simple and easy to use. You can deploy web apps and worker processes as easily as before but they can now be hidden behind the curtain provided by the VPC. This makes a better match for Datomic, which just to clear it up, is also not really a nun.</p>
 
-<p>I have been fortunate to have access to the private Beta version of Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let’s get into the details…</p>
+<p>You UI have been fortunate to have access to the private Beta version of Private Spaces for work reasons and it meant that I could try out my idea again on the side. Maybe the introductions would be more cordial this time around. And of course it was, so let’s get into the details…</p>
 
 <p><strong>Pack, Hack and Stack</strong></p>
 
@@ -110,7 +110,7 @@
 
 <p>OK, so you’re back and armed with your license you are now only a few seconds from deploying your first app.</p>
 
-<p><strong>Heroku Spaces</strong> [Ceremony alert]</p>
+<p><strong>Heroku Private Spaces</strong> [Ceremony alert]</p>
 
 <p>OK, I was fibbing.  There is also a little ceremony on Heroku as you will need to have an Enterprise account - contact the Heroku account manager to organise that.</p>
 
@@ -179,11 +179,19 @@ heroku addons:attach postgresql-xyzabc-1234 -a my-xtor-web-front</code></pre></f
 
 <p>All of the Datomic software and Heroku Postgres services are free. Be careful to watch your dyno use on Heroku as it’s possible to go beyond the free tier if you play for too long.</p>
 
+<p>You should be aware that Heroku Private Spaces is a beta product that is currently only available to Heroku Enterprise customers. That usually means you have a paid up front account.</p>
+
+<p>[ A friend from Heroku (thanks @michrome) made me aware of a small caveat with respect to Heroku Postgres: plans below Standard-4 do not exist “in” the Private Space. In practise this is not a big issue as the connection must always be made with SSL ]</p>
+
 <p>Obviously you can spend as much as you want with Datomic or Heroku once you get going.</p>
 
-<p>The code is on github so you can try it out for yourself and let me know how it works out.</p>
+<p>The code is on github so you can fork it and please let me know if there are any problems.</p>
 
-<p>I would appreciate a link or a tweet if you found this useful.</p>
+<p><strong>Thanks</strong></p>
+
+<p>Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS.</p>
+
+<p>Zing me or ping me if this was useful via Twitter.</p>
 
 
   </div>
