@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Feb 2017 00:19:16 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Feb 2017 00:19:16 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Feb 2017 00:27:19 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Feb 2017 00:27:19 +0100</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -39,7 +39,7 @@
 &lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(nthrest [0 1 2 3] 2)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;I was not familiar with them so I started digging a bit deeper. They are based, possibly obviously, on &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;rest&lt;/code&gt;. The only difference is their return value when the sequence is nil or empty.&lt;/p&gt;
+&lt;p&gt;I was not familiar with them so I started digging a bit deeper. They are based, possibly obviously, on &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;rest&lt;/code&gt;. The only difference between &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;rest&lt;/code&gt; (and their derivatives) is their return value when the sequence is nil or empty.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [nil-rest-gives (rest nil)
       empty-rest-gives (rest [])]
@@ -52,7 +52,7 @@
 
 &lt;h1 id=&quot;seq-and-ye-shall-find&quot;&gt;Seq and ye shall find&lt;/h1&gt;
 
-&lt;p&gt;In turn the docs say they are both are based on &lt;code class=&quot;highlighter-rouge&quot;&gt;seq&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In turn the docs say that both &lt;code class=&quot;highlighter-rouge&quot;&gt;rest&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; are based on &lt;code class=&quot;highlighter-rouge&quot;&gt;seq&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Looking at the code for &lt;code class=&quot;highlighter-rouge&quot;&gt;next&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;rest&lt;/code&gt; we see how this is achieved: they are wrapped in method calls to native code.&lt;/p&gt;
 
