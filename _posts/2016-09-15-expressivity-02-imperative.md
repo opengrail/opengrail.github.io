@@ -167,7 +167,6 @@ C has its historic place in device drivers and other low level system code where
 
 The [next post will show how OO][oo] - in Java at least - imposes limits on expression, **by design**.
 
-[imperative]: {% post_url 2016-09-11-expressivity-02-imperative %}
 [oo]: {% post_url 2016-09-11-expressivity-03-oo %}
 [fp]: {% post_url 2016-09-11-expressivity-04-fp %}
 
