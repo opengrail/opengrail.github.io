@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Feb 2017 00:45:44 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Feb 2017 00:45:44 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Feb 2017 00:47:49 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Feb 2017 00:47:49 +0100</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -206,7 +206,7 @@
 
 &lt;p&gt;So why would such functions exist?&lt;/p&gt;
 
-&lt;h1 id=&quot;functional-in-a-recursive-style&quot;&gt;Functional in a Recursive style&lt;/h1&gt;
+&lt;h1 id=&quot;functionil-recursion&quot;&gt;Functionil Recursion&lt;/h1&gt;
 
 &lt;p&gt;Nil can be used to good effect as a terminal condition when writing recursive programs.&lt;/p&gt;
 

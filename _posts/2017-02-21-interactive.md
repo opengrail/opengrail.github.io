@@ -210,7 +210,7 @@ Ah, yes in the case of `next` and its derivatives, the sequence functions make n
 
 So why would such functions exist?
 
-# Functional in a Recursive style
+# Functionil Recursion
 
 Nil can be used to good effect as a terminal condition when writing recursive programs.
 
