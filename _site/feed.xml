@@ -6,9 +6,361 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Feb 2017 00:48:06 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Feb 2017 00:48:06 +0100</lastBuildDate>
+    <pubDate>Fri, 14 Apr 2017 15:10:12 +0200</pubDate>
+    <lastBuildDate>Fri, 14 Apr 2017 15:10:12 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Numbers as text</title>
+        <description>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://app.klipse.tech/css/codemirror.css&quot; /&gt;
+
+&lt;script&gt;  
+  window.klipse_settings = {
+        selector: &#39;.language-klipse&#39;
+      };
+&lt;/script&gt;
+
+&lt;h2 id=&quot;friendly-challenge&quot;&gt;Friendly challenge&lt;/h2&gt;
+
+&lt;p&gt;I was chatting to a friend about job interviews and he mentioned that he always gives a small challenge to the candidates that they can do at home.&lt;/p&gt;
+
+&lt;p&gt;The goal is to spell out numbers as sentences, similar to how text might appear on a bankers cheque (or check if you’re in the US and - bonus - it’s still relevant for you).&lt;/p&gt;
+
+&lt;p&gt;Here is the behaviour that the program should provide as a minimum:&lt;/p&gt;
+
+&lt;table class=&quot;mbtablestyle&quot;&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;number&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;strong&gt;text&lt;/strong&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;eight&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;79&lt;/td&gt;
+      &lt;td&gt;seventy nine&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;619&lt;/td&gt;
+      &lt;td&gt;six hundred and nineteen&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5 919&lt;/td&gt;
+      &lt;td&gt;five thousand, nine hundred and nineteen&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;49 191&lt;/td&gt;
+      &lt;td&gt;forty nine thousand, one hundred and ninety one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;391 919&lt;/td&gt;
+      &lt;td&gt;three hundred and ninety one thousand, nine hundred and nineteen&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2 919 191&lt;/td&gt;
+      &lt;td&gt;two million, nine hundred and nineteen thousand, one hundred and ninety one&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;89 191 919&lt;/td&gt;
+      &lt;td&gt;eighty nine million, one hundred and ninety one thousand, nine hundred and nineteen&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;br /&gt;
+The challenge is meant to be simple and serve mostly as a worked example to centre discussions around design and development approaches.&lt;/p&gt;
+
+&lt;p&gt;I figured that this small challenge could make an interesting blog post for the same reasons.&lt;/p&gt;
+
+&lt;p&gt;This post is enhanced using &lt;a href=&quot;https://github.com/viebel/klipse&quot;&gt;KLIPSE&lt;/a&gt; live code snippets meaning &lt;strong&gt;you&lt;/strong&gt; can edit the code and see immediate results&lt;/p&gt;
+
+&lt;h2 id=&quot;all-the-single-ladies&quot;&gt;All the single ladies&lt;/h2&gt;
+
+&lt;p&gt;Hard code the single numbers you say. No way. Hard code the names at least you say. Again no way.&lt;/p&gt;
+
+&lt;p&gt;Let use key words, sequences and combinations to get straight into it the good stuff right from the start…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def words [:one :two :three :four :five :six :seven :eight :nine :ten])
+(def singles (zipmap (range 1 11) words))
+; ask the REPL to print the definition
+singles
+; simple interactive test, try it yourself...
+(get singles 7)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Computers are good at generating numbers and key words are easy to manipulate.&lt;/p&gt;
+
+&lt;p&gt;zipmap is a simple way to create a map from two sequences - using the first as keys and the second as values.&lt;/p&gt;
+
+&lt;p&gt;Neat, eh?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def words [:one :two :three :four :five :fix-me :seven :eight :nine :ten])
+(def singles (zipmap (range 1 11) (map name words)))
+; ask the REPL to print the definition
+singles
+(get singles 6)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we transform the keys to words - to show that off. But there is a bug in the form.&lt;/p&gt;
+
+&lt;p&gt;It is simple to detect and fix. Do it :)&lt;/p&gt;
+
+&lt;h2 id=&quot;teenage-thrills&quot;&gt;Teenage thrills&lt;/h2&gt;
+
+&lt;p&gt;Let’s complete the form for the fixed, low numbers:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def words [:one :two :three :four :five :six :seven :eight :nine :ten
+            :eleven :twelve :thirteen :fourteen :fifteen :sixteen :seventeen :eighteen :nineteen])
+(def singles (zipmap (range 1 20) words))
+; take a random key and get the result
+(get singles (rand-nth (keys singles)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next we deal with the other fixed numbers &amp;gt;= 20 and &amp;lt; 100&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def x10 [:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety])
+(def tens (zipmap (range 20 99 10) x10))
+; take a random key and get the result
+(get tens (rand-nth (keys tens)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we use the computer to produce a range that is stepped by 10.&lt;/p&gt;
+
+&lt;p&gt;Bringing it together we can emit up to 100 numbers as text with ease…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn starters
+  [num]
+  (if-let [answer (get singles num)]
+    [answer]
+    (let [modulus (mod num 10)
+          tenny   (- num modulus)]
+      (if (zero? modulus)
+        [(get tens tenny)]
+        [(get tens tenny) (get singles modulus)]))))
+
+; Generate a random sample of numbers to test it out
+(map (fn [n] [n (starters n)])
+     (random-sample 0.05 (range 1 100)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can tweak the above code to adjust the number of samples.&lt;/p&gt;
+
+&lt;p&gt;The first part of the code (if-let) tests if the answer is present in the singles collection - there is no need to take the risk of testing for a sentinel value. Such values can easily get out of sync with the size of the vector or require maintenance. Also, because it’s a map no need to test for length - just look it up and find it or move along.&lt;/p&gt;
+
+&lt;p&gt;If we don’t find it, we take the modulus and look up the answer in one or both sets.&lt;/p&gt;
+
+&lt;p&gt;Finally, we use a some Clojure syntax sugar to coerce results into a vector by surrounding the responses with square brackets &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[ ]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Having the answer as a sequence makes it easy to select or compose standard functions to further manipulate the results.&lt;/p&gt;
+
+&lt;h2 id=&quot;hundreds-and-thousands&quot;&gt;Hundreds and Thousands&lt;/h2&gt;
+
+&lt;p&gt;So now to deal with the hundreds, thousands and so on…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn units [start step count]
+  &quot;Generate a list of n numbers with a start and step multiplier&quot;
+  (reduce (fn [a b] (conj a (* (last a) step)))
+          [start] (range count)))
+
+(units 1 2 4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The units function provides a way to generate lists of numbers at certain boundaries. We would like to test that numbers sit between various magnitudes.&lt;/p&gt;
+
+&lt;p&gt;We could hard code all of this but why should we always reach for the dull choice?&lt;/p&gt;
+
+&lt;p&gt;We do need the large number text though so we follow the same zipmap pattern as before…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def large-numbers-text [:thousand :million :billion :trillion
+                         :quadrillion :quintillion :sextillion
+                         :septillion :octillion :nonillion
+                         :decillion :undecillion :duodecillion
+                         :tredecillion :quattuordecillion])
+
+(def large-number-map (zipmap (units 1000 1000 (count large-numbers-text))
+                              large-numbers-text))
+
+(let [rand (rand-nth (keys large-number-map))]
+  [rand (get large-number-map rand)])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So we now have all of the big number boundaries set up and ready to go, we need the other (100s and 1000s boundaries), with at least the same range.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def ten-boundaries
+  (units 10 1000 (count large-numbers-text)))
+(take 3 ten-boundaries)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def hundred-boundaries
+  (units 100 1000 (count large-numbers-text)))
+(take 3 hundred-boundaries)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;no-class&quot;&gt;No class&lt;/h2&gt;
+
+&lt;p&gt;No classes have been defined so far … we have been able to do all of this interactively and at the REPL. This is a big win with Clojure - no need to wait for the compiler!&lt;/p&gt;
+
+&lt;p&gt;Let’s top it off by capitalising the first letter. We can cheat here by using a Clojure standard library function. I’m not convinced it really is cheating but when it’s this easy, it feels a little bit like it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [print-sequence (interpose &quot; &quot; (map name (starters 33)))]
+  (clojure.string/capitalize (apply str print-sequence)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;guard-rails&quot;&gt;Guard rails&lt;/h2&gt;
+
+&lt;p&gt;Even with the advent of spec, it’s sometimes still simpler to use argument assertions to get the job done.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn num-text [n]
+  {:pre [(&amp;gt; n 0)]}
+  n)
+; ERR ---&amp;gt; Scroll window to the right to see the error
+(num-text -1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Stay with data - easier to work with and to test&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Layer on infra - to enable testing on the infra&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use the latest possible transforms at the edge of the system&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use randomness early and often&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use properties and constraints to properly test your system&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Developing with data, sequences and composing functions to manipulate them is how we will finally get to leave the sand pit.&lt;/p&gt;
+
+&lt;h2 id=&quot;gotchas&quot;&gt;Gotchas&lt;/h2&gt;
+
+&lt;p&gt;US readers please note: in the US the grammar for expressing these numbers is different and simpler: there’s no ‘and’. Providing this facility for all cultures and languages is not trivial and it reminds us that even such a small and simple example like this - like most any thing - is most often a subset of a much more complex domain.&lt;/p&gt;
+
+&lt;h2 id=&quot;disclaimer-me--maths&quot;&gt;Disclaimer: Me != maths&lt;/h2&gt;
+
+&lt;p&gt;Please let me know if you are a maths whizz and know a simpler way to solve this.&lt;/p&gt;
+
+&lt;p&gt;Also, if you have another functional way, in JS or Haskell or Scala or Java 8.&lt;/p&gt;
+
+&lt;p&gt;This has been fun but if there is a ‘right way’, I would be happy to learn it!&lt;/p&gt;
+
+&lt;script src=&quot;http://app.klipse.tech/plugin/js/klipse_plugin.js?&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var disqus_shortname = &#39;opengrail&#39;;
+
+    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
+        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+</description>
+        <pubDate>Fri, 14 Apr 2017 15:10:12 +0200</pubDate>
+        <link>http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/14/numbers-text.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/14/numbers-text.html</guid>
+        
+        
+        <category>Clojure</category>
+        
+        <category>ClojureScript</category>
+        
+        <category>Functional</category>
+        
+      </item>
+    
+      <item>
+        <title>Mirage Driven Development</title>
+        <description>&lt;h1 id=&quot;lubricious-productivity&quot;&gt;Lubricious productivity&lt;/h1&gt;
+&lt;p&gt;Yes, productivity is a slippery substance.&lt;/p&gt;
+
+&lt;p&gt;Much ink has been spilled over it in personal and work spheres.&lt;/p&gt;
+
+&lt;p&gt;Famous texts of Highly Effective Snake-Oil Salesmen mix up psychology and personal mythology with some common themes: an emphasis on personal discipline, collaboration and low-tech tools.&lt;/p&gt;
+
+&lt;p&gt;And another common theme - zero facts or proof of actual effectiveness other than the success of their author. That success is further bolstered by the popularity of the claptrap they peddle.&lt;/p&gt;
+
+&lt;p&gt;Software projects are expensive so the search is on for techniques that will unlock magic productivity gains: criticises the current condition and projects a utopian transformation.&lt;/p&gt;
+
+&lt;p&gt;Likewise, in software, the search for productivity has been constant. And likewise the facts and proof seem illusory as we zoom out to the highest level.&lt;/p&gt;
+
+&lt;p&gt;Like the seven hobbits, a microscopic view can help.&lt;/p&gt;
+
+&lt;p&gt;10x developers. Existence (totemic) and criticism (piss factory style).&lt;/p&gt;
+
+&lt;p&gt;Form follows function (lovely to bend things around!)&lt;/p&gt;
+
+&lt;p&gt;There is an app store category devoted to such TODO list applications and I am happy to on the other side of the industry, mocking them and the illusions of control that they purport to offer.&lt;/p&gt;
+
+&lt;p&gt;In software functions are created using languages and protocols are used to for  interoperability.&lt;/p&gt;
+
+&lt;p&gt;abc&lt;/p&gt;
+
+&lt;p&gt;When we are walking through the desert and become thirsty we will&lt;/p&gt;
+
+&lt;p&gt;We’ve heard of mortgage driven development, ego driven development and the non-pejorative TDD and BDD&lt;/p&gt;
+
+&lt;p&gt;They all sum up to one thing - hope or fear of the future and some prescription to manage it&lt;/p&gt;
+
+&lt;p&gt;This is why I prefer the term mirage driven development&lt;/p&gt;
+
+&lt;p&gt;Religions do not have proof of all of their claims. Nor do Astro-physicists. But we have existential proof of both religion and physics. They drive devotion and action even if they are sometimes opposed.&lt;/p&gt;
+
+&lt;p&gt;Likewise neither static or dynamic types can solve all problems but there is existential prove of their effectiveness to create and run mission critical business processes.&lt;/p&gt;
+
+&lt;p&gt;Leaving aside what we cannot prove let’s take software like medicine. It’s a much better match than building because it accepts that the system is complex and not completely understood. Administering treatment is like building corporate software - unpredictable and may have unwanted side effects. We can’t even predict the side effects.&lt;/p&gt;
+
+&lt;p&gt;Like medicine we prove effectiveness by experimenting and we are definitely still at the whiskey and leeches stage. We don’t know if future generations will discover the equivalent of hand washing (biggest life saver ever) or what the equivalent of a CATSCAN will look like for PLs.&lt;/p&gt;
+
+&lt;p&gt;We do know that people crave certainty and leadership and are suckers for a confident huckster such as myself.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Datomic&lt;/strong&gt; is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other folks at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on &lt;a href=&quot;https://www.datomic.com&quot;&gt;the Datomic website&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;thanks&quot;&gt;Thanks&lt;/h1&gt;
+
+&lt;p&gt;Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS.&lt;/p&gt;
+
+&lt;p&gt;Zing me or ping me if this was useful via Twitter.&lt;/p&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var disqus_shortname = &#39;opengrail&#39;;
+
+    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
+        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+</description>
+        <pubDate>Fri, 14 Apr 2017 15:10:12 +0200</pubDate>
+        <link>http://blog.opengrail.com/clojure/clojurescript/2017/04/14/mirage-dd.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/2017/04/14/mirage-dd.html</guid>
+        
+        
+        <category>Clojure</category>
+        
+        <category>ClojureScript</category>
+        
+      </item>
     
       <item>
         <title>Nil points</title>
@@ -1398,223 +1750,6 @@ per minute and provide fine grained time series with very little code.&lt;/p&gt;
         <category>streams</category>
         
         <category>core.async</category>
-        
-      </item>
-    
-      <item>
-        <title>Event Stream Processing - A short series of adventures with core.async</title>
-        <description>&lt;h1 id=&quot;event-stream-processing---motivation&quot;&gt;Event Stream Processing - Motivation&lt;/h1&gt;
-
-&lt;p&gt;Event Stream Processing (ESP) is an interesting way in which we can model our systems.&lt;/p&gt;
-
-&lt;p&gt;If we think of actions in the world as events (and we should!) then we would like to process them in way that befits this understanding.&lt;/p&gt;
-
-&lt;p&gt;Traditionally we have been unable to do this for three major reasons:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;lack of cheap and available processing capacity.&lt;/strong&gt; This led to an unhealthy split between tools for batch and online processing. It did however allow the expensive hardware to be exploited close to 24/7 rather than just during the online day.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;lack of good programming models.&lt;/strong&gt; A callback based module is objectively harder to program, test and debug that a sequential module. Functional languages support lazy evaluation to enable support for (real or imagined) infinite streams.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;lack of motivation.&lt;/strong&gt; We could afford to be 24 hours, 12 hours or 1 hour behind and the users either wouldn’t care or wouldn’t have a better choice since that was the IT industry standard.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These reasons have been relentlessly crushed:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;commodity hardware and cloud rental makes it straightforward to process as much as we would like in real-time.&lt;/li&gt;
-  &lt;li&gt;concurrent programming models are now built into languages (Go, C#, Erlang, ES6) and provided as macros in Clojure and other languages in the form of Reactive Extensions (RX).&lt;/li&gt;
-  &lt;li&gt;mobile devices and IoT motivate the need to provide up to date versions of data for users at all times, everywhere. Companies in every sector are now providing this level of quality so it is quickly becoming a cost of doing business.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;csp-for-esp-no-thanks-jsp&quot;&gt;CSP for ESP. No thanks JSP.&lt;/h1&gt;
-
-&lt;p&gt;Modern concurrency models are based on Communicating Sequential Processes that is a formal model for allowing independent sequential processes to communicate using channels. I’m not going to repeat the theory here but if you are hungry for more, see &lt;a href=&quot;https://www.youtube.com/watch?v=cN_DpYBzKso&quot;&gt;Rob Pike’s presentation on concurrency and parallelism&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;CSP is a powerful enabler for Event Stream Processing. Furthermore, with the advent of microservices, ESP has become an interesting model to glue together events that occur between the independent microservices. Likewise mcroservices provide a natural model to expose stream data in casual yet powerful ways. Casual because stream consumers can be created aside from the stream producer and powerful because they can join multiple streams or process time series windows of events to create new categories applications built on high-order time based events.&lt;/p&gt;
-
-&lt;h1 id=&quot;streams-everywhere&quot;&gt;Streams everywhere?&lt;/h1&gt;
-
-&lt;p&gt;In this opening post I am asserting that this vision displaces the database as the centre piece of online data processing.&lt;/p&gt;
-
-&lt;p&gt;There does however, remain a place for these technologies. Databases and search engines offer facilities that cannot be matched or replicated by event streams (ACID transactions and complex data mining). Database themselves can be the source of events as new transactions are applied. This is evidenced by the Transaction Queue in Datomic, the replication log of CouchDB and the oplog of MongoDB. Likewise SQL Server and DB2 can be queried through Change Data Capture interfaces to obtain deltas from a given point in time.&lt;/p&gt;
-
-&lt;h1 id=&quot;tooling-choices&quot;&gt;Tooling choices&lt;/h1&gt;
-
-&lt;p&gt;There is a huge range of tools and technologies to ingest, store and process events: from cloud services such as &lt;a href=&quot;https://aws.amazon.com/kinesis/streams/&quot;&gt;Amazon’s Kinesis Streams&lt;/a&gt;, powerful frameworks such as &lt;a href=&quot;http://kafka.apache.org/&quot;&gt;Apache Kakfa&lt;/a&gt;, &lt;a href=&quot;https://flink.apache.org/&quot;&gt;Apache Flink&lt;/a&gt; and all the way down to individual language features.&lt;/p&gt;
-
-&lt;p&gt;I always want to start off with something concrete that doesn’t require a lot of infrastructure but can demonstrate the benefits. So I don’t want to rely on the cloud or big frameworks - at least not just yet.&lt;/p&gt;
-
-&lt;p&gt;I could have picked Go or JS but I’m a big advocate for Clojure so &lt;a href=&quot;https://github.com/clojure/core.async/&quot;&gt;core.async&lt;/a&gt; is a natural choice for me to start my investigations.&lt;/p&gt;
-
-&lt;h1 id=&quot;full-disclojure&quot;&gt;Full DisClojure&lt;/h1&gt;
-
-&lt;p&gt;To be honest, I know (and my colleagues insist) that there are other languages and frameworks that are richer by default than core.async. But my other goal here is to research and understand the basic building blocks on which this model operates.&lt;/p&gt;
-
-&lt;p&gt;In my experience the abstractions in Clojure are tastefully chosen. So I decided to start there on the basis that I would not get lost either learning a new language (like Go) or in the intricacies of distributed persistence addressed by more complex frameworks (like Flink).&lt;/p&gt;
-
-&lt;p&gt;If I can also provide some examples that are useful in the Clojure community: bonus.&lt;/p&gt;
-
-&lt;p&gt;Oh and it’s my own time and I wanted to have some fun, so shut up.&lt;/p&gt;
-
-&lt;h1 id=&quot;event-stream-processing---example-scenarios&quot;&gt;Event Stream Processing - example scenarios&lt;/h1&gt;
-
-&lt;p&gt;When dreaming up some scenarios I wanted to make something easy for my fellow &lt;del&gt;corporate drones&lt;/del&gt; developers to grok so I figured that a small subset of an order management system would fit the bill.&lt;/p&gt;
-
-&lt;p&gt;This type of system is ripe with opportunities to demonstrate events throughout and I have made an overview illustration of a subset of a bare bones system here:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/Stock-Tracking-Streams-1.jpg&quot; alt=&quot;Simple stock management&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In this series of posts I will show the following examples in code:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/clojure/events/streams/core.async/2016/02/06/event-streams-core-async.html&quot;&gt;Reading events&lt;/a&gt; from streams (Stock Tracker in the above drawing)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/clojure/events/streams/core.async/2016/02/09/event-streams-core-async-state.html&quot;&gt;Joining streams&lt;/a&gt; to combine data and manage state (Stock Management Tracker)&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/clojure/events/streams/core.async/2016/02/11/event-streams-core-async-time-series.html&quot;&gt;Process time series&lt;/a&gt; events in the form of sliding intervals (Sliding Window Tracker)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The code is all on &lt;a href=&quot;https://github.com/raymcdermott/core-async-examples&quot;&gt;my GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h1 id=&quot;thanks&quot;&gt;Thanks&lt;/h1&gt;
-
-</description>
-        <pubDate>Sat, 06 Feb 2016 19:59:38 +0100</pubDate>
-        <link>http://blog.opengrail.com/clojure/events/streams/2016/02/06/event-stream-intro.html</link>
-        <guid isPermaLink="true">http://blog.opengrail.com/clojure/events/streams/2016/02/06/event-stream-intro.html</guid>
-        
-        
-        <category>clojure</category>
-        
-        <category>events</category>
-        
-        <category>streams</category>
-        
-      </item>
-    
-      <item>
-        <title>Datomic On Heroku with DynamoDB</title>
-        <description>&lt;h1 id=&quot;datomic-on-heroku-with-dynamodb&quot;&gt;Datomic On Heroku with DynamoDB&lt;/h1&gt;
-
-&lt;p&gt;In my earlier post I describe how to use get &lt;a href=&quot;https://www.datomic.com&quot;&gt;Datomic&lt;/a&gt; up and running on &lt;a href=&quot;https://www.heroku.com/private-spaces&quot;&gt;Heroku Private Spaces&lt;/a&gt;. The great advantage of this system is the avoidance of any infrastructure management. You deploy your transactor like any other app.&lt;/p&gt;
-
-&lt;p&gt;For that piece I describe how to use Heroku Postgres as a storage back-end. Heroku Postgres is a fine service for running systems that are optimised for SQL and has many interesting features, such as forking, which make it extremely agile. It is also possible to have a database running in the same Private Space as your transactor which could be important for security. Finally, also on a security note, some high end instances of Heroku Postgres have an Encryption At Rest feature and that might be a requirement for your business.&lt;/p&gt;
-
-&lt;p&gt;As a refresher, this is what it looks like on Heroku:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/DatomicHerokuVisuals-4.jpg&quot; alt=&quot;Datomic components&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;datomic-and-dynamodb&quot;&gt;Datomic and DynamoDB&lt;/h1&gt;
-&lt;p&gt;But of course Datomic has other storage options, including the AWS DynamoDB. In this article I will show how we can use the same facilities for deploying apps and the transactor in a Heroku Private Space but use DynamoDB rather than Heroku Postgres as a storage option.&lt;/p&gt;
-
-&lt;p&gt;This is what it looks like when we use DynamoDB:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/DatomicHerokuAWSVisuals-1.jpg&quot; alt=&quot;Datomic components&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;chocolate-and-ice-cream&quot;&gt;Chocolate and ice-cream&lt;/h1&gt;
-&lt;p&gt;As a final background note, you should also bear in mind that it is perfectly possible to have multiple transactors with different storage back-ends and to have them all still be reachable and usable by the same Peer.&lt;/p&gt;
-
-&lt;h1 id=&quot;transactor-app&quot;&gt;Transactor app&lt;/h1&gt;
-&lt;p&gt;Getting into the details, the process is very similar to the set up for Postgres with a few small tweaks. For the sake of completeness I am going to charge through the whole process again here so that you don’t have to pick apart the differences.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Create your transactor app&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku apps:create my-xtor -s my-space&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Configure the Datomic buildpack&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku buildpacks:set https://github.com/opengrail/heroku-buildpack-datomic -a my-xtor&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Provision your database&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Follow the guidelines for setting up DynamoDB in the &lt;a href=&quot;http://docs.datomic.com/storage.html#provisioning-dynamo&quot;&gt;Datomic Storage documentation&lt;/a&gt;. The build pack only supports the simplest automation process so you will need to follow that route.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Clone the demo transactor app&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/raymcdermott/space-xtor&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Configure your Datomic license for Heroku&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_LICENSE_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;license-password
-heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_LICENSE_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;license-user
-heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_TRANSACTOR_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;license-key&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Configure you storage&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Configure the buildpack to use &lt;code class=&quot;highlighter-rouge&quot;&gt;DynamoDB&lt;/code&gt; rather than the default (which is Heroku Postgres) and provide your AWS account details to Heroku set the configuration variables for your app like this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;DATOMIC_STORAGE_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;DYNAMODB
-heroku config:set &lt;span class=&quot;nv&quot;&gt;AWS_ACCESS_KEY_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aws-access-key-id 
-heroku config:set &lt;span class=&quot;nv&quot;&gt;AWS_SECRET_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;aws-secret-key&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Push the app&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Create your web app&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku apps:create my-xtor-web-front -s my-space&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Attach your database&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Configure the database and the AWS region that your system is running on. For &lt;code class=&quot;highlighter-rouge&quot;&gt;US EAST&lt;/code&gt; do this:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku config:set &lt;span class=&quot;nv&quot;&gt;DYNAMO_DATABASE_URL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;datomic:ddb://us-east-1/your-system-name/heroku-spaces&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Clone the demo web app&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/opengrail/xtor-web-front&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Push the demo web app&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git push heroku master&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;strong&gt;Test it all out&lt;/strong&gt;&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;heroku open -a my-xtor-web-front&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h1 id=&quot;operating-costs&quot;&gt;Operating costs&lt;/h1&gt;
-
-&lt;p&gt;Be careful to watch your dyno use on Heroku as it’s possible to go beyond the free tier if you play for too long.&lt;/p&gt;
-
-&lt;p&gt;Likewise DynamoDB is low cost to start out can add up if you hit it hard.&lt;/p&gt;
-
-&lt;p&gt;You should be aware that Heroku Private Spaces is a beta product that is currently only available to Heroku Enterprise customers. That usually means you have a paid up front account.&lt;/p&gt;
-
-&lt;p&gt;Obviously you can spend as much as you want with Datomic or DynamoDB once you get going.&lt;/p&gt;
-
-&lt;p&gt;The code for the build packs and the sample apps are all on github so you can fork away and please let me know if there are any problems or suggestions for improvements.&lt;/p&gt;
-
-&lt;h1 id=&quot;thanks&quot;&gt;Thanks&lt;/h1&gt;
-
-&lt;p&gt;Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS / DBAAS combination.&lt;/p&gt;
-
-&lt;p&gt;Zing me or ping me if this was useful via Twitter.&lt;/p&gt;
-
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    var disqus_shortname = &#39;opengrail&#39;;
-
-    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
-        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
-        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
-    })();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-
-</description>
-        <pubDate>Sun, 03 Jan 2016 19:59:38 +0100</pubDate>
-        <link>http://blog.opengrail.com/datomic/heroku/dynamodb/aws/2016/01/03/datomic-heroku-spaces.html</link>
-        <guid isPermaLink="true">http://blog.opengrail.com/datomic/heroku/dynamodb/aws/2016/01/03/datomic-heroku-spaces.html</guid>
-        
-        
-        <category>datomic</category>
-        
-        <category>heroku</category>
-        
-        <category>dynamoDB</category>
-        
-        <category>AWS</category>
         
       </item>
     
