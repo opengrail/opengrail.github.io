@@ -6,32 +6,6 @@ permalink: /about/
 
 I am Ray McDermott, a consultant developing software and helping out on software architectures.
 
-Originally from the UK but living in Belgium for tax reasons. If you're not Belgian you won't realise just how funny that is.
+Originally from the UK but living in Belgium for tax reasons.
 
-# Feedback
-
-I am thinking about putting comments on here but in the meantime please see me on the Clojurian Slack or tweet me up.
-
-# Past talks:
-
-Here is a [link to a largely extemporaneous talk at JSConf EU][js-conf] about migrating an auto manufacturer's Pan-European web site infrastructure to Node.js and Heroku 
-
-I gave another talk about JS - this time using React - at a [reactjs meetup in Brussels 13th January 2016][react-js]
-
-# Future talks:
-
-I have submitted a talk to the folks at [Clojure Days in Amsterdam][clojure-days] which runs on Saturday March 19, 2016. 
-
-I will be going to the conference anyway so let me know if you're going too because I love to have conversations about any of this stuff!
-
-# Cycling
-
-If you really want to stalk me you can follow my cycle training for my next attempt at the [legendary Marmotte][marmotte] event in July 2016 on a hand-made, full carbon [Twitter account][rays-bike]
-
-
-[cloj-tv]: https://www.youtube.com/user/ClojureTV
-[js-conf]: https://www.youtube.com/watch?v=JlRHyg60vvI
-[react-js]: https://www.youtube.com/watch?v=u07thvFbBvw
-[clojure-days]: http://www.ticketbase.com/events/dutch-clojure-days-2016
-[marmotte]: http://www.sport.be/marmottegranfondoseries/en/
-[rays-bike]: https://twitter.com/raymondos_bike
+If you are Belgian you will understand that that is a joke.

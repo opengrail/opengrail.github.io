@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 14 Apr 2017 15:10:12 +0200</pubDate>
-    <lastBuildDate>Fri, 14 Apr 2017 15:10:12 +0200</lastBuildDate>
+    <pubDate>Fri, 14 Apr 2017 15:14:22 +0200</pubDate>
+    <lastBuildDate>Fri, 14 Apr 2017 15:14:22 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -271,7 +271,7 @@ singles
 
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
-        <pubDate>Fri, 14 Apr 2017 15:10:12 +0200</pubDate>
+        <pubDate>Fri, 14 Apr 2017 15:14:22 +0200</pubDate>
         <link>http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/14/numbers-text.html</link>
         <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/14/numbers-text.html</guid>
         
@@ -287,6 +287,7 @@ singles
       <item>
         <title>Mirage Driven Development</title>
         <description>&lt;h1 id=&quot;lubricious-productivity&quot;&gt;Lubricious productivity&lt;/h1&gt;
+
 &lt;p&gt;Yes, productivity is a slippery substance.&lt;/p&gt;
 
 &lt;p&gt;Much ink has been spilled over it in personal and work spheres.&lt;/p&gt;
@@ -295,9 +296,11 @@ singles
 
 &lt;p&gt;And another common theme - zero facts or proof of actual effectiveness other than the success of their author. That success is further bolstered by the popularity of the claptrap they peddle.&lt;/p&gt;
 
-&lt;p&gt;Software projects are expensive so the search is on for techniques that will unlock magic productivity gains: criticises the current condition and projects a utopian transformation.&lt;/p&gt;
+&lt;h1 id=&quot;it-is-core-to-big-business&quot;&gt;IT is core to big business&lt;/h1&gt;
 
-&lt;p&gt;Likewise, in software, the search for productivity has been constant. And likewise the facts and proof seem illusory as we zoom out to the highest level.&lt;/p&gt;
+&lt;p&gt;Software projects can be expensive so the search is on for techniques that will unlock magic productivity gains.&lt;/p&gt;
+
+&lt;p&gt;So, in software, the search for productivity has been a constant. And likewise the facts and proof seem illusory as we zoom out to the highest level.&lt;/p&gt;
 
 &lt;p&gt;Like the seven hobbits, a microscopic view can help.&lt;/p&gt;
 
@@ -305,13 +308,13 @@ singles
 
 &lt;p&gt;Form follows function (lovely to bend things around!)&lt;/p&gt;
 
-&lt;p&gt;There is an app store category devoted to such TODO list applications and I am happy to on the other side of the industry, mocking them and the illusions of control that they purport to offer.&lt;/p&gt;
+&lt;p&gt;There is an app store category devoted to such TODO list applications and I am happy to be on the other side of that industry, mocking them and the illusions of control that they purport to offer.&lt;/p&gt;
 
 &lt;p&gt;In software functions are created using languages and protocols are used to for  interoperability.&lt;/p&gt;
 
 &lt;p&gt;abc&lt;/p&gt;
 
-&lt;p&gt;When we are walking through the desert and become thirsty we will&lt;/p&gt;
+&lt;p&gt;When we are walking through the desert and become thirsty we become desperate, even delusional.&lt;/p&gt;
 
 &lt;p&gt;We’ve heard of mortgage driven development, ego driven development and the non-pejorative TDD and BDD&lt;/p&gt;
 
@@ -329,12 +332,6 @@ singles
 
 &lt;p&gt;We do know that people crave certainty and leadership and are suckers for a confident huckster such as myself.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Datomic&lt;/strong&gt; is an immutable, append-only databases that stores all of your new and historic data. It’s easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other folks at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There’s a ton more innovation from Datomic so check out the videos and other introductory material on &lt;a href=&quot;https://www.datomic.com&quot;&gt;the Datomic website&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;thanks&quot;&gt;Thanks&lt;/h1&gt;
-
-&lt;p&gt;Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS.&lt;/p&gt;
-
 &lt;p&gt;Zing me or ping me if this was useful via Twitter.&lt;/p&gt;
 
 &lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
@@ -351,7 +348,7 @@ singles
 
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
-        <pubDate>Fri, 14 Apr 2017 15:10:12 +0200</pubDate>
+        <pubDate>Fri, 14 Apr 2017 15:14:22 +0200</pubDate>
         <link>http://blog.opengrail.com/clojure/clojurescript/2017/04/14/mirage-dd.html</link>
         <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/2017/04/14/mirage-dd.html</guid>
         

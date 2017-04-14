@@ -5,17 +5,20 @@ categories: Clojure ClojureScript
 ---
 
 # Lubricious productivity
-Yes, productivity is a slippery substance. 
 
-Much ink has been spilled over it in personal and work spheres. 
+Yes, productivity is a slippery substance.
 
-Famous texts of Highly Effective Snake-Oil Salesmen mix up psychology and personal mythology with some common themes: an emphasis on personal discipline, collaboration and low-tech tools. 
+Much ink has been spilled over it in personal and work spheres.
+
+Famous texts of Highly Effective Snake-Oil Salesmen mix up psychology and personal mythology with some common themes: an emphasis on personal discipline, collaboration and low-tech tools.
 
 And another common theme - zero facts or proof of actual effectiveness other than the success of their author. That success is further bolstered by the popularity of the claptrap they peddle.
 
-Software projects are expensive so the search is on for techniques that will unlock magic productivity gains: criticises the current condition and projects a utopian transformation.
+# IT is core to big business
 
-Likewise, in software, the search for productivity has been constant. And likewise the facts and proof seem illusory as we zoom out to the highest level.
+Software projects can be expensive so the search is on for techniques that will unlock magic productivity gains.
+
+So, in software, the search for productivity has been a constant. And likewise the facts and proof seem illusory as we zoom out to the highest level.
 
 Like the seven hobbits, a microscopic view can help.
 
@@ -23,19 +26,19 @@ Like the seven hobbits, a microscopic view can help.
 
 Form follows function (lovely to bend things around!)
 
-There is an app store category devoted to such TODO list applications and I am happy to on the other side of the industry, mocking them and the illusions of control that they purport to offer.
+There is an app store category devoted to such TODO list applications and I am happy to be on the other side of that industry, mocking them and the illusions of control that they purport to offer.
 
 In software functions are created using languages and protocols are used to for  interoperability.
 
 abc
 
-When we are walking through the desert and become thirsty we will 
+When we are walking through the desert and become thirsty we become desperate, even delusional.
 
 We've heard of mortgage driven development, ego driven development and the non-pejorative TDD and BDD
 
 They all sum up to one thing - hope or fear of the future and some prescription to manage it
 
-This is why I prefer the term mirage driven development 
+This is why I prefer the term mirage driven development
 
 Religions do not have proof of all of their claims. Nor do Astro-physicists. But we have existential proof of both religion and physics. They drive devotion and action even if they are sometimes opposed.
 
@@ -47,18 +50,6 @@ Like medicine we prove effectiveness by experimenting and we are definitely stil
 
 We do know that people crave certainty and leadership and are suckers for a confident huckster such as myself.
 
-
-**Datomic** is an immutable, append-only databases that stores all of your new and historic data. It's easy to keep a history of prices or customers or whatever but not just as individual entities but as part of the history of the entire database. It comes from Rich Hickey and the other folks at Cognitect that brought you Clojure. It retains the ACID properties of the traditional RDBMS and has revived a logic programming interface to make queries using Datalog.  The other interesting aspect of Datomic is that it can offload the job of permanent storage to another database - like Postgres or Riak. There's a ton more innovation from Datomic so check out the videos and other introductory material on [the Datomic website][datomic-site]
-
-# Thanks
-
-Thanks for making it through, I hope you enjoy the wonders of Datomic on a great PAAS.
-
 Zing me or ping me if this was useful via Twitter.
-
-
-[datomic-site]: https://www.datomic.com
-[heroku-cli]: https://toolbelt.heroku.com
-
 
 {% include disqus.html %}
