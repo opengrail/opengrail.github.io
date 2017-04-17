@@ -99,7 +99,7 @@ Building the answer as a sequence is a huge simplification compared to the other
 
 ## You decided to dip and now you wanna trip
 
-The second part deal with the hundreds...
+The second part deals with the hundreds...
 
 ~~~klipse
 (defn inject-and
@@ -189,7 +189,7 @@ The interesting part of this approach is that we generate all of the boundary co
 (map #(which-bounds? % unit-boundaries) various)
 ~~~
 
-The code to test for the boundaries, and to map it into the correct unit, is a simple over the boundaries.
+The code to test for the boundaries, and to map it into the correct unit, is a straightforward mapping check over the boundaries.
 
 We use the units function to generate a sequence to test it out. You can edit the code above to see the test data and validate it.
 
