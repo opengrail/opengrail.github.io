@@ -99,7 +99,7 @@ Building the answer as a sequence is a huge simplification compared to the other
 
 ## You decided to dip and now you wanna trip
 
-With hundreds we can make it a straight readout of the number. It's
+The second part deal with the hundreds...
 
 ~~~klipse
 (defn inject-and
