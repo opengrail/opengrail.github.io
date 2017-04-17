@@ -6,283 +6,9 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 14 Apr 2017 15:14:22 +0200</pubDate>
-    <lastBuildDate>Fri, 14 Apr 2017 15:14:22 +0200</lastBuildDate>
+    <pubDate>Mon, 17 Apr 2017 02:01:50 +0200</pubDate>
+    <lastBuildDate>Mon, 17 Apr 2017 02:01:50 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
-    
-      <item>
-        <title>Numbers as text</title>
-        <description>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://app.klipse.tech/css/codemirror.css&quot; /&gt;
-
-&lt;script&gt;  
-  window.klipse_settings = {
-        selector: &#39;.language-klipse&#39;
-      };
-&lt;/script&gt;
-
-&lt;h2 id=&quot;friendly-challenge&quot;&gt;Friendly challenge&lt;/h2&gt;
-
-&lt;p&gt;I was chatting to a friend about job interviews and he mentioned that he always gives a small challenge to the candidates that they can do at home.&lt;/p&gt;
-
-&lt;p&gt;The goal is to spell out numbers as sentences, similar to how text might appear on a bankers cheque (or check if you’re in the US and - bonus - it’s still relevant for you).&lt;/p&gt;
-
-&lt;p&gt;Here is the behaviour that the program should provide as a minimum:&lt;/p&gt;
-
-&lt;table class=&quot;mbtablestyle&quot;&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;number&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;strong&gt;text&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-  &lt;tfoot&gt;
-    &lt;tr&gt;
-      &lt;td&gt;8&lt;/td&gt;
-      &lt;td&gt;eight&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;79&lt;/td&gt;
-      &lt;td&gt;seventy nine&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;619&lt;/td&gt;
-      &lt;td&gt;six hundred and nineteen&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;5 919&lt;/td&gt;
-      &lt;td&gt;five thousand, nine hundred and nineteen&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;49 191&lt;/td&gt;
-      &lt;td&gt;forty nine thousand, one hundred and ninety one&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;391 919&lt;/td&gt;
-      &lt;td&gt;three hundred and ninety one thousand, nine hundred and nineteen&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;2 919 191&lt;/td&gt;
-      &lt;td&gt;two million, nine hundred and nineteen thousand, one hundred and ninety one&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;89 191 919&lt;/td&gt;
-      &lt;td&gt;eighty nine million, one hundred and ninety one thousand, nine hundred and nineteen&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tfoot&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;br /&gt;
-The challenge is meant to be simple and serve mostly as a worked example to centre discussions around design and development approaches.&lt;/p&gt;
-
-&lt;p&gt;I figured that this small challenge could make an interesting blog post for the same reasons.&lt;/p&gt;
-
-&lt;p&gt;This post is enhanced using &lt;a href=&quot;https://github.com/viebel/klipse&quot;&gt;KLIPSE&lt;/a&gt; live code snippets meaning &lt;strong&gt;you&lt;/strong&gt; can edit the code and see immediate results&lt;/p&gt;
-
-&lt;h2 id=&quot;all-the-single-ladies&quot;&gt;All the single ladies&lt;/h2&gt;
-
-&lt;p&gt;Hard code the single numbers you say. No way. Hard code the names at least you say. Again no way.&lt;/p&gt;
-
-&lt;p&gt;Let use key words, sequences and combinations to get straight into it the good stuff right from the start…&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def words [:one :two :three :four :five :six :seven :eight :nine :ten])
-(def singles (zipmap (range 1 11) words))
-; ask the REPL to print the definition
-singles
-; simple interactive test, try it yourself...
-(get singles 7)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Computers are good at generating numbers and key words are easy to manipulate.&lt;/p&gt;
-
-&lt;p&gt;zipmap is a simple way to create a map from two sequences - using the first as keys and the second as values.&lt;/p&gt;
-
-&lt;p&gt;Neat, eh?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def words [:one :two :three :four :five :fix-me :seven :eight :nine :ten])
-(def singles (zipmap (range 1 11) (map name words)))
-; ask the REPL to print the definition
-singles
-(get singles 6)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here we transform the keys to words - to show that off. But there is a bug in the form.&lt;/p&gt;
-
-&lt;p&gt;It is simple to detect and fix. Do it :)&lt;/p&gt;
-
-&lt;h2 id=&quot;teenage-thrills&quot;&gt;Teenage thrills&lt;/h2&gt;
-
-&lt;p&gt;Let’s complete the form for the fixed, low numbers:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def words [:one :two :three :four :five :six :seven :eight :nine :ten
-            :eleven :twelve :thirteen :fourteen :fifteen :sixteen :seventeen :eighteen :nineteen])
-(def singles (zipmap (range 1 20) words))
-; take a random key and get the result
-(get singles (rand-nth (keys singles)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Next we deal with the other fixed numbers &amp;gt;= 20 and &amp;lt; 100&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def x10 [:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety])
-(def tens (zipmap (range 20 99 10) x10))
-; take a random key and get the result
-(get tens (rand-nth (keys tens)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here we use the computer to produce a range that is stepped by 10.&lt;/p&gt;
-
-&lt;p&gt;Bringing it together we can emit up to 100 numbers as text with ease…&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn starters
-  [num]
-  (if-let [answer (get singles num)]
-    [answer]
-    (let [modulus (mod num 10)
-          tenny   (- num modulus)]
-      (if (zero? modulus)
-        [(get tens tenny)]
-        [(get tens tenny) (get singles modulus)]))))
-
-; Generate a random sample of numbers to test it out
-(map (fn [n] [n (starters n)])
-     (random-sample 0.05 (range 1 100)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You can tweak the above code to adjust the number of samples.&lt;/p&gt;
-
-&lt;p&gt;The first part of the code (if-let) tests if the answer is present in the singles collection - there is no need to take the risk of testing for a sentinel value. Such values can easily get out of sync with the size of the vector or require maintenance. Also, because it’s a map no need to test for length - just look it up and find it or move along.&lt;/p&gt;
-
-&lt;p&gt;If we don’t find it, we take the modulus and look up the answer in one or both sets.&lt;/p&gt;
-
-&lt;p&gt;Finally, we use a some Clojure syntax sugar to coerce results into a vector by surrounding the responses with square brackets &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[ ]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Having the answer as a sequence makes it easy to select or compose standard functions to further manipulate the results.&lt;/p&gt;
-
-&lt;h2 id=&quot;hundreds-and-thousands&quot;&gt;Hundreds and Thousands&lt;/h2&gt;
-
-&lt;p&gt;So now to deal with the hundreds, thousands and so on…&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn units [start step count]
-  &quot;Generate a list of n numbers with a start and step multiplier&quot;
-  (reduce (fn [a b] (conj a (* (last a) step)))
-          [start] (range count)))
-
-(units 1 2 4)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The units function provides a way to generate lists of numbers at certain boundaries. We would like to test that numbers sit between various magnitudes.&lt;/p&gt;
-
-&lt;p&gt;We could hard code all of this but why should we always reach for the dull choice?&lt;/p&gt;
-
-&lt;p&gt;We do need the large number text though so we follow the same zipmap pattern as before…&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def large-numbers-text [:thousand :million :billion :trillion
-                         :quadrillion :quintillion :sextillion
-                         :septillion :octillion :nonillion
-                         :decillion :undecillion :duodecillion
-                         :tredecillion :quattuordecillion])
-
-(def large-number-map (zipmap (units 1000 1000 (count large-numbers-text))
-                              large-numbers-text))
-
-(let [rand (rand-nth (keys large-number-map))]
-  [rand (get large-number-map rand)])
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So we now have all of the big number boundaries set up and ready to go, we need the other (100s and 1000s boundaries), with at least the same range.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def ten-boundaries
-  (units 10 1000 (count large-numbers-text)))
-(take 3 ten-boundaries)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def hundred-boundaries
-  (units 100 1000 (count large-numbers-text)))
-(take 3 hundred-boundaries)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;no-class&quot;&gt;No class&lt;/h2&gt;
-
-&lt;p&gt;No classes have been defined so far … we have been able to do all of this interactively and at the REPL. This is a big win with Clojure - no need to wait for the compiler!&lt;/p&gt;
-
-&lt;p&gt;Let’s top it off by capitalising the first letter. We can cheat here by using a Clojure standard library function. I’m not convinced it really is cheating but when it’s this easy, it feels a little bit like it.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [print-sequence (interpose &quot; &quot; (map name (starters 33)))]
-  (clojure.string/capitalize (apply str print-sequence)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;guard-rails&quot;&gt;Guard rails&lt;/h2&gt;
-
-&lt;p&gt;Even with the advent of spec, it’s sometimes still simpler to use argument assertions to get the job done.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn num-text [n]
-  {:pre [(&amp;gt; n 0)]}
-  n)
-; ERR ---&amp;gt; Scroll window to the right to see the error
-(num-text -1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;conclusions&quot;&gt;Conclusions&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Stay with data - easier to work with and to test&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Layer on infra - to enable testing on the infra&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Use the latest possible transforms at the edge of the system&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Use randomness early and often&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Use properties and constraints to properly test your system&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Developing with data, sequences and composing functions to manipulate them is how we will finally get to leave the sand pit.&lt;/p&gt;
-
-&lt;h2 id=&quot;gotchas&quot;&gt;Gotchas&lt;/h2&gt;
-
-&lt;p&gt;US readers please note: in the US the grammar for expressing these numbers is different and simpler: there’s no ‘and’. Providing this facility for all cultures and languages is not trivial and it reminds us that even such a small and simple example like this - like most any thing - is most often a subset of a much more complex domain.&lt;/p&gt;
-
-&lt;h2 id=&quot;disclaimer-me--maths&quot;&gt;Disclaimer: Me != maths&lt;/h2&gt;
-
-&lt;p&gt;Please let me know if you are a maths whizz and know a simpler way to solve this.&lt;/p&gt;
-
-&lt;p&gt;Also, if you have another functional way, in JS or Haskell or Scala or Java 8.&lt;/p&gt;
-
-&lt;p&gt;This has been fun but if there is a ‘right way’, I would be happy to learn it!&lt;/p&gt;
-
-&lt;script src=&quot;http://app.klipse.tech/plugin/js/klipse_plugin.js?&quot;&gt;&lt;/script&gt;
-
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    var disqus_shortname = &#39;opengrail&#39;;
-
-    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
-        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
-        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
-    })();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-</description>
-        <pubDate>Fri, 14 Apr 2017 15:14:22 +0200</pubDate>
-        <link>http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/14/numbers-text.html</link>
-        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/14/numbers-text.html</guid>
-        
-        
-        <category>Clojure</category>
-        
-        <category>ClojureScript</category>
-        
-        <category>Functional</category>
-        
-      </item>
     
       <item>
         <title>Mirage Driven Development</title>
@@ -348,14 +74,328 @@ singles
 
 &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
 </description>
-        <pubDate>Fri, 14 Apr 2017 15:14:22 +0200</pubDate>
-        <link>http://blog.opengrail.com/clojure/clojurescript/2017/04/14/mirage-dd.html</link>
-        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/2017/04/14/mirage-dd.html</guid>
+        <pubDate>Mon, 17 Apr 2017 02:01:50 +0200</pubDate>
+        <link>http://blog.opengrail.com/clojure/clojurescript/2017/04/17/mirage-dd.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/2017/04/17/mirage-dd.html</guid>
         
         
         <category>Clojure</category>
         
         <category>ClojureScript</category>
+        
+      </item>
+    
+      <item>
+        <title>Numbers as text</title>
+        <description>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;http://app.klipse.tech/css/codemirror.css&quot; /&gt;
+
+&lt;script&gt;  
+  window.klipse_settings = {
+        selector: &#39;.language-klipse&#39;
+      };
+&lt;/script&gt;
+
+&lt;h2 id=&quot;random-beyonce-based-headlines-as-if-you-care&quot;&gt;Random Beyonce based headlines, as if you care&lt;/h2&gt;
+
+&lt;p&gt;I was chatting to a friend about job interviews and he mentioned that he always gives a small challenge to the candidates that they can do at home.&lt;/p&gt;
+
+&lt;p&gt;The goal is to spell out numbers as sentences, similar to how text might appear on a bankers cheque (or check if you’re in the US and - bonus - it’s still relevant for you).&lt;/p&gt;
+
+&lt;p&gt;Here is the behaviour that the program should provide as a minimum:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;num-&amp;gt;text 123456789&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;=&amp;gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;One hundred and twenty three million four hundred and fifty six thousand seven hundred and eighty nine&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The challenge is meant to be relatively simple and serve as a worked example to centre discussions around design and development approaches.&lt;/p&gt;
+
+&lt;p&gt;I figured that addressing this problem with Clojure could make an interesting blog post for the same reasons. The code is on &lt;a href=&quot;https://github.com/raymcdermott/num-text&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This post is enhanced using &lt;a href=&quot;https://github.com/viebel/klipse&quot;&gt;KLIPSE&lt;/a&gt; live code snippets meaning &lt;strong&gt;you&lt;/strong&gt; can edit the code and see immediate results&lt;/p&gt;
+
+&lt;h2 id=&quot;all-the-single-ladies&quot;&gt;All the single ladies&lt;/h2&gt;
+
+&lt;p&gt;Hard code the single numbers you say. No way. Hard code the names at least you say. Again no way. Beyonce would not approve.&lt;/p&gt;
+
+&lt;p&gt;Let use key words, sequences and combinations to get straight into it the good FP stuff right from the start…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def x1 [:one :two :three :four :five :six :seven :eight :nine
+         :ten :eleven :twelve :thirteen :fourteen :fifteen :sixteen :seventeen :eighteen :nineteen])
+(def singles (zipmap (range 1 20) x1))
+; simple interactive test, try it yourself...
+(get singles 7)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Clojure make it easy to generating numbers (&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;range&lt;/code&gt;&lt;/strong&gt;) and :key-words are easy to test.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;zipmap&lt;/code&gt;&lt;/strong&gt; is a simple way to create a map from two sequences - using the first as keys and the second as values.&lt;/p&gt;
+
+&lt;p&gt;So we have the computer doing it’s share of the work already. Neat!&lt;/p&gt;
+
+&lt;h2 id=&quot;now-put-your-hands-up&quot;&gt;Now put your hands up&lt;/h2&gt;
+
+&lt;p&gt;Next we deal with the other fixed numbers &amp;gt;= 20 and &amp;lt; 100&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def x10 [:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety])
+(def tens (zipmap (range 20 99 10) x10))
+(get tens (rand-nth (keys tens)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we use another form of the &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;range&lt;/code&gt;&lt;/strong&gt; function again to produce a range that starts at 20, ends at 99 and is stepped by 10.&lt;/p&gt;
+
+&lt;p&gt;The interactive sample introduces a little randomisation for the LOLs and we will use more of this as we go along.&lt;/p&gt;
+
+&lt;h2 id=&quot;im-doing-my-own-little-thing&quot;&gt;I’m doing my own little thing&lt;/h2&gt;
+
+&lt;p&gt;My solution is composed from three logical parts: numbers to 100, numbers between 100 and 1000 and numbers above 1000.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn nums-lt-100
+  [num]
+  {:pre [(pos? num)]}
+  (if-let [answer (or (get singles num)
+                      (get tens num))]
+    [answer]
+    (let [ten-part  (quot num 10)
+          ten-whole (* 10 ten-part)]
+      [(get tens ten-whole) (nums-lt-100 (- num ten-whole))])))
+
+; Generate a random sample of numbers to test it out
+(map (fn [n] [n (nums-lt-100 n)])
+     (random-sample 0.05 (range 1 100)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can tweak the above code to adjust the number of samples (&lt;code class=&quot;highlighter-rouge&quot;&gt;0.05&lt;/code&gt;)&lt;/p&gt;
+
+&lt;p&gt;The first part of the code (if-let) tests if the answer is present in the singles or tens collection - there is no need to take the risk of testing for a sentinel value. Such values can easily get out of sync with the size of the vector or require maintenance. Also, because it’s a map no need to test for length - just look it up and find it or move along.&lt;/p&gt;
+
+&lt;p&gt;If we don’t find it, we take the modulus and look up the answer in one or both sets.&lt;/p&gt;
+
+&lt;p&gt;Finally, we use a some Clojure syntax sugar to coerce results into a vector by surrounding the responses with square brackets &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[ ]&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Building the answer as a sequence is a huge simplification compared to the other solutions I have seen out there. This will become more evident as the solution is further composed.&lt;/p&gt;
+
+&lt;h2 id=&quot;you-decided-to-dip-and-now-you-wanna-trip&quot;&gt;You decided to dip and now you wanna trip&lt;/h2&gt;
+
+&lt;p&gt;With hundreds we can make it a straight readout of the number. It’s&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn inject-and
+  [num-vec]
+  (let [size (count num-vec)]
+    (cond (&amp;lt;= size 2) num-vec
+          :else (concat (take 2 num-vec) [:and] (drop 2 num-vec)))))
+
+(defn nums-gt-100-lt-1000
+  [num]
+  {:pre [(&amp;gt;= num 100) (&amp;lt; num 1000)]}
+  (let [hundreds  (quot num 100)
+        remainder (- num (* hundreds 100))
+        result    [(get singles hundreds) :hundred
+                   (if-not (zero? remainder)
+                     (nums-lt-100 remainder))]]
+    (inject-and (remove nil? result))))
+
+(map #(nums-gt-100-lt-1000 %)
+     (filter odd? (random-sample 0.1 (range 921 1000))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inject-and&lt;/code&gt;&lt;/strong&gt; is a small helper to find the right spot in the vector to inject the and. Such baroqueness is not needed in the US version so this function could be easily removed.&lt;/p&gt;
+
+&lt;p&gt;The main function does some trivial maths to separate out the hundreds and its remainder. The hundreds component is added to the vector and then we use the earlier function on any remainder.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;There is a small annoyance to my eye with this solution … I have to use &lt;code class=&quot;highlighter-rouge&quot;&gt;(quot num 100)&lt;/code&gt; rather than &lt;code class=&quot;highlighter-rouge&quot;&gt;(/ num 100)&lt;/code&gt; as the default answer in Clojure is a rational number. You can coerce it an integer but I’m not a fan of using such type trickery unless it’s absolutely unavoidable.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;i-got-gloss-on-my-lips-a-man-on-my-hips&quot;&gt;I got gloss on my lips, a man on my hips&lt;/h2&gt;
+
+&lt;p&gt;And now I’m ready to deal with the big boys: thousands, millions and so on… to quattuordecillion. We can go higher with a longer list but this makes the samples too awkward. [You can find a longer list up to millinillion on the GitHub repo.]&lt;/p&gt;
+
+&lt;p&gt;This is the third part of the solution and is also based on sequences of generated numbers.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn units [start step count]
+  (reduce (fn [a b] (conj a (* (last a) step)))
+          [start] (range count)))
+
+(units 1 2 4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;got-me-tighter-than-my-dereon-jeans&quot;&gt;Got me tighter than my Dereon jeans&lt;/h2&gt;
+
+&lt;p&gt;The units function provides a way to generate lists of numbers at certain boundaries and we can will use that to establish the various ‘large number’ magnitudes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(def large-numbers-text [:thousand :million :billion :trillion
+                         :quadrillion :quintillion :sextillion
+                         :septillion :octillion :nonillion
+                         :decillion :undecillion :duodecillion
+                         :tredecillion :quattuordecillion])
+
+(def unitable (units 1000N 1000N (dec (count large-numbers-text))))
+
+(def large-number-map (zipmap unitable large-numbers-text))
+(def inverse-large-numbers-map (reduce merge {}
+                                  (map (juxt val key) large-number-map)))
+
+(def unit-boundaries (map (fn [u] [u (* u 1000N)]) unitable))
+
+(let [rand (rand-nth (keys large-number-map))]
+  [rand (get large-number-map rand)])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We use the same &lt;code class=&quot;highlighter-rouge&quot;&gt;zipmap&lt;/code&gt; pattern for large number texts as before…&lt;/p&gt;
+
+&lt;p&gt;In addition to the previous pattern, we also generate an inverse look up map that we will need later.&lt;/p&gt;
+
+&lt;p&gt;The interesting part of this approach is that we generate all of the boundary conditions for all supported units.&lt;/p&gt;
+
+&lt;h2 id=&quot;acting-up-drink-in-my-cup&quot;&gt;Acting up, drink in my cup&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn which-bounds? [num unit-bounds]
+  (remove nil? (map (fn [[lower upper]]
+                      (if (and (&amp;gt;= num lower)
+                               (&amp;lt; num upper))
+                        lower)) unit-bounds)))
+
+(defn which-unit? [num]
+  (let [unit (which-bounds? num unit-boundaries)]
+    (get large-number-map (first unit))))
+
+(def various (units 1000 7 7))
+
+(map #(which-bounds? % unit-boundaries) various)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The code to test for the boundaries, and to map it into the correct unit, is a simple over the boundaries.&lt;/p&gt;
+
+&lt;p&gt;We use the units function to generate a sequence to test it out. You can edit the code above to see the test data and validate it.&lt;/p&gt;
+
+&lt;h2 id=&quot;i-can-care-less-what-you-think&quot;&gt;I can care less what you think&lt;/h2&gt;
+
+&lt;p&gt;With this in place we can present the final form that composes it together.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn num-representation
+  [num]
+  (flatten
+    (cond
+      (&amp;lt; num 100) (nums-lt-100 num)
+      (&amp;lt; num 1000) (nums-gt-100-lt-1000 num)
+      :else (let [unit       (which-unit? num)
+                  divisor    (unit inverse-large-numbers-map)
+                  first-part (quot num divisor)
+                  remainder  (- num (* divisor first-part))]
+              (if (zero? remainder)
+                [(num-representation first-part) unit]
+                [(num-representation first-part) unit (num-representation remainder)])))))
+
+(num-representation 56789)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The trick here is to always place the larger numbers back through the function so that each part is processed into the appropriate single, ten or 100 multiplier.&lt;/p&gt;
+
+&lt;h2 id=&quot;i-need-no-permission-did-i-mention&quot;&gt;I need no permission, did I mention?&lt;/h2&gt;
+
+&lt;p&gt;There is one final part at the edge to morph the data into strings…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn num-vec-&amp;gt;text
+  [num-vec]
+  (clojure.string/capitalize
+    (apply str (interpose &quot; &quot; (map name num-vec)))))
+
+(defn num-&amp;gt;text
+  [num]
+  (num-vec-&amp;gt;text (num-representation num)))
+
+(num-&amp;gt;text 56789)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;if-you-liked-it-then-you-should-have-put-a-ring-on-it&quot;&gt;If you liked it, then you should have put a ring on it&lt;/h2&gt;
+
+&lt;p&gt;That’s just the beginning though. This problem is one where the range of answers is so huge that we cannot possibly test all of them. Moreover tests on strings presume a human checker.&lt;/p&gt;
+
+&lt;p&gt;So we can do better than that. Next time I want to go into using spec on this problem but I will just finish with a few data samples for tests that I have concocted on the GitHub version.&lt;/p&gt;
+
+&lt;h2 id=&quot;oh-oh-oh&quot;&gt;Oh, oh, oh&lt;/h2&gt;
+
+&lt;p&gt;CONSISTENCY check: Do all of the first numbers, across all units start with :one ?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [sample (units 1000N 1000N (dec (count large-numbers-text)))]
+  (map #(first (num-representation %)) sample))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;oh-oh-oh-oh-oh-oh&quot;&gt;Oh, oh, oh, oh, oh, oh&lt;/h2&gt;
+
+&lt;p&gt;CONSISTENCY check: Is the answer for all of the first numbers, across all units, two words ?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [sample (units 1000N 1000N (dec (count large-numbers-text)))]
+  (map #(count (num-representation %)) sample))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;oh-oh-oh-1&quot;&gt;Oh, oh, oh&lt;/h2&gt;
+
+&lt;p&gt;What does it mean?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Stay with data - it’s easier to work with and to test&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Layer on infra - to enable testing on different layers&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use the latest possible transforms at the edge of the system&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use randomness early and often&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use properties and constraints to properly test your system&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Developing with data, sequences and composing functions to manipulate them is how we will finally get to leave the sand pit.&lt;/p&gt;
+
+&lt;h2 id=&quot;oh-oh-oh-2&quot;&gt;Oh, oh, oh&lt;/h2&gt;
+
+&lt;p&gt;US readers please note: in the US the grammar for expressing these numbers is different and simpler: there’s no ‘and’.&lt;/p&gt;
+
+&lt;p&gt;Providing this facility for all cultures and languages is not trivial and it reminds us that even such a small and simple example like this - like most any thing - is most often a subset of a much more complex domain.&lt;/p&gt;
+
+&lt;h2 id=&quot;cause-if-you-liked-it-then-you-should-have-put-a-ring-on-it&quot;&gt;‘Cause if you liked it, then you should have put a ring on it&lt;/h2&gt;
+
+&lt;p&gt;Disclaimer: Me != maths&lt;/p&gt;
+
+&lt;p&gt;Please let me know if you are a maths whizz and know a simpler way to solve this.&lt;/p&gt;
+
+&lt;p&gt;Also, if you have another functional way, in JS or Haskell or Scala or Java 8.&lt;/p&gt;
+
+&lt;p&gt;This has been fun but if there is a ‘right way’, I would be happy to learn it!&lt;/p&gt;
+
+&lt;script src=&quot;http://app.klipse.tech/plugin/js/klipse_plugin.js?&quot;&gt;&lt;/script&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    var disqus_shortname = &#39;opengrail&#39;;
+
+    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
+        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+</description>
+        <pubDate>Mon, 17 Apr 2017 02:00:00 +0200</pubDate>
+        <link>http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/17/numbers-text.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/functional/2017/04/17/numbers-text.html</guid>
+        
+        
+        <category>Clojure</category>
+        
+        <category>ClojureScript</category>
+        
+        <category>Functional</category>
         
       </item>
     
