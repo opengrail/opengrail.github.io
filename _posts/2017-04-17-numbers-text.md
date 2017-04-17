@@ -238,7 +238,7 @@ There is one final part at the edge to morph the data into strings...
 
 That's just the beginning though. This problem is one where the range of answers is so huge that we cannot possibly test all of them. Moreover tests on strings presume a human checker.
 
-So we can do better than that. Next time I want to go into using spec on this problem but I will just finish with a few data samples for tests that I have concocted on the GitHub version.
+So we can do better than that. Next time I want to go into using spec on this problem but I will just finish with a few data samples for tests that I have concocted. You can see more on the GitHub repo.
 
 ## Oh, oh, oh
 
@@ -268,7 +268,7 @@ What does it mean?
 
 - Use the latest possible transforms at the edge of the system
 
-- Use randomness early and often
+- Use randomness early and often in your feedback loop
 
 - Use properties and constraints to properly test your system
 
