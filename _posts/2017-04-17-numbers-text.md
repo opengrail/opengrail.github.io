@@ -246,7 +246,7 @@ CONSISTENCY check: Do all of the first numbers, across all units start with :one
 
 ~~~klipse
 (let [sample (units 1000N 1000N (dec (count large-numbers-text)))]
-  (map #(first (num-representation %)) sample))
+  (distinct (map #(first (num-representation %)) sample)))
 ~~~
 
 ## Oh, oh, oh, oh, oh, oh
@@ -255,7 +255,7 @@ CONSISTENCY check: Is the answer for all of the first numbers, across all units,
 
 ~~~klipse
 (let [sample (units 1000N 1000N (dec (count large-numbers-text)))]
-  (map #(count (num-representation %)) sample))
+  (distinct(map #(count (num-representation %)) sample)))
 ~~~
 
 ## Oh, oh, oh
