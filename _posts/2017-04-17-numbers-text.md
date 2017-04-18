@@ -102,12 +102,6 @@ Building the answer as a sequence is a huge simplification compared to the other
 The second part deals with the hundreds...
 
 ~~~klipse
-(defn inject-and
-  [num-vec]
-  (let [size (count num-vec)]
-    (cond (<= size 2) num-vec
-          :else (concat (take 2 num-vec) [:and] (drop 2 num-vec)))))
-
 (defn nums-gt-100-lt-1000
   [num]
   {:pre [(>= num 100) (< num 1000)]}
@@ -116,13 +110,11 @@ The second part deals with the hundreds...
         result    [(get singles hundreds) :hundred
                    (if-not (zero? remainder)
                      (nums-lt-100 remainder))]]
-    (inject-and (remove nil? result))))
+    (remove nil? result)))
 
 (map #(nums-gt-100-lt-1000 %)
      (filter odd? (random-sample 0.1 (range 921 1000))))
 ~~~
-
-**`inject-and`** is a small helper to find the right spot in the vector to inject the and. Such baroqueness is not needed in the US version so this function could be easily removed.
 
 The main function does some trivial maths to separate out the hundreds and its remainder. The hundreds component is added to the vector and then we use the earlier function on any remainder.
 
@@ -198,22 +190,41 @@ We use the units function to generate a sequence to test it out. You can edit th
 With this in place we can present the final form that composes it together.
 
 ~~~klipse
+(defn inject-and
+  [num-vec]
+  (if (<= (count num-vec) 2)
+    num-vec
+    (let [check-map (assoc inverse-large-numbers-map :hundred 100)]
+      (cond
+        (get check-map (last num-vec)) num-vec
+        (get check-map (last (drop-last 1 num-vec)))
+        (concat (drop-last 1 num-vec) [:and] (take-last 1 num-vec))
+        (get check-map (last (drop-last 2 num-vec)))
+        (concat (drop-last 2 num-vec) [:and] (take-last 2 num-vec))
+        :else num-vec))))
+
 (defn num-representation
   [num]
-  (flatten
-    (cond
-      (< num 100) (nums-lt-100 num)
-      (< num 1000) (nums-gt-100-lt-1000 num)
-      :else (let [unit       (which-unit? num)
-                  divisor    (unit inverse-large-numbers-map)
-                  first-part (quot num divisor)
-                  remainder  (- num (* divisor first-part))]
-              (if (zero? remainder)
-                [(num-representation first-part) unit]
-                [(num-representation first-part) unit (num-representation remainder)])))))
+  (inject-and
+    (flatten
+      (cond
+        (< num 100) (nums-lt-100 num)
+        (< num 1000) (nums-gt-100-lt-1000 num)
+        :else (let [unit           (which-unit? num)
+                    divisor        (unit inverse-large-numbers-map)
+                    first-part     (quot num divisor)
+                    remainder      (- num (* divisor first-part))
+                    representation (if (zero? remainder)
+                                     [(num-representation first-part) unit]
+                                     [(num-representation first-part)
+                                      unit
+                                      (num-representation remainder)])]
+                representation)))))
 
-(num-representation 56789)
+(num-representation 1001)
 ~~~
+
+**`inject-and`** finds the right spot in the vector to inject the and. Such baroqueness is not needed in the US version so this function could be easily removed.
 
 The trick here is to always place the larger numbers back through the function so that each part is processed into the appropriate single, ten or 100 multiplier.
 

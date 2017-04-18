@@ -6,84 +6,9 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 17 Apr 2017 02:01:50 +0200</pubDate>
-    <lastBuildDate>Mon, 17 Apr 2017 02:01:50 +0200</lastBuildDate>
+    <pubDate>Tue, 18 Apr 2017 09:26:32 +0200</pubDate>
+    <lastBuildDate>Tue, 18 Apr 2017 09:26:32 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
-    
-      <item>
-        <title>Mirage Driven Development</title>
-        <description>&lt;h1 id=&quot;lubricious-productivity&quot;&gt;Lubricious productivity&lt;/h1&gt;
-
-&lt;p&gt;Yes, productivity is a slippery substance.&lt;/p&gt;
-
-&lt;p&gt;Much ink has been spilled over it in personal and work spheres.&lt;/p&gt;
-
-&lt;p&gt;Famous texts of Highly Effective Snake-Oil Salesmen mix up psychology and personal mythology with some common themes: an emphasis on personal discipline, collaboration and low-tech tools.&lt;/p&gt;
-
-&lt;p&gt;And another common theme - zero facts or proof of actual effectiveness other than the success of their author. That success is further bolstered by the popularity of the claptrap they peddle.&lt;/p&gt;
-
-&lt;h1 id=&quot;it-is-core-to-big-business&quot;&gt;IT is core to big business&lt;/h1&gt;
-
-&lt;p&gt;Software projects can be expensive so the search is on for techniques that will unlock magic productivity gains.&lt;/p&gt;
-
-&lt;p&gt;So, in software, the search for productivity has been a constant. And likewise the facts and proof seem illusory as we zoom out to the highest level.&lt;/p&gt;
-
-&lt;p&gt;Like the seven hobbits, a microscopic view can help.&lt;/p&gt;
-
-&lt;p&gt;10x developers. Existence (totemic) and criticism (piss factory style).&lt;/p&gt;
-
-&lt;p&gt;Form follows function (lovely to bend things around!)&lt;/p&gt;
-
-&lt;p&gt;There is an app store category devoted to such TODO list applications and I am happy to be on the other side of that industry, mocking them and the illusions of control that they purport to offer.&lt;/p&gt;
-
-&lt;p&gt;In software functions are created using languages and protocols are used to for  interoperability.&lt;/p&gt;
-
-&lt;p&gt;abc&lt;/p&gt;
-
-&lt;p&gt;When we are walking through the desert and become thirsty we become desperate, even delusional.&lt;/p&gt;
-
-&lt;p&gt;We’ve heard of mortgage driven development, ego driven development and the non-pejorative TDD and BDD&lt;/p&gt;
-
-&lt;p&gt;They all sum up to one thing - hope or fear of the future and some prescription to manage it&lt;/p&gt;
-
-&lt;p&gt;This is why I prefer the term mirage driven development&lt;/p&gt;
-
-&lt;p&gt;Religions do not have proof of all of their claims. Nor do Astro-physicists. But we have existential proof of both religion and physics. They drive devotion and action even if they are sometimes opposed.&lt;/p&gt;
-
-&lt;p&gt;Likewise neither static or dynamic types can solve all problems but there is existential prove of their effectiveness to create and run mission critical business processes.&lt;/p&gt;
-
-&lt;p&gt;Leaving aside what we cannot prove let’s take software like medicine. It’s a much better match than building because it accepts that the system is complex and not completely understood. Administering treatment is like building corporate software - unpredictable and may have unwanted side effects. We can’t even predict the side effects.&lt;/p&gt;
-
-&lt;p&gt;Like medicine we prove effectiveness by experimenting and we are definitely still at the whiskey and leeches stage. We don’t know if future generations will discover the equivalent of hand washing (biggest life saver ever) or what the equivalent of a CATSCAN will look like for PLs.&lt;/p&gt;
-
-&lt;p&gt;We do know that people crave certainty and leadership and are suckers for a confident huckster such as myself.&lt;/p&gt;
-
-&lt;p&gt;Zing me or ping me if this was useful via Twitter.&lt;/p&gt;
-
-&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-    var disqus_shortname = &#39;opengrail&#39;;
-
-    /* * * DON&#39;T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
-        dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
-        (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
-    })();
-&lt;/script&gt;
-
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;http://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
-</description>
-        <pubDate>Mon, 17 Apr 2017 02:01:50 +0200</pubDate>
-        <link>http://blog.opengrail.com/clojure/clojurescript/2017/04/17/mirage-dd.html</link>
-        <guid isPermaLink="true">http://blog.opengrail.com/clojure/clojurescript/2017/04/17/mirage-dd.html</guid>
-        
-        
-        <category>Clojure</category>
-        
-        <category>ClojureScript</category>
-        
-      </item>
     
       <item>
         <title>Numbers as text</title>
@@ -177,15 +102,9 @@
 
 &lt;h2 id=&quot;you-decided-to-dip-and-now-you-wanna-trip&quot;&gt;You decided to dip and now you wanna trip&lt;/h2&gt;
 
-&lt;p&gt;With hundreds we can make it a straight readout of the number. It’s&lt;/p&gt;
+&lt;p&gt;The second part deals with the hundreds…&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn inject-and
-  [num-vec]
-  (let [size (count num-vec)]
-    (cond (&amp;lt;= size 2) num-vec
-          :else (concat (take 2 num-vec) [:and] (drop 2 num-vec)))))
-
-(defn nums-gt-100-lt-1000
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn nums-gt-100-lt-1000
   [num]
   {:pre [(&amp;gt;= num 100) (&amp;lt; num 1000)]}
   (let [hundreds  (quot num 100)
@@ -193,13 +112,11 @@
         result    [(get singles hundreds) :hundred
                    (if-not (zero? remainder)
                      (nums-lt-100 remainder))]]
-    (inject-and (remove nil? result))))
+    (remove nil? result)))
 
 (map #(nums-gt-100-lt-1000 %)
      (filter odd? (random-sample 0.1 (range 921 1000))))
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inject-and&lt;/code&gt;&lt;/strong&gt; is a small helper to find the right spot in the vector to inject the and. Such baroqueness is not needed in the US version so this function could be easily removed.&lt;/p&gt;
 
 &lt;p&gt;The main function does some trivial maths to separate out the hundreds and its remainder. The hundreds component is added to the vector and then we use the earlier function on any remainder.&lt;/p&gt;
 
@@ -265,7 +182,7 @@
 (map #(which-bounds? % unit-boundaries) various)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The code to test for the boundaries, and to map it into the correct unit, is a simple over the boundaries.&lt;/p&gt;
+&lt;p&gt;The code to test for the boundaries, and to map it into the correct unit, is a straightforward mapping check over the boundaries.&lt;/p&gt;
 
 &lt;p&gt;We use the units function to generate a sequence to test it out. You can edit the code above to see the test data and validate it.&lt;/p&gt;
 
@@ -273,22 +190,41 @@
 
 &lt;p&gt;With this in place we can present the final form that composes it together.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn num-representation
-  [num]
-  (flatten
-    (cond
-      (&amp;lt; num 100) (nums-lt-100 num)
-      (&amp;lt; num 1000) (nums-gt-100-lt-1000 num)
-      :else (let [unit       (which-unit? num)
-                  divisor    (unit inverse-large-numbers-map)
-                  first-part (quot num divisor)
-                  remainder  (- num (* divisor first-part))]
-              (if (zero? remainder)
-                [(num-representation first-part) unit]
-                [(num-representation first-part) unit (num-representation remainder)])))))
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(defn inject-and
+  [num-vec]
+  (if (&amp;lt;= (count num-vec) 2)
+    num-vec
+    (let [check-map (assoc inverse-large-numbers-map :hundred 100)]
+      (cond
+        (get check-map (last num-vec)) num-vec
+        (get check-map (last (drop-last 1 num-vec)))
+        (concat (drop-last 1 num-vec) [:and] (take-last 1 num-vec))
+        (get check-map (last (drop-last 2 num-vec)))
+        (concat (drop-last 2 num-vec) [:and] (take-last 2 num-vec))
+        :else num-vec))))
 
-(num-representation 56789)
+(defn num-representation
+  [num]
+  (inject-and
+    (flatten
+      (cond
+        (&amp;lt; num 100) (nums-lt-100 num)
+        (&amp;lt; num 1000) (nums-gt-100-lt-1000 num)
+        :else (let [unit           (which-unit? num)
+                    divisor        (unit inverse-large-numbers-map)
+                    first-part     (quot num divisor)
+                    remainder      (- num (* divisor first-part))
+                    representation (if (zero? remainder)
+                                     [(num-representation first-part) unit]
+                                     [(num-representation first-part)
+                                      unit
+                                      (num-representation remainder)])]
+                representation)))))
+
+(num-representation 1001)
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;inject-and&lt;/code&gt;&lt;/strong&gt; finds the right spot in the vector to inject the and. Such baroqueness is not needed in the US version so this function could be easily removed.&lt;/p&gt;
 
 &lt;p&gt;The trick here is to always place the larger numbers back through the function so that each part is processed into the appropriate single, ten or 100 multiplier.&lt;/p&gt;
 
@@ -312,14 +248,14 @@
 
 &lt;p&gt;That’s just the beginning though. This problem is one where the range of answers is so huge that we cannot possibly test all of them. Moreover tests on strings presume a human checker.&lt;/p&gt;
 
-&lt;p&gt;So we can do better than that. Next time I want to go into using spec on this problem but I will just finish with a few data samples for tests that I have concocted on the GitHub version.&lt;/p&gt;
+&lt;p&gt;So we can do better than that. Next time I want to go into using spec on this problem but I will just finish with a few data samples for tests that I have concocted. You can see more on the GitHub repo.&lt;/p&gt;
 
 &lt;h2 id=&quot;oh-oh-oh&quot;&gt;Oh, oh, oh&lt;/h2&gt;
 
 &lt;p&gt;CONSISTENCY check: Do all of the first numbers, across all units start with :one ?&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [sample (units 1000N 1000N (dec (count large-numbers-text)))]
-  (map #(first (num-representation %)) sample))
+  (distinct (map #(first (num-representation %)) sample)))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&quot;oh-oh-oh-oh-oh-oh&quot;&gt;Oh, oh, oh, oh, oh, oh&lt;/h2&gt;
@@ -327,7 +263,7 @@
 &lt;p&gt;CONSISTENCY check: Is the answer for all of the first numbers, across all units, two words ?&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-klipse&quot;&gt;(let [sample (units 1000N 1000N (dec (count large-numbers-text)))]
-  (map #(count (num-representation %)) sample))
+  (distinct(map #(count (num-representation %)) sample)))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&quot;oh-oh-oh-1&quot;&gt;Oh, oh, oh&lt;/h2&gt;
@@ -345,7 +281,7 @@
     &lt;p&gt;Use the latest possible transforms at the edge of the system&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Use randomness early and often&lt;/p&gt;
+    &lt;p&gt;Use randomness early and often in your feedback loop&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Use properties and constraints to properly test your system&lt;/p&gt;
@@ -1787,6 +1723,94 @@ per minute and provide fine grained time series with very little code.&lt;/p&gt;
         <category>streams</category>
         
         <category>core.async</category>
+        
+      </item>
+    
+      <item>
+        <title>Event Stream Processing - A short series of adventures with core.async</title>
+        <description>&lt;h1 id=&quot;event-stream-processing---motivation&quot;&gt;Event Stream Processing - Motivation&lt;/h1&gt;
+
+&lt;p&gt;Event Stream Processing (ESP) is an interesting way in which we can model our systems.&lt;/p&gt;
+
+&lt;p&gt;If we think of actions in the world as events (and we should!) then we would like to process them in way that befits this understanding.&lt;/p&gt;
+
+&lt;p&gt;Traditionally we have been unable to do this for three major reasons:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;lack of cheap and available processing capacity.&lt;/strong&gt; This led to an unhealthy split between tools for batch and online processing. It did however allow the expensive hardware to be exploited close to 24/7 rather than just during the online day.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;lack of good programming models.&lt;/strong&gt; A callback based module is objectively harder to program, test and debug that a sequential module. Functional languages support lazy evaluation to enable support for (real or imagined) infinite streams.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;lack of motivation.&lt;/strong&gt; We could afford to be 24 hours, 12 hours or 1 hour behind and the users either wouldn’t care or wouldn’t have a better choice since that was the IT industry standard.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These reasons have been relentlessly crushed:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;commodity hardware and cloud rental makes it straightforward to process as much as we would like in real-time.&lt;/li&gt;
+  &lt;li&gt;concurrent programming models are now built into languages (Go, C#, Erlang, ES6) and provided as macros in Clojure and other languages in the form of Reactive Extensions (RX).&lt;/li&gt;
+  &lt;li&gt;mobile devices and IoT motivate the need to provide up to date versions of data for users at all times, everywhere. Companies in every sector are now providing this level of quality so it is quickly becoming a cost of doing business.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;csp-for-esp-no-thanks-jsp&quot;&gt;CSP for ESP. No thanks JSP.&lt;/h1&gt;
+
+&lt;p&gt;Modern concurrency models are based on Communicating Sequential Processes that is a formal model for allowing independent sequential processes to communicate using channels. I’m not going to repeat the theory here but if you are hungry for more, see &lt;a href=&quot;https://www.youtube.com/watch?v=cN_DpYBzKso&quot;&gt;Rob Pike’s presentation on concurrency and parallelism&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;CSP is a powerful enabler for Event Stream Processing. Furthermore, with the advent of microservices, ESP has become an interesting model to glue together events that occur between the independent microservices. Likewise mcroservices provide a natural model to expose stream data in casual yet powerful ways. Casual because stream consumers can be created aside from the stream producer and powerful because they can join multiple streams or process time series windows of events to create new categories applications built on high-order time based events.&lt;/p&gt;
+
+&lt;h1 id=&quot;streams-everywhere&quot;&gt;Streams everywhere?&lt;/h1&gt;
+
+&lt;p&gt;In this opening post I am asserting that this vision displaces the database as the centre piece of online data processing.&lt;/p&gt;
+
+&lt;p&gt;There does however, remain a place for these technologies. Databases and search engines offer facilities that cannot be matched or replicated by event streams (ACID transactions and complex data mining). Database themselves can be the source of events as new transactions are applied. This is evidenced by the Transaction Queue in Datomic, the replication log of CouchDB and the oplog of MongoDB. Likewise SQL Server and DB2 can be queried through Change Data Capture interfaces to obtain deltas from a given point in time.&lt;/p&gt;
+
+&lt;h1 id=&quot;tooling-choices&quot;&gt;Tooling choices&lt;/h1&gt;
+
+&lt;p&gt;There is a huge range of tools and technologies to ingest, store and process events: from cloud services such as &lt;a href=&quot;https://aws.amazon.com/kinesis/streams/&quot;&gt;Amazon’s Kinesis Streams&lt;/a&gt;, powerful frameworks such as &lt;a href=&quot;http://kafka.apache.org/&quot;&gt;Apache Kakfa&lt;/a&gt;, &lt;a href=&quot;https://flink.apache.org/&quot;&gt;Apache Flink&lt;/a&gt; and all the way down to individual language features.&lt;/p&gt;
+
+&lt;p&gt;I always want to start off with something concrete that doesn’t require a lot of infrastructure but can demonstrate the benefits. So I don’t want to rely on the cloud or big frameworks - at least not just yet.&lt;/p&gt;
+
+&lt;p&gt;I could have picked Go or JS but I’m a big advocate for Clojure so &lt;a href=&quot;https://github.com/clojure/core.async/&quot;&gt;core.async&lt;/a&gt; is a natural choice for me to start my investigations.&lt;/p&gt;
+
+&lt;h1 id=&quot;full-disclojure&quot;&gt;Full DisClojure&lt;/h1&gt;
+
+&lt;p&gt;To be honest, I know (and my colleagues insist) that there are other languages and frameworks that are richer by default than core.async. But my other goal here is to research and understand the basic building blocks on which this model operates.&lt;/p&gt;
+
+&lt;p&gt;In my experience the abstractions in Clojure are tastefully chosen. So I decided to start there on the basis that I would not get lost either learning a new language (like Go) or in the intricacies of distributed persistence addressed by more complex frameworks (like Flink).&lt;/p&gt;
+
+&lt;p&gt;If I can also provide some examples that are useful in the Clojure community: bonus.&lt;/p&gt;
+
+&lt;p&gt;Oh and it’s my own time and I wanted to have some fun, so shut up.&lt;/p&gt;
+
+&lt;h1 id=&quot;event-stream-processing---example-scenarios&quot;&gt;Event Stream Processing - example scenarios&lt;/h1&gt;
+
+&lt;p&gt;When dreaming up some scenarios I wanted to make something easy for my fellow &lt;del&gt;corporate drones&lt;/del&gt; developers to grok so I figured that a small subset of an order management system would fit the bill.&lt;/p&gt;
+
+&lt;p&gt;This type of system is ripe with opportunities to demonstrate events throughout and I have made an overview illustration of a subset of a bare bones system here:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Stock-Tracking-Streams-1.jpg&quot; alt=&quot;Simple stock management&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this series of posts I will show the following examples in code:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/clojure/events/streams/core.async/2016/02/06/event-streams-core-async.html&quot;&gt;Reading events&lt;/a&gt; from streams (Stock Tracker in the above drawing)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/clojure/events/streams/core.async/2016/02/09/event-streams-core-async-state.html&quot;&gt;Joining streams&lt;/a&gt; to combine data and manage state (Stock Management Tracker)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/clojure/events/streams/core.async/2016/02/11/event-streams-core-async-time-series.html&quot;&gt;Process time series&lt;/a&gt; events in the form of sliding intervals (Sliding Window Tracker)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The code is all on &lt;a href=&quot;https://github.com/raymcdermott/core-async-examples&quot;&gt;my GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;thanks&quot;&gt;Thanks&lt;/h1&gt;
+
+</description>
+        <pubDate>Sat, 06 Feb 2016 19:59:38 +0100</pubDate>
+        <link>http://blog.opengrail.com/clojure/events/streams/2016/02/06/event-stream-intro.html</link>
+        <guid isPermaLink="true">http://blog.opengrail.com/clojure/events/streams/2016/02/06/event-stream-intro.html</guid>
+        
+        
+        <category>clojure</category>
+        
+        <category>events</category>
+        
+        <category>streams</category>
         
       </item>
     
