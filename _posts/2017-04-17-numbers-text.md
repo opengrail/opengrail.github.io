@@ -224,9 +224,9 @@ With this in place we can present the final form that composes it together.
 (num-representation 1001)
 ~~~
 
-**`inject-and`** finds the right spot in the vector to inject the and. Such baroqueness is not needed in the US version so this function could be easily removed.
+**`inject-and`** finds the right spot in the vector to inject the and. Since the call site is recursive, it applies properly across all units. Such baroqueness is not needed in the US version so this function could be easily removed.
 
-The trick here is to always place the larger numbers back through the function so that each part is processed into the appropriate single, ten or 100 multiplier.
+The trick in the `num-representation` function is to always have the larger numbers feed back through the function so that each part is processed - from left to right - into the appropriate single, ten or 100 multiplier.
 
 ## I need no permission, did I mention?
 
