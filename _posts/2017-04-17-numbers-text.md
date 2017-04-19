@@ -89,7 +89,7 @@ My solution is composed from three logical parts: numbers to 100, numbers betwee
      (take 2 (random-sample 0.05 (range 1 100))))
 </code></pre>
 
-You can tweak the above code to adjust the number of samples (take N)
+You can tweak the above code to adjust the number of samples (take N). By the way, I only take a small sample so that the page doesn't reflow every two seconds ;-)
 
 The first part of the code (if-let) tests if the answer is present in the singles or tens collection - there is no need to take the risk of testing for a sentinel value. Such values can easily get out of sync with the size of the vector or require maintenance. Also, because it's a map no need to test for length - just look it up and find it or move along.
 
