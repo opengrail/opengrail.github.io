@@ -302,7 +302,7 @@ Also, if you have another functional way, in JS or Haskell or Scala or Java 8.
 This has been fun but if there is a 'right way', I would be happy to learn it!
 
 
-[klipse]: https://github.com/viebel/klipse
+[klipse]: http://blog.klipse.tech/clojure/2016/03/30/destructuring.html
 [ray-github]: https://github.com/raymcdermott/num-text
 
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js?"></script>
