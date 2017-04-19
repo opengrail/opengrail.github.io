@@ -5,14 +5,14 @@ date:   2017-04-17 01:00:00 +0100
 categories: Clojure ClojureScript Functional
 ---
 
-<link rel="stylesheet" type="text/css"  
-  href="http://app.klipse.tech/css/codemirror.css">
+<link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
 
 <script>  
   window.klipse_settings = {
         selector: '.language-klipse'
       };
 </script>
+
 
 ## Random Beyonce based headlines, as if you care
 
@@ -57,11 +57,11 @@ So we have the computer doing it's share of the work already. Neat!
 
 Next we deal with the other fixed numbers >= 20 and < 100
 
-~~~klipse
+<pre><code class="language-klipse" data-loop-msec="1000">
 (def x10 [:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety])
 (def tens (zipmap (range 20 99 10) x10))
 (get tens (rand-nth (keys tens)))
-~~~
+</code></pre>
 
 Here we use another form of the **`range`** function again to produce a range that starts at 20, ends at 99 and is stepped by 10.
 
@@ -115,6 +115,7 @@ The second part deals with the hundreds...
 (map #(nums-gt-100-lt-1000 %)
      (filter odd? (random-sample 0.1 (range 921 1000))))
 ~~~
+
 
 The main function does some trivial maths to separate out the hundreds and its remainder. The hundreds component is added to the vector and then we use the earlier function on any remainder.
 
