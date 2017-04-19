@@ -305,10 +305,10 @@ This has been fun but if there is a 'right way', I would be happy to learn it!
 
 # There is a right way ...
 
-Ha ha ... and to prove this point @alexmiller informed me on Twitter that Clojure has this already and soooooo much more in the form of [cl-format][cl-format] which is an implementation of output formats from Common Lisp. Wow! This is a whole mew rabbit hole people!
+Ha ha ... and to prove this point @alexmiller informed me on Twitter that Clojure has this already and soooooo much more in the form of [cl-format][cl-format] which is an implementation of output formats from Common Lisp. Wow! This is a whole new rabbit hole people!
 
 <pre><code class="language-klipse" data-loop-msec="2000">
-(clojure.pprint/cl-format true "~r" (rand-int 1000000001))
+(cljs.pprint/cl-format true "~r" (rand-int 1000000001))
 </code></pre>
 
 
