@@ -71,7 +71,7 @@ The interactive sample introduces a little randomisation for the LOLs and we wil
 
 My solution is composed from three logical parts: numbers to 100, numbers between 100 and 1000 and numbers above 1000.
 
-~~~klipse
+<pre><code class="language-klipse" data-loop-msec="1000">
 (defn nums-lt-100
   [num]
   {:pre [(pos? num)]}
@@ -85,7 +85,7 @@ My solution is composed from three logical parts: numbers to 100, numbers betwee
 ; Generate a random sample of numbers to test it out
 (map (fn [n] [n (nums-lt-100 n)])
      (random-sample 0.05 (range 1 100)))
-~~~
+</code></pre>
 
 You can tweak the above code to adjust the number of samples (`0.05`)
 
