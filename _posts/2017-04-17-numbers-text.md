@@ -84,10 +84,10 @@ My solution is composed from three logical parts: numbers to 100, numbers betwee
 
 ; Generate a random sample of numbers to test it out
 (map (fn [n] [n (nums-lt-100 n)])
-     (random-sample 0.05 (range 1 100)))
+     (take 2 (random-sample 0.05 (range 1 100))))
 </code></pre>
 
-You can tweak the above code to adjust the number of samples (`0.05`)
+You can tweak the above code to adjust the number of samples (take N)
 
 The first part of the code (if-let) tests if the answer is present in the singles or tens collection - there is no need to take the risk of testing for a sentinel value. Such values can easily get out of sync with the size of the vector or require maintenance. Also, because it's a map no need to test for length - just look it up and find it or move along.
 
@@ -101,7 +101,7 @@ Building the answer as a sequence is a huge simplification compared to the other
 
 The second part deals with the hundreds...
 
-~~~klipse
+<pre><code class="language-klipse" data-loop-msec="1000">
 (defn nums-gt-100-lt-1000
   [num]
   {:pre [(>= num 100) (< num 1000)]}
@@ -113,9 +113,8 @@ The second part deals with the hundreds...
     (remove nil? result)))
 
 (map #(nums-gt-100-lt-1000 %)
-     (filter odd? (random-sample 0.1 (range 921 1000))))
-~~~
-
+     (take 3 (filter odd? (random-sample 0.5 (range 921 1000)))))
+</code></pre>
 
 The main function does some trivial maths to separate out the hundreds and its remainder. The hundreds component is added to the vector and then we use the earlier function on any remainder.
 
@@ -139,7 +138,7 @@ This is the third part of the solution and is also based on sequences of generat
 
 The units function provides a way to generate lists of numbers at certain boundaries and we can will use that to establish the various 'large number' magnitudes.
 
-~~~klipse
+<pre><code class="language-klipse" data-loop-msec="1000">
 (def large-numbers-text [:thousand :million :billion :trillion
                          :quadrillion :quintillion :sextillion
                          :septillion :octillion :nonillion
@@ -156,7 +155,7 @@ The units function provides a way to generate lists of numbers at certain bounda
 
 (let [rand (rand-nth (keys large-number-map))]
   [rand (get large-number-map rand)])
-~~~
+</code></pre>
 
 We use the same `zipmap` pattern for large number texts as before...
 
