@@ -57,7 +57,7 @@ So we have the computer doing it's share of the work already. Neat!
 
 Next we deal with the other fixed numbers >= 20 and < 100
 
-<pre><code class="language-klipse" data-loop-msec="1000">
+<pre><code class="language-klipse" data-loop-msec="2000">
 (def x10 [:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety])
 (def tens (zipmap (range 20 99 10) x10))
 (get tens (rand-nth (keys tens)))
@@ -67,11 +67,13 @@ Here we use another form of the **`range`** function again to produce a range th
 
 The interactive sample introduces a little randomisation for the LOLs and we will use more of this as we go along.
 
+> The refresh on the randomisation is a little magic from `Klipse` that I use to set a loop every 2 seconds in the HTML mark up.
+
 ## I'm doing my own little thing
 
 My solution is composed from three logical parts: numbers to 100, numbers between 100 and 1000 and numbers above 1000.
 
-<pre><code class="language-klipse" data-loop-msec="1000">
+<pre><code class="language-klipse" data-loop-msec="2000">
 (defn nums-lt-100
   [num]
   {:pre [(pos? num)]}
@@ -101,7 +103,7 @@ Building the answer as a sequence is a huge simplification compared to the other
 
 The second part deals with the hundreds...
 
-<pre><code class="language-klipse" data-loop-msec="1000">
+<pre><code class="language-klipse" data-loop-msec="2000">
 (defn nums-gt-100-lt-1000
   [num]
   {:pre [(>= num 100) (< num 1000)]}
@@ -138,7 +140,7 @@ This is the third part of the solution and is also based on sequences of generat
 
 The units function provides a way to generate lists of numbers at certain boundaries and we can will use that to establish the various 'large number' magnitudes.
 
-<pre><code class="language-klipse" data-loop-msec="1000">
+<pre><code class="language-klipse" data-loop-msec="2000">
 (def large-numbers-text [:thousand :million :billion :trillion
                          :quadrillion :quintillion :sextillion
                          :septillion :octillion :nonillion
