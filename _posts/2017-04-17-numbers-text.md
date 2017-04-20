@@ -200,12 +200,10 @@ With this in place we can present the final form that composes it together.
       (cond
         (= :and (last (drop-last 1 num-vec))) num-vec
         (get check-map (last num-vec)) num-vec
-        (get check-map (last (drop-last 1 num-vec))) (concat (drop-last 1 num-vec)
-                                                             [:and]
-                                                             (take-last 1 num-vec))
-        (get check-map (last (drop-last 2 num-vec))) (concat (drop-last 2 num-vec)
-                                                             [:and]
-                                                             (take-last 2 num-vec))
+        (get check-map (last (drop-last 1 num-vec)))
+            (concat (drop-last 1 num-vec) [:and] (take-last 1 num-vec))
+        (get check-map (last (drop-last 2 num-vec)))
+            (concat (drop-last 2 num-vec) [:and] (take-last 2 num-vec))
         :else num-vec))))
 
 (defn num-representation
@@ -226,7 +224,7 @@ With this in place we can present the final form that composes it together.
                                       (num-representation remainder)])]
                 representation)))))
 
-(map #(num-representation %) 1001 100101)
+(num-representation 100101)
 ~~~
 
 **`inject-and`** finds the right spot in the vector to inject the and. Since the call site is recursive, it applies properly across all units. Such baroqueness is not needed in the US version so this function could be easily removed.
@@ -308,10 +306,10 @@ This has been fun but if there is a 'right way', I would be happy to learn it!
 
 # There is a right way ...
 
-Ha ha ... and to prove this point Alex Miller (aka [@puredanger][alex]) informed me on Twitter that **Clojure** has something very close to this already - and soooooo much more - in the form of [cl-format][cl-format] which is an implementation of output formats from Common Lisp. Who knew? Wow! This is a whole new rabbit hole people!
+Ha ha ... and to prove this point Alex Miller (aka [@puredanger][alex]) informed me on Twitter that **Clojure** has something very close to this already - and soooooo much more - in the form of [cl-format][cl-format]. This is an implementation of output formats from Common Lisp. Who knew? Wow - it's astounding and it was honestly worth this effort to discover that it exists! This is a whole new rabbit hole people!
 
 <pre><code class="language-klipse" data-loop-msec="3000" data-preamble="(require 'clojure.pprint)">
-(clojure.pprint/cl-format true "~r" (rand-int 10000001))
+(clojure.pprint/cl-format true "~r" (rand-int 10001))
 </code></pre>
 
 
