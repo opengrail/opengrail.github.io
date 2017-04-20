@@ -309,7 +309,7 @@ This has been fun but if there is a 'right way', I would be happy to learn it!
 Ha ha ... and to prove this point Alex Miller (aka [@puredanger][alex]) informed me on Twitter that **Clojure** has something very close to this already - and soooooo much more - in the form of [cl-format][cl-format]. This is an implementation of output formats from Common Lisp. Who knew? Wow - it's astounding and it was honestly worth this effort to discover that it exists! This is a whole new rabbit hole people!
 
 <pre><code class="language-klipse" data-loop-msec="3000" data-preamble="(require 'clojure.pprint)">
-(clojure.pprint/cl-format true "~r" (rand-int 10001))
+(clojure.pprint/cl-format true "~r" 100101)
 </code></pre>
 
 
