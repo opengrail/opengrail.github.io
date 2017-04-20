@@ -150,8 +150,7 @@ The units function provides a way to generate lists of numbers at certain bounda
 (def unitable (units 1000N 1000N (dec (count large-numbers-text))))
 
 (def large-number-map (zipmap unitable large-numbers-text))
-(def inverse-large-numbers-map (reduce merge {}
-                                  (map (juxt val key) large-number-map)))
+(def inverse-large-numbers-map (into {} (map (fn [[a b]] [b a])) large-number-map))
 
 (def unit-boundaries (map (fn [u] [u (* u 1000N)]) unitable))
 
