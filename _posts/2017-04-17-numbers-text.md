@@ -198,11 +198,14 @@ With this in place we can present the final form that composes it together.
     num-vec
     (let [check-map (assoc inverse-large-numbers-map :hundred 100)]
       (cond
+        (= :and (last (drop-last 1 num-vec))) num-vec
         (get check-map (last num-vec)) num-vec
-        (get check-map (last (drop-last 1 num-vec)))
-        (concat (drop-last 1 num-vec) [:and] (take-last 1 num-vec))
-        (get check-map (last (drop-last 2 num-vec)))
-        (concat (drop-last 2 num-vec) [:and] (take-last 2 num-vec))
+        (get check-map (last (drop-last 1 num-vec))) (concat (drop-last 1 num-vec)
+                                                             [:and]
+                                                             (take-last 1 num-vec))
+        (get check-map (last (drop-last 2 num-vec))) (concat (drop-last 2 num-vec)
+                                                             [:and]
+                                                             (take-last 2 num-vec))
         :else num-vec))))
 
 (defn num-representation
@@ -223,7 +226,7 @@ With this in place we can present the final form that composes it together.
                                       (num-representation remainder)])]
                 representation)))))
 
-(num-representation 1001)
+(map #(num-representation %) 1001 100101)
 ~~~
 
 **`inject-and`** finds the right spot in the vector to inject the and. Since the call site is recursive, it applies properly across all units. Such baroqueness is not needed in the US version so this function could be easily removed.
