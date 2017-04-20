@@ -299,22 +299,23 @@ Disclaimer: Me != maths
 
 Please let me know if you are a maths whizz and know a simpler way to solve this.
 
-Also, if you have another functional way, in JS or Haskell or Scala or Java 8.
+Also, if you have another functional way, in Clojure, JS or Haskell or Scala or Java 8.
 
 This has been fun but if there is a 'right way', I would be happy to learn it!
 
 # There is a right way ...
 
-Ha ha ... and to prove this point @alexmiller informed me on Twitter that Clojure has this already and soooooo much more in the form of [cl-format][cl-format] which is an implementation of output formats from Common Lisp. Wow! This is a whole new rabbit hole people!
+Ha ha ... and to prove this point Alex Miller (aka [@puredanger][alex]) informed me on Twitter that **Clojure** has something very close to this already - and soooooo much more - in the form of [cl-format][cl-format] which is an implementation of output formats from Common Lisp. Who knew? Wow! This is a whole new rabbit hole people!
 
-<pre><code class="language-klipse" data-loop-msec="2000">
-(cljs.pprint/cl-format true "~r" (rand-int 1000000001))
+<pre><code class="language-klipse" data-loop-msec="3000" data-preamble="(require 'clojure.pprint)">
+(clojure.pprint/cl-format true "~r" (rand-int 10000001))
 </code></pre>
 
 
 [klipse]: http://blog.klipse.tech/clojure/2016/03/30/destructuring.html
 [ray-github]: https://github.com/raymcdermott/num-text
 [cl-format]:http://clojure.github.io/clojure/clojure.pprint-api.html#clojure.pprint/cl-format
+[alex]:https://twitter.com/puredanger
 
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js?"></script>
 

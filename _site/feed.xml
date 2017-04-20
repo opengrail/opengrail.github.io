@@ -6,8 +6,8 @@
 </description>
     <link>http://blog.opengrail.com/</link>
     <atom:link href="http://blog.opengrail.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 19 Apr 2017 18:30:43 +0200</pubDate>
-    <lastBuildDate>Wed, 19 Apr 2017 18:30:43 +0200</lastBuildDate>
+    <pubDate>Thu, 20 Apr 2017 09:47:16 +0200</pubDate>
+    <lastBuildDate>Thu, 20 Apr 2017 09:47:16 +0200</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -37,7 +37,7 @@
 
 &lt;p&gt;I figured that addressing this problem with Clojure could make an interesting blog post for the same reasons. The code is on &lt;a href=&quot;https://github.com/raymcdermott/num-text&quot;&gt;Github&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;This post is enhanced using &lt;a href=&quot;https://github.com/viebel/klipse&quot;&gt;KLIPSE&lt;/a&gt; live code snippets meaning &lt;strong&gt;you&lt;/strong&gt; can edit the code and see immediate results&lt;/p&gt;
+&lt;p&gt;This post is enhanced using &lt;a href=&quot;http://blog.klipse.tech/clojure/2016/03/30/destructuring.html&quot;&gt;KLIPSE&lt;/a&gt; live code snippets meaning &lt;strong&gt;you&lt;/strong&gt; can edit the code and see immediate results&lt;/p&gt;
 
 &lt;h2 id=&quot;all-the-single-ladies&quot;&gt;All the single ladies&lt;/h2&gt;
 
@@ -62,7 +62,7 @@
 
 &lt;p&gt;Next we deal with the other fixed numbers &amp;gt;= 20 and &amp;lt; 100&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;1000&quot;&gt;
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;2000&quot;&gt;
 (def x10 [:twenty :thirty :forty :fifty :sixty :seventy :eighty :ninety])
 (def tens (zipmap (range 20 99 10) x10))
 (get tens (rand-nth (keys tens)))
@@ -72,11 +72,15 @@
 
 &lt;p&gt;The interactive sample introduces a little randomisation for the LOLs and we will use more of this as we go along.&lt;/p&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;The refresh on the randomisation is a little magic from &lt;code class=&quot;highlighter-rouge&quot;&gt;Klipse&lt;/code&gt; that I use to set a loop every 2 seconds in the HTML mark up.&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h2 id=&quot;im-doing-my-own-little-thing&quot;&gt;I’m doing my own little thing&lt;/h2&gt;
 
 &lt;p&gt;My solution is composed from three logical parts: numbers to 100, numbers between 100 and 1000 and numbers above 1000.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;1000&quot;&gt;
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;2000&quot;&gt;
 (defn nums-lt-100
   [num]
   {:pre [(pos? num)]}
@@ -92,7 +96,7 @@
      (take 2 (random-sample 0.05 (range 1 100))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;You can tweak the above code to adjust the number of samples (take N)&lt;/p&gt;
+&lt;p&gt;You can tweak the above code to adjust the number of samples (take N). By the way, I only take a small sample so that the page doesn’t reflow every two seconds ;-)&lt;/p&gt;
 
 &lt;p&gt;The first part of the code (if-let) tests if the answer is present in the singles or tens collection - there is no need to take the risk of testing for a sentinel value. Such values can easily get out of sync with the size of the vector or require maintenance. Also, because it’s a map no need to test for length - just look it up and find it or move along.&lt;/p&gt;
 
@@ -106,7 +110,7 @@
 
 &lt;p&gt;The second part deals with the hundreds…&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;1000&quot;&gt;
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;2000&quot;&gt;
 (defn nums-gt-100-lt-1000
   [num]
   {:pre [(&amp;gt;= num 100) (&amp;lt; num 1000)]}
@@ -144,7 +148,7 @@
 
 &lt;p&gt;The units function provides a way to generate lists of numbers at certain boundaries and we can will use that to establish the various ‘large number’ magnitudes.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;1000&quot;&gt;
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;2000&quot;&gt;
 (def large-numbers-text [:thousand :million :billion :trillion
                          :quadrillion :quintillion :sextillion
                          :septillion :octillion :nonillion
@@ -306,9 +310,17 @@
 
 &lt;p&gt;Please let me know if you are a maths whizz and know a simpler way to solve this.&lt;/p&gt;
 
-&lt;p&gt;Also, if you have another functional way, in JS or Haskell or Scala or Java 8.&lt;/p&gt;
+&lt;p&gt;Also, if you have another functional way, in Clojure, JS or Haskell or Scala or Java 8.&lt;/p&gt;
 
 &lt;p&gt;This has been fun but if there is a ‘right way’, I would be happy to learn it!&lt;/p&gt;
+
+&lt;h1 id=&quot;there-is-a-right-way-&quot;&gt;There is a right way …&lt;/h1&gt;
+
+&lt;p&gt;Ha ha … and to prove this point Alex Miller (aka &lt;a href=&quot;https://twitter.com/puredanger&quot;&gt;@puredanger&lt;/a&gt;) informed me on Twitter that &lt;strong&gt;Clojure&lt;/strong&gt; has something very close to this already - and soooooo much more - in the form of &lt;a href=&quot;http://clojure.github.io/clojure/clojure.pprint-api.html#clojure.pprint/cl-format&quot;&gt;cl-format&lt;/a&gt; which is an implementation of output formats from Common Lisp. Who knew? Wow! This is a whole new rabbit hole people!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-klipse&quot; data-loop-msec=&quot;3000&quot; data-preamble=&quot;(require &#39;clojure.pprint)&quot;&gt;
+(clojure.pprint/cl-format true &quot;~r&quot; (rand-int 10000001))
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;script src=&quot;http://app.klipse.tech/plugin/js/klipse_plugin.js?&quot;&gt;&lt;/script&gt;
 
