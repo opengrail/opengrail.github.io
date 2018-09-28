@@ -8,4 +8,4 @@ I am Ray McDermott, a consultant developing software and helping out on software
 
 Originally from the UK but living in Belgium for tax reasons.
 
-If you are Belgian you will understand that that is a joke.
+_Belgians already understand that the given reason is a joke._

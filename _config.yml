@@ -4,7 +4,7 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Opengrail blog
+title: Ray McDermott - Seeking the Open Grail
 email: blog@opengrail.com
 description: > # this means to ignore newlines until "baseurl:"
   Thoughts on Clojure, Datomic and related technology
