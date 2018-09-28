@@ -16,4 +16,4 @@ github_username:  raymcdermott
 # Build settings
 markdown: kramdown
 
-theme: jekyll-theme-minimal
+theme: jekyll-theme-slate
